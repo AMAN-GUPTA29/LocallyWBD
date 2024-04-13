@@ -14,9 +14,9 @@ async function sellerRegistrationController (req, res){
         {   
             return res.status(400).send({message:error.details[0].message});
         }
-        console.log(req.body)
         const seller=await Seller.findOne({email:req.body.email});
         
+        // console.log(req.body)
         if(seller){
             return res.status(409).send({message:"User with given email exist"})
         }
