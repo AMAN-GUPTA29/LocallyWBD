@@ -1,6 +1,7 @@
 
 const router = require("express").Router();
 const{Consumer}=require("../Models/consumer");
+const{BlockedConsumer}=require("../Models/blockedconsumer")
 const bcrypt=require("bcrypt");
 const { validate } = require("../Utils/registrationValidation");
 
@@ -19,6 +20,12 @@ async function consumerRegistrationController (req, res){
         
         if(consumer){
             return res.status(409).send({message:"User with given email exist"})
+        }
+
+        const blocked=await BlockedConsumer.findOne({email:req.body.email});
+        console.log(blocked)
+        if(blocked){
+            return res.status(409).send({message:"User Blocked"})
         }
 
         const salt=await bcrypt.genSalt(Number(process.env.SALT));

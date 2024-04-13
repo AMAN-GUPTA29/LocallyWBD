@@ -14,6 +14,8 @@ const adminProfileRoute=require('./Routes/AdminProfileRoute')
 const adminProfileUpdateRoute=require('./Routes/AdminProfileUpdateRoute')
 const adminConsumerListRoute=require('./Routes/AdminConsumerListRoute')
 const adminSellerListRoute=require('./Routes/AdminSellerListRoute')
+const adminBlockSellerRoute=require('./Routes/AdminSellerBlockRoute')
+const adminBlockConsumerRoute=require('./Routes/AdminConsumerBlockRoute')
 
 const sellerRegistrationRoutes=require('./Routes/SellerRegistrationRoute')
 const sellerLoginRoutes=require('./Routes/SellerLoginRoute')
@@ -38,6 +40,8 @@ app.use("/api/admin/profile",adminProfileRoute);
 app.use("/api/admin/profile/update",adminProfileUpdateRoute);
 app.use("/api/admin/consumerlist",adminConsumerListRoute)
 app.use("/api/admin/sellerlist",adminSellerListRoute)
+app.use("/api/admin/blockseller",adminBlockSellerRoute)
+app.use("/api/admin/blockconsumer",adminBlockConsumerRoute)
 
 app.use("/api/seller/register",sellerRegistrationRoutes);
 app.use("/api/seller/login",sellerLoginRoutes);
