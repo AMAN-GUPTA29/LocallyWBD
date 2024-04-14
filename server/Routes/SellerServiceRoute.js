@@ -7,6 +7,6 @@ const {ViewService} = require('./../Controllers/Service/ViewServicesController')
 router.post("/addservice",authenticateToken, AddService)
 
 // ---/api/seller/services/viewservice
- router.get("/viewservice", authenticateToken, ViewService)
+router.get("/viewservice", authenticateToken, ViewService)
 
 module.exports = router;
