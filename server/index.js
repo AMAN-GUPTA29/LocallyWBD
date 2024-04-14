@@ -33,6 +33,7 @@ const sellerProfileUpdateRoute=require('./Routes/SellerProfileUpdateRoute')
 
 const sellerServicesRouter = require('./Routes/SellerServiceRoute')
 const GetService_SellerDetailsRouter = require('./Routes/GetService_SellerDetailsRouter')
+const MakeRequestRouter = require('./Routes/MakeRequestRouter')
 
 connection();
 
@@ -63,6 +64,7 @@ app.use("/api/seller/profile/update",sellerProfileUpdateRoute)
 
 app.use('/api/seller/services', sellerServicesRouter)
 app.use('/api/customer/service', GetService_SellerDetailsRouter)
+app.use('/api/customer/makerequest', MakeRequestRouter)
 
 const port=process.env.PORT || 8080;
 app.listen(port,()=>console.log(`Listning on port ${port}....`));
