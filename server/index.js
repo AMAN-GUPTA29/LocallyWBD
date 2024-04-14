@@ -46,6 +46,7 @@ app.use("/api/consumer/register",consumerRegistrationRoutes);
 app.use("/api/consumer/login",consumerLoginRoute);
 app.use("/api/consumer/profile",ConsumerProfileRoute);
 app.use("/api/consumer/profile/update",ConsumerProfileUpdateRoute)
+app.use('/api/customer/service', GetService_SellerDetailsRouter)
 
 app.use("/api/admin/register",adminRegistrationRoutes);
 app.use("/api/admin/login",adminLoginRoutes);
@@ -60,9 +61,10 @@ app.use("/api/seller/register",sellerRegistrationRoutes);
 app.use("/api/seller/login",sellerLoginRoutes);
 app.use("/api/seller/profile",sellerProfileRoute);
 app.use("/api/seller/profile/update",sellerProfileUpdateRoute)
-
 app.use('/api/seller/services', sellerServicesRouter)
-app.use('/api/customer/service', GetService_SellerDetailsRouter)
+
+
+
 
 const port=process.env.PORT || 8080;
 app.listen(port,()=>console.log(`Listning on port ${port}....`));
