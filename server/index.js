@@ -1,3 +1,10 @@
+/**
+ * Add morgan
+ * Add RFS
+ * Add csrf
+ * Add multer
+ * Add Global error handler (a,b,c,d) => {retutn xyz}
+ */
 const bodyparser = require('body-parser')
 
 require('dotenv').config();
@@ -25,7 +32,7 @@ const sellerProfileRoute=require('./Routes/SellerProfileRoute')
 const sellerProfileUpdateRoute=require('./Routes/SellerProfileUpdateRoute')
 
 const sellerServicesRouter = require('./Routes/SellerServiceRoute')
-
+const GetService_SellerDetailsRouter = require('./Routes/GetService_SellerDetailsRouter')
 
 connection();
 
@@ -55,6 +62,7 @@ app.use("/api/seller/profile",sellerProfileRoute);
 app.use("/api/seller/profile/update",sellerProfileUpdateRoute)
 
 app.use('/api/seller/services', sellerServicesRouter)
+app.use('/api/customer/service', GetService_SellerDetailsRouter)
 
 const port=process.env.PORT || 8080;
 app.listen(port,()=>console.log(`Listning on port ${port}....`));
