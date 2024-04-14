@@ -1,6 +1,7 @@
 
 const router = require("express").Router();
 const{Seller}=require("../Models/seller");
+const{BlockedSeller}=require("../Models/blockedseller")
 const bcrypt=require("bcrypt");
 const { validate } = require("../Utils/sellerRegistrationValidation");
 
@@ -19,6 +20,12 @@ async function sellerRegistrationController (req, res){
         // console.log(req.body)
         if(seller){
             return res.status(409).send({message:"User with given email exist"})
+        }
+
+        const blocked=await BlockedSeller.findOne({email:req.body.email});
+
+        if(blocked){
+            return res.status(409).send({message:"User Blocked"})
         }
 
         const salt=await bcrypt.genSalt(Number(process.env.SALT));

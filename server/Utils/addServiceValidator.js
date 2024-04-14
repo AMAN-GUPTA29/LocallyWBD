@@ -8,6 +8,7 @@ const validate = (data) => {
         charge: Joi.string().required().label("Charge"),
 		description: Joi.string().required().label("Description"),
 	});
+	console.log("daclnj")
 	return schema.validate(data);
 };
 

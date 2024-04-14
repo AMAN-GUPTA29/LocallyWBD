@@ -3,17 +3,16 @@ const {validate} = require('./../../Utils/addServiceValidator.js')
 
 
 async function AddService(req, res) {
-    const selleruser = req.user
-    console.log(selleruser)
-    const error = validate(req.body)
+   
+    const { error } = validate(req.body);
     if (error) {
-        return res.status(400).send({message:error.details[0].message});
+        return res.status(400).send({message:error.details});
     }
 
-    // await new Services({
-    //     ...req.body,
-
-    // }).save()
+    await new Services({
+        ...req.body,
+        pointer:req.user._id
+    }).save()
     res.status(201).send({message:"Service created Succesfully"})
 
 }
