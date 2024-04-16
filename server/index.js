@@ -37,6 +37,8 @@ const MakeRequestRouter = require('./Routes/MakeRequestRouter')
 const PendingRequestRouter = require('./Routes/PendingRequestsRoute')
 const AcceptedRequestRouter = require('./Routes/AcceptedRequestRoute')
 const SellerViewCustomerRequestRoute = require('./Routes/SellerViewCustomerRequestRoute')
+const SellerAcceptedRequestRoute = require('./Routes/SellerAcceptedRequestRoute')
+const SellerDeleteRequestRoute = require('./Routes/SellerDeleteRequestRoute')
 
 connection();
 
@@ -72,6 +74,8 @@ app.use('/api/customer/makerequest', MakeRequestRouter)
 app.use('/api/customer/pendingrequests', PendingRequestRouter)
 app.use('/api/customer/acceptedrequests', AcceptedRequestRouter)
 app.use('/api/seller/viewrequests',SellerViewCustomerRequestRoute)
+app.use('/api/seller/request/accepted',SellerAcceptedRequestRoute)
+app.use('/api/seller/request/cancel',SellerDeleteRequestRoute)
 
 
 
