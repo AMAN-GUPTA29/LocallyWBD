@@ -34,6 +34,11 @@ const sellerProfileUpdateRoute=require('./Routes/SellerProfileUpdateRoute')
 const sellerServicesRouter = require('./Routes/SellerServiceRoute')
 const GetService_SellerDetailsRouter = require('./Routes/GetService_SellerDetailsRouter')
 const MakeRequestRouter = require('./Routes/MakeRequestRouter')
+const PendingRequestRouter = require('./Routes/PendingRequestsRoute')
+const AcceptedRequestRouter = require('./Routes/AcceptedRequestRoute')
+const SellerViewCustomerRequestRoute = require('./Routes/SellerViewCustomerRequestRoute')
+const SellerAcceptedRequestRoute = require('./Routes/SellerAcceptedRequestRoute')
+const SellerDeleteRequestRoute = require('./Routes/SellerDeleteRequestRoute')
 const CompleteRequestRouter = require('./Routes/CompleteRequestRouter')
 
 connection();
@@ -67,6 +72,11 @@ app.use("/api/seller/profile/update",sellerProfileUpdateRoute)
 app.use('/api/seller/services', sellerServicesRouter)
 app.use('/api/customer/service', GetService_SellerDetailsRouter)
 app.use('/api/customer/makerequest', MakeRequestRouter)
+app.use('/api/customer/pendingrequests', PendingRequestRouter)
+app.use('/api/customer/acceptedrequests', AcceptedRequestRouter)
+app.use('/api/seller/viewrequests',SellerViewCustomerRequestRoute)
+app.use('/api/seller/request/accepted',SellerAcceptedRequestRoute)
+app.use('/api/seller/request/cancel',SellerDeleteRequestRoute)
 app.use('/api/customer/completed', CompleteRequestRouter)
 
 
