@@ -36,6 +36,7 @@ const GetService_SellerDetailsRouter = require('./Routes/GetService_SellerDetail
 const MakeRequestRouter = require('./Routes/MakeRequestRouter')
 const PendingRequestRouter = require('./Routes/PendingRequestsRoute')
 const AcceptedRequestRouter = require('./Routes/AcceptedRequestRoute')
+const SellerViewCustomerRequestRoute = require('./Routes/SellerViewCustomerRequestRoute')
 
 connection();
 
@@ -70,6 +71,7 @@ app.use('/api/customer/service', GetService_SellerDetailsRouter)
 app.use('/api/customer/makerequest', MakeRequestRouter)
 app.use('/api/customer/pendingrequests', PendingRequestRouter)
 app.use('/api/customer/acceptedrequests', AcceptedRequestRouter)
+app.use('/api/seller/viewrequests',SellerViewCustomerRequestRoute)
 
 
 

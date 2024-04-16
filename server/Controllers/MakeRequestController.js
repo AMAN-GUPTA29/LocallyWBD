@@ -7,9 +7,13 @@ async function MakeRequestController (req, res) {
     try{
         const { id } = req.params // service-id
         console.log(id)
+        console.log("ht")
         if ( !id ) throw Error
+        console.log("htsdgv")
         const customer_id = req.user._id
-        const service_obj = await Services.findOne({ _id:id }) // pointer == seller._id
+        console.log(id)
+        const service_obj = await Services.findOne({ _id:id }) 
+        console.log("gr")// pointer == seller._id
         const seller_id = service_obj.pointer;
         
 
