@@ -1,0 +1,18 @@
+.backimagechange-ag {
+  background-image: url(./images/crousal1.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  animation: change 10s infinite ease-in-out;
+}
+@keyframes change {
+  0% {
+    background-image: url(./images/crousal2.jpeg);
+  }
+  50% {
+    background-image: url(./images/crousal3.jpeg);
+  }
+
+  100% {
+    background-image: url(./images/crousal1.jpeg);
+  }
+}
