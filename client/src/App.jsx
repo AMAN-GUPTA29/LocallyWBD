@@ -5,12 +5,12 @@ import './App.css'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 
 import AmanRoutes from './routes/AmanRoutes.jsx'
-import AnimeshRoutes from "./routes/AnimeshRoutes";
-import ChaitnyaRoutes from './routes/ChaitnyaRoutes'
-import PranavRoutes from './routes/PranavRoutes'
-import SomeshwarRoutes from './routes/SomeshwarRoutes'
-import VarunRoutes from './routes/VarunRoutes'
-import RootLayout from './pages/RootLayout'
+import AnimeshRoutes from "./routes/AnimeshRoutes.jsx";
+import ChaitnyaRoutes from './routes/ChaitnyaRoutes.jsx'
+import PranavRoutes from './routes/PranavRoutes.jsx'
+import SomeshwarRoutes from './routes/SomeshwarRoutes.jsx'
+import VarunRoutes from './routes/VarunRoutes.jsx'
+import RootLayout from './pages/RootLayout.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,11 +21,11 @@ function App() {
       element: <RootLayout />,
       children: [
         ...AmanRoutes,
-        // ...AnimeshRoutes,
-        // ...VarunRoutes,
-        // ...PranavRoutes,
-        // ...ChaitnyaRoutes,
-        // ...SomeshwarRoutes
+        ...AnimeshRoutes,
+        ...VarunRoutes,
+        ...PranavRoutes,
+        ...ChaitnyaRoutes,
+        ...SomeshwarRoutes
       ],
     },
   ]);

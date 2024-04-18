@@ -1,7 +1,7 @@
 import LandingPage from "../pages/LandingPage"
 
-let adminRoutes = [
+let AmanRoutes = [
     { path: "/", element: <LandingPage/> }
 ]
 
-export default adminRoutes; 
+export default AmanRoutes; 
