@@ -13,22 +13,7 @@ import Footerland from "../components/landingpageComponent/footer";
 function LandingPage() {
   return (
     <div  className="toAll">
-      <Fragment>
-      {/* <header classNameName={styles.header}>
-        <a href="/">
-          <img classNameName={styles.logo} alt="Startup logo" src="images/logo.png" />
-        </a>
-
-        <nav classNameName={styles.mainNav}>
-          <ul classNameName={styles.mainNavList}>
-            <li><a classNameName={styles.mainNavLink} href="/">Home</a></li>
-            <li><a classNameName={styles.mainNavLink} href="/about">About Us</a></li>
-            <li><a classNameName={styles.mainNavLink} href="/#testimonials">Testimonials</a></li>
-            <li><a classNameName={styles.mainNavLink} href="/contact">ContactUs</a></li>
-            <li><a classNameName={${styles.mainNavLink} ${styles.navCta}} href="/login">Login</a></li>
-          </ul>
-        </nav>
-      </header> */}
+      
       <Header></Header>
       <HeroSection></HeroSection>
       <div className="testy"></div>
@@ -41,7 +26,7 @@ function LandingPage() {
       <TestimonialsSection></TestimonialsSection>
       <SellerLoginSection></SellerLoginSection>
       <Footerland />
-    </Fragment>
+    
     </div>
   );
 }
