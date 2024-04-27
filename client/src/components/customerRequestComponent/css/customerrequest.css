@@ -1,0 +1,45 @@
+.headerr {
+    margin-top: 20px;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+}
+
+.card {
+    /* background-image: url("/images/service_card_background.jpg"); */
+    /* background-image: url("/images/plainbg.jpeg"); */
+    background: rgb(27, 40, 62);
+    background: linear-gradient(90deg, rgba(27, 40, 62, 1) 0%, rgba(115, 142, 172, 1) 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+
+.buttons {
+    margin: 0px 30%;
+}
+
+.reject {
+    /* background-color: rgb(233, 97, 84); */
+    border-radius: 10px;
+    margin-right: 10%;
+}
+
+.accept {
+    /* background-color: rgb(11, 11, 238); */
+    border-radius: 10px;
+    margin-left: 10%;
+}
+
+.accept:hover {
+    background-color: rgb(8, 153, 8);
+}
+
+.reject:hover {
+    background-color: rgb(227, 15, 33);
+}
+
+.h_2 {
+    font-weight: 800;
+    font-size: 60px;
+}

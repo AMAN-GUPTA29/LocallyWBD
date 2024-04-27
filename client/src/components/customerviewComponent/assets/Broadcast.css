@@ -1,0 +1,15 @@
+.special {
+    font-family: 'Anton', sans-serif;
+}
+
+.curve-border {
+    border-radius: 8px;
+}
+
+.fltr {
+    border-radius: 5px;
+}
+
+.card {
+    box-shadow: 1px 1px 1px 3px rgb(219, 219, 219);
+}

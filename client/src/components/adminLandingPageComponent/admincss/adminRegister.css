@@ -1,0 +1,109 @@
+body{
+    background-color:  rgb(240, 237, 237);
+}
+.container{
+    margin: auto;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+}
+h1{
+    margin: 30px;
+    font-weight:bold;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    /* background: -webkit-linear-gradient(#b700f4, #400056);
+    background: -webkit-linear-gradient(#000428, #004e92);
+    background: -webkit-linear-gradient(#aa076b, #61045f);
+    -webkit-background-clip: text;
+-webkit-text-fill-color: transparent; */
+}
+.box{
+    min-height: 500px;
+    min-width: 400px;
+    border-radius: 15px;
+    height: 500px;
+    height: 40vh;
+    width: fit-content;
+    margin: 10vh;
+    padding: 50px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    /* background-color:rgb(219, 216, 216);     */
+    
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.3);
+}
+.item{
+    position: relative;
+}
+.icon{
+    position: absolute;
+    top: 27px;
+    left: 32px;
+}
+.form{
+    text-align: center;
+    padding: 0px 0px 10px 0px;
+}
+.foot{
+    padding: 20px;
+    margin: 0px;
+}
+input[type="name"],input[type="email"],input[type="password"]{
+    text-align:left;
+    padding: 21px 30px;
+    width: 85%;
+    height: 30px;
+    margin: 10px 0px;
+    font-style: normal;
+    font-size: medium;
+    border-radius: 8px;
+    border: 2px solid  rgb(237, 234, 234);
+}
+input[type="name"]:hover,input[type="email"]:hover,input[type="password"]:hover{
+    border: 1px solid rgb(118, 114, 114);
+}
+input[type="submit"]{
+    width: 80%;
+    height: 40px;
+    margin: 10px 0px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style: normal;
+    font-size: medium;
+    border-radius: 10px;
+   
+    /* background-color: rgb(218, 62, 127); */
+    /* background-image: linear-gradient(90deg, #b700f4, #9f00d4, #9502c6, #7e01a8, #5e047b, #400056); */
+    /* background: rgb(0,4,40);
+background: linear-gradient(90deg, rgba(0,4,40,1) 0%, rgba(0,78,146,1) 100%);
+background: rgb(170,7,107);
+background: linear-gradient(90deg, rgba(170,7,107,1) 0%, rgba(97,4,95,1) 100%); */
+background-color: rgb(16, 14, 14);
+color: white;
+}
+button{
+    width: 50%;
+    height: 35px;
+    margin: 10px 0px;
+    font-style: normal;
+    font-size: medium;
+    border-radius: 10px;    
+    cursor: pointer;
+    border: none;        
+}
+.or{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} 
+hr{
+    display: inline-block;
+    width: 90px;
+    margin: 5px 20px;
+} 
+.ref{
+    margin: 20px 20px;
+    color: black;
+}     

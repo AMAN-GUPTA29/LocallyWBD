@@ -3,7 +3,7 @@ import "./footer.css";
 
 const Footerland = () => {
   return (
-    <fragment>
+    <div>
       <section>
         <div className="adjustnew"></div>
       </section>
@@ -124,7 +124,7 @@ const Footerland = () => {
           </div>
         </footer>
       </section>
-    </fragment>
+    </div>
   );
 };
 
