@@ -11,7 +11,8 @@ const sellerSchema = new mongoose.Schema({
     address: { type: String, required: true },
     pin: { type: String, required: true },
     status:{type:String,default:"Unblocked"},
-    time:{type:Date,default:Date.now}
+    time:{type:Date,default:Date.now},
+    income: { type: Number, default: 0 },
     // img:{type:String,data:Buffer}
 });
 

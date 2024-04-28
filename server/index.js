@@ -16,6 +16,7 @@ const consumerRegistrationRoutes=require('./Routes/ConsumerRegistrationRoutes')
 const consumerLoginRoute=require('./Routes/ConsumerLoginRoutes')
 const ConsumerProfileRoute=require('./Routes/ConsumerProfileRoute');
 const ConsumerProfileUpdateRoute=require('./Routes/ConsumerProfileRouteUpdate');
+const ConsumerGivenSellerRatingRoute=require("./Routes/ConsumerRatingRoute")
 
 const adminRegistrationRoutes=require('./Routes/AdminRegistrationRoute')
 const adminLoginRoutes=require('./Routes/AdminLoginRoute')
@@ -58,6 +59,7 @@ app.use("/api/consumer/login",consumerLoginRoute);
 app.use("/api/consumer/profile",ConsumerProfileRoute);
 app.use("/api/consumer/profile/update",ConsumerProfileUpdateRoute)
 app.use('/api/customer/service', GetService_SellerDetailsRouter)
+app.use("/api/consumer/sellerrating",ConsumerGivenSellerRatingRoute)
 
 app.use("/api/admin/register",adminRegistrationRoutes);
 app.use("/api/admin/login",adminLoginRoutes);

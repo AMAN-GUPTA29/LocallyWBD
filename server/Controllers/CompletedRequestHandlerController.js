@@ -1,6 +1,10 @@
 const { assert } = require('joi')
 const { Requests } = require('./../Models/request')
 const { History } =require('./../Models/history')
+const {Seller}=require('./../Models/seller')
+const {Services}=require('./../Models/service')
+
+// /api/v1/request/completed/:id
 
 async function CompletedRequestHandlerController (req, res) {
     try{
@@ -19,6 +23,10 @@ async function CompletedRequestHandlerController (req, res) {
             sellerid: request_obj.sellerid,
             serviceid: request_obj.serviceid,
         }
+        var price=(await Services.findOne({_id:request_obj.serviceid})).charge
+        // // var premoney=(await Seller.findOne({_id:request_obj.sellerid})).income
+        // var finalmoney=premoney;
+        await Seller.updateOne({ _id: request_obj.sellerid }, { $inc: { income: price } })
 
         await new History(instance).save()
         await Requests.deleteOne({ _id:id })
