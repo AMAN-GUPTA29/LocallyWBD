@@ -8,6 +8,16 @@ async function sellerDeleteController (req, res){
        
         
         console.log(req.body)
+
+        const status=await BlockedSeller.findOne({email:req.body.email});
+        
+        // console.log(req.body)
+        if(status){
+            return res.status(409).send({message:"User already blocked"})
+        }
+
+
+
         try{
         const deleteseller=await Seller.updateOne({email:req.body.email},{ $set: {status:"blocked"} });
         console.log(deleteseller);

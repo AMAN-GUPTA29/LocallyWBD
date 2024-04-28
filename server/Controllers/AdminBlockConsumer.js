@@ -8,8 +8,15 @@ async function consumerDeleteController (req, res){
        
         console.log("tj")
         console.log(req.body)
+
+        const status=await BlockedConsumer.findOne({email:req.body.email});
+        
+        // console.log(req.body)
+        if(status){
+            return res.status(409).send({message:"User already blocked"})
+        }
         try{
-            
+         
         const deleteconsumer=await Consumer.updateOne({email:req.body.email},{ $set: {status:"blocked"} });
         // console.log(deleteconsumer);
         }
