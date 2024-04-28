@@ -26,6 +26,8 @@ const adminConsumerListRoute=require('./Routes/AdminConsumerListRoute')
 const adminSellerListRoute=require('./Routes/AdminSellerListRoute')
 const adminBlockSellerRoute=require('./Routes/AdminSellerBlockRoute')
 const adminBlockConsumerRoute=require('./Routes/AdminConsumerBlockRoute')
+const makeBroadCastRoute=require('./Routes/MakeBroadcastRoute')
+
 
 const sellerRegistrationRoutes=require('./Routes/SellerRegistrationRoute')
 const sellerLoginRoutes=require('./Routes/SellerLoginRoute')
@@ -73,6 +75,7 @@ app.use("/api/admin/blockedconsumerlist",blockedconsumerlistRoute)
 app.use("/api/admin/blockedsellerlist",blockedsellerlistRoute)
 app.use("/api/admin/unblockconsumer",unblockconsumerRoute)
 app.use("/api/admin/unblockseller",unblocksellerRoute)
+app.use("/api/admin/makebroadcast",makeBroadCastRoute)
 
 app.use("/api/seller/register",sellerRegistrationRoutes);
 app.use("/api/seller/login",sellerLoginRoutes);

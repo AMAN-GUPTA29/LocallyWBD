@@ -20,8 +20,10 @@ async function sellerProfileViewController (req, res){
         console.log("verified")
         // console.log(req.user.email);
 
+        console.log(req.user);
+
         
-        res.status(201).send({message:"founduser",email:req.user.email,name:req.user.name,phone:req.user.phone,address:req.user.address,pin:req.user.pin})  ;  
+        res.status(201).send({message:"founduser",data:req.user})  ;  
     }catch(e){
         console.log(e)
         res.status(500).send({message:"internl server error"})
