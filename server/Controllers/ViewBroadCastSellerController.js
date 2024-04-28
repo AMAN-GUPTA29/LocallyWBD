@@ -12,7 +12,8 @@ async function viewBroadcastController (req, res){
     try {
                 
         	
-        const broadcastmess = await Broadcast.find({pointer:"seller", $or });
+        const broadcastmess = await Broadcast.find({$or:[{pointer:"seller"},{pointer:"all"}] });
+
 
 
                 res.status(201).send({ data: broadcastmess ,message: "Successful" });
