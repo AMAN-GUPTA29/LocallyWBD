@@ -49,6 +49,7 @@ const SellerViewCustomerRequestRoute = require('./Routes/SellerViewCustomerReque
 const SellerAcceptedRequestRoute = require('./Routes/SellerAcceptedRequestRoute')
 const SellerDeleteRequestRoute = require('./Routes/SellerDeleteRequestRoute')
 const CompleteRequestRouter = require('./Routes/CompleteRequestRouter')
+const ConsumerViewServicesRoute = require('./Routes/ConsumerViewServicesRoute')
 
 connection();
 
@@ -95,6 +96,7 @@ app.use('/api/seller/viewrequests',SellerViewCustomerRequestRoute)
 app.use('/api/seller/request/accepted',SellerAcceptedRequestRoute)
 app.use('/api/seller/request/cancel',SellerDeleteRequestRoute)
 app.use('/api/customer/completed', CompleteRequestRouter)
+app.use('/api/customer/viewServices', ConsumerViewServicesRoute)
 
 
 
