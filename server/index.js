@@ -30,6 +30,8 @@ const sellerRegistrationRoutes=require('./Routes/SellerRegistrationRoute')
 const sellerLoginRoutes=require('./Routes/SellerLoginRoute')
 const sellerProfileRoute=require('./Routes/SellerProfileRoute')
 const sellerProfileUpdateRoute=require('./Routes/SellerProfileUpdateRoute')
+const blockedconsumerlistRoute=require('./Routes/ConsumerBlockedListRoute')
+const blockedsellerlistRoute=require('./Routes/SellerBlockedListRoute')
 
 const sellerServicesRouter = require('./Routes/SellerServiceRoute')
 const GetService_SellerDetailsRouter = require('./Routes/GetService_SellerDetailsRouter')
@@ -63,6 +65,8 @@ app.use("/api/admin/consumerlist",adminConsumerListRoute)
 app.use("/api/admin/sellerlist",adminSellerListRoute)
 app.use("/api/admin/blockseller",adminBlockSellerRoute)
 app.use("/api/admin/blockconsumer",adminBlockConsumerRoute)
+app.use("/api/admin/blockedconsumerlist",blockedconsumerlistRoute)
+app.use("/api/admin/blockedsellerlist",blockedsellerlistRoute)
 
 app.use("/api/seller/register",sellerRegistrationRoutes);
 app.use("/api/seller/login",sellerLoginRoutes);
