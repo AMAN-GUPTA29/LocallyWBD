@@ -1,0 +1,67 @@
+.special {
+    font-family: 'Anton', sans-serif;
+}
+
+.curve-border {
+    border-radius: 8px;
+}
+
+.flex-right {
+    display: flex;
+    margin-left: auto;
+}
+
+.flex-mid {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.flex-left {
+    display: flex;
+    margin-right: auto;
+}
+
+.fltr {
+    border-radius: 5px;
+}
+
+.card {
+    box-shadow: 1px 1px 1px 3px rgb(219, 219, 219);
+}
+
+
+/* .mainbutton:link,
+.mainbutton:visited {
+    display: inline-block;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 1.8rem;
+    transition: all 0.3s;
+}
+
+
+.mainbutton:hover,
+.mainbutton:active {
+    color: #cb997e;
+} */
+
+
+
+
+.mainotherbutton:link,
+.mainotherbutton:visited {
+    margin-top: 2%;
+    padding: 0.6rem 1.2rem;
+    border-radius: 9px;
+    color: #fff;
+    background-color: #bb3e03;
+    text-decoration: none;
+
+}
+
+.mainotherbutton:hover,
+.mainotherbutton:active {
+    background-color: #cb997e;
+}

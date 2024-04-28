@@ -1,0 +1,38 @@
+.card-content {
+  /* border: 1px solid #dee2e6; */
+  background-color: white; 
+}
+.idcard{
+  background-color: rgb(221, 212, 212);
+  background: #208d7d;
+  background: #2db29d;
+  /* padding: 5%; */
+}
+
+
+.idcard-rating{
+  background-color: white;
+  /* padding:8px 20px;  */
+}
+
+.idcard-footer{
+  background-color: white;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.idcard-phone{
+  margin: 2% 5%;
+}
+.idcard-address{
+  /* display: flex;
+  flex-direction: row; */
+  margin: 2% 5%;
+}
+.phone-label,.address-label{
+  margin: 2% 4%;
+}
+
+.like-symbol,.like-word{
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+

@@ -1,0 +1,76 @@
+/* .broadcast {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+} */
+
+.container-ss {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.past-broadcasts {
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+    margin: 0;
+}
+
+.users {
+    font-family: Arial, sans-serif;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.all,.customers,.workers {
+    width: 33%;
+    background-color: transparent;
+    border: none;
+    color: #333;
+    padding: 10px 20px;
+    margin: 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+}
+
+.all:after,.customers:after,.workers:after {
+    content: "";
+    display: block;
+    width: 50%;
+    height: 2px;
+    background-color: #333333;
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    /* Center the underline */
+    transform: scaleX(0);
+    /* Initially, set the length to zero */
+    transform-origin: 100% 50%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.all:hover:after,.customers:hover:after,.workers:hover:after  {
+    transform: scaleX(1);
+    /* Expand the underline on hover */
+}
+
+/* Add some spacing between the buttons for better visibility */
+.all+.all,.customers+.customers,.workers+.workers {
+    margin-left: 10px;
+}
+
+/* Add this CSS to your existing styles */
+.active::after {
+    transform: scaleX(1);
+}

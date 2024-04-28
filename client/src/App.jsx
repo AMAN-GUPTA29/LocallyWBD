@@ -12,6 +12,8 @@ import SomeshwarRoutes from './routes/SomeshwarRoutes.jsx'
 import VarunRoutes from './routes/VarunRoutes.jsx'
 import RootLayout from './pages/RootLayout.jsx'
 
+import { AuthProvider } from './AuthContext.jsx'
+
 function App() {
   const [count, setCount] = useState(0)
 
@@ -32,7 +34,9 @@ function App() {
 
   return (
     <>
+      <AuthProvider>
       <RouterProvider router={router}></RouterProvider>
+      </AuthProvider>
     </>
   );
 }
