@@ -6,11 +6,12 @@ const bcrypt=require("bcrypt");
 async function consumerDeleteController (req, res){
     try{
        
-        
+        console.log("tj")
         console.log(req.body)
         try{
-        const deleteconsumer=await Consumer.deleteOne({email:req.body.email});
-        console.log(deleteconsumer);
+            
+        const deleteconsumer=await Consumer.updateOne({email:req.body.email},{ $set: {status:"blocked"} });
+        // console.log(deleteconsumer);
         }
         catch(e)
         {
@@ -21,7 +22,7 @@ async function consumerDeleteController (req, res){
         await new BlockedConsumer({...req.body}).save();
 
         
-        res.status(201).send({message:"Consumer Deleted"})
+        res.status(201).send({message:"Consumer Blocked"})
     }catch(e){
         console.log(e)
         res.status(500).send({message:"internl server error"})

@@ -9,7 +9,7 @@ async function sellerDeleteController (req, res){
         
         console.log(req.body)
         try{
-        const deleteseller=await Seller.deleteOne({email:req.body.email});
+        const deleteseller=await Seller.updateOne({email:req.body.email},{ $set: {status:"blocked"} });
         console.log(deleteseller);
         }
         catch(e)
@@ -21,7 +21,7 @@ async function sellerDeleteController (req, res){
         await new BlockedSeller({...req.body}).save();
 
         
-        res.status(201).send({message:"Seller Deleted"})
+        res.status(201).send({message:"Seller Blocked"})
     }catch(e){
         console.log(e)
         res.status(500).send({message:"internl server error"})
