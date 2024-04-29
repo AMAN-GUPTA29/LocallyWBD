@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { FaEnvelope, FaKey, FaGoogle, FaTwitter, FaInstagram } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
+
 
 const SellerLoginForm = () => {
+  const {login} = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -53,22 +56,20 @@ const SellerLoginForm = () => {
     setErrors({ email: '', password: '' });
   
     try {
-      const response = await fetch('http://localhost:8080/api/seller/seller-login', {
+      const response = await fetch('http://localhost:8080/api/seller/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-        }),
+        body: JSON.stringify(formData),
       });
       const data = await response.json();
   
-      if (data.success) {
+      if (data.message  === "logged in successfully") {
         // Login successful
         console.log('Login successful:', data);
         // Redirect to '/sellerview'
+        login(data.data);
         navigate('/sellerview');
       } else {
         // Login failed

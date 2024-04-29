@@ -12,60 +12,91 @@ const AdminCustomerList = () => {
   const [isModalOpen2, setIsModalOpen2] = useState(false);
   const [selectedUserName, setSelectedUserName] = useState('');
   const [selectedCustomerId, setSelectedCustomerId] = useState('');
+  const [selectedCustomerEmail, setSelectedCustomerEmail] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/customerDetails',{
+    fetch('http://localhost:8080/api/admin/consumerlist', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
       .then(response => response.json())
-      .then(data => setUsers(data))
+      .then(data => setUsers(data.data))
+      .catch(error => console.error('Error fetching data:', error));
+
+    fetch('http://localhost:8080/api/admin/blockedconsumerlist', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then(response => response.json())
+      .then(data => setBlockedUsers(data.data))
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
-  const toggleModal1 = (userName, customerId) => {
+  const toggleModal1 = (userName, customerId, email) => {
     setSelectedUserName(userName);
     setSelectedCustomerId(customerId);
+    setSelectedCustomerEmail(email);
     setIsModalOpen1(!isModalOpen1);
   };
 
-  const toggleModal2 = (userName) => {
-    setSelectedUserName(userName);
+  const toggleModal2 = (email) => {
+    setSelectedUserName(email);
     setIsModalOpen2(!isModalOpen2);
   };
 
   const blockUser = async () => {
+    console.log("block consumer func")
     setBlockedUsers([...blockedUsers, selectedUserName]);
-        toggleModal1();
-    // try {
-    //   const response = await fetch(`http://localhost:8080/api/blockCustomer/${selectedCustomerId}`, {
-    //     method: 'PUT',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({ blocked: true }),
-    //   });
-    //   if (response.ok) {
-    //     setBlockedUsers([...blockedUsers, selectedUserName]);
-    //     toggleModal1(); // Close the modal
-    //   } else {
-    //     throw new Error('Failed to block user');
-    //   }
-    // } catch (err) {
-    //   console.error(err);
-    // }
+    toggleModal1();
+    try {
+      const response = await fetch(`http://localhost:8080/api/admin/blockconsumer`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ blocked: true, email: selectedCustomerEmail }),
+      });
+      if (response.ok) {
+        setBlockedUsers([...blockedUsers, selectedUserName]);
+        toggleModal1(); // Close the modal
+      } else {
+        throw new Error('Failed to block user');
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
-  
 
-  const unblockUser = () => {
+
+  const unblockUser = async() => {
+    console.log("Unblock consumer func")
     setBlockedUsers(blockedUsers.filter(user => user !== selectedUserName));
-    toggleModal2(); // Close the modal
+    toggleModal2(); //close modal
+    try {
+      const response = await fetch(`http://localhost:8080/api/admin/unblockconsumer`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ blocked: true, email: selectedCustomerEmail }),
+      });
+      if (response.ok) {
+        setBlockedUsers([...blockedUsers, selectedUserName]);
+      } else {
+        throw new Error('Failed to block user');
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       {/* Modal for blocking user */}
       {isModalOpen1 && (
         <div>
@@ -115,7 +146,7 @@ const AdminCustomerList = () => {
                 onClick={blockUser}
                 className="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5"
               >
-                Block
+                Blockk
               </button>
               <button
                 data-modal-hide="static-modal"
@@ -178,7 +209,7 @@ const AdminCustomerList = () => {
                 onClick={unblockUser}
                 className="text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5"
               >
-                Unblock
+                Unblockk
               </button>
               <button
                 data-modal-hide="static-modal"
@@ -204,6 +235,10 @@ const AdminCustomerList = () => {
                 <th className="px-4 py-2">Name</th>
                 <th className="px-4 py-2">Email</th>
                 <th className="px-4 py-2">Id</th>
+                <th className="px-4 py-2">Phone</th>
+                <th className="px-4 py-2">Address</th>
+                <th className="px-4 py-2">Pincode</th>
+                <th className="px-4 py-2">Status</th>
                 <th className="px-4 py-2">Action</th>
               </tr>
             </thead>
@@ -213,6 +248,10 @@ const AdminCustomerList = () => {
                   <td className="border px-4 py-2">Mr.{user.name}</td>
                   <td className="border px-4 py-2">{user.email}</td>
                   <td className="border px-4 py-2">{user._id}</td>
+                  <td className="border px-4 py-2">{user.phone}</td>
+                  <td className="border px-4 py-2">{user.address}</td>
+                  <td className="border px-4 py-2">{user.pin}</td>
+                  <td className="border px-4 py-2">{user.status}</td>
                   <td className="border px-4 py-2">
                     {blockedUsers.includes(user.name) ? (
                       <button
@@ -223,7 +262,7 @@ const AdminCustomerList = () => {
                       </button>
                     ) : (
                       <button
-                        onClick={() => toggleModal1(user.name, user.customerid)}
+                        onClick={() => toggleModal1(user.name, user.customerid, user.email)}
                         className="text-white bg-red-700 hover:bg-red-800 hover:text-white font-bold rounded-lg text-sm px-5 py-2.5"
                       >
                         <h5>Block</h5>
@@ -236,6 +275,50 @@ const AdminCustomerList = () => {
           </table>
         </div>
       )}
+
+      {/* ---------------------------------------------------------------------------------------- */}
+      <h1 className="head text-center font-bold my-4 text-2xl">
+        Blocked Customers
+      </h1>
+      {blockedUsers && (
+        <div className="container-ss mx-auto">
+          <table className="table-auto w-full">
+            <thead className="bg-gray-200">
+              <tr>
+                <th className="px-4 py-2">Email</th>
+                <th className="px-4 py-2">Id</th>
+                <th className="px-4 py-2">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {blockedUsers.map((user, i) => (
+                <tr key={i}>
+                  <td className="border px-4 py-2">{user.email}</td>
+                  <td className="border px-4 py-2">{user._id}</td>
+                  <td className="border px-4 py-2">
+                    {(user.email) ? (
+                      <button
+                        onClick={() => toggleModal2(user.email)}
+                        className="text-white bg-green-700 hover:bg-green-800 hover:text-white font-bold rounded-lg text-sm px-5 py-2.5"
+                      >
+                        <h5>Unblock</h5>
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => toggleModal1(user.name, user.customerid, user.email)}
+                        className="text-white bg-red-700 hover:bg-red-800 hover:text-white font-bold rounded-lg text-sm px-5 py-2.5"
+                      >
+                        <h5>Block</h5>
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
     </div>
   );
 };

@@ -58,7 +58,7 @@ const AdminRegister = () => {
 
     if (validateForm()) {
         try {
-            const response = await fetch('http://localhost:8080/api/registerAdmin', {
+            const response = await fetch('http://localhost:8080/api/admin/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -68,10 +68,11 @@ const AdminRegister = () => {
             const data = await response.json();
             console.log("data : ",data)
 
-            if (response.ok) {
-                navigate('/adminland');
+            if (data.message === "User created Succesfully") {
+              console.log("user created")
+                navigate('/adminLogin');
             }else {
-              alert("Email already exists")
+              alert("Email already exists from alse")
               console.log(data.message);
             }
         } catch (err) {
