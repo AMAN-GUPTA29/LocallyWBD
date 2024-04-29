@@ -86,6 +86,14 @@ app.use("/api/consumer/sellerprofileview",SellerProfileConsumerRoute)
 app.use("/api/consumer/sellerreview",SellerGivenConsumerRatingRoute)
 app.use("/api/consumer/seller/optedservice",ServiceInfoConsumerRoute)
 app.use("/api/consumer/pendingrequestdelete",pendingRequestDeleteRequestRoute)
+app.use("/api/consumer/history",checkConsumerHistoryRoute)
+app.use('/api/customer/completed', CompleteRequestRouter)
+app.use('/api/customer/viewServices', ConsumerViewServicesRoute)
+app.use('/api/customer/service', GetService_SellerDetailsRouter)
+app.use('/api/customer/makerequest', MakeRequestRouter)
+app.use('/api/customer/pendingrequests', PendingRequestRouter)
+app.use('/api/customer/acceptedrequests', AcceptedRequestRouter)
+
 app.use("/api/consumer/history",checkConsumerHistoryRoute)//left
 
 app.use("/api/admin/register",adminRegistrationRoutes);
@@ -111,18 +119,13 @@ app.use("/api/seller/profile",sellerProfileRoute);
 app.use("/api/seller/profile/update",sellerProfileUpdateRoute)
 app.use("/api/seller/viewbroadcast",SellerViewBroadcastRoute)
 app.use("/api/seller/review/route",SellerReviewViewRoute)
+
 app.use("/api/seller/history",SellerHistoryRoute)//left
 
 app.use('/api/seller/services', sellerServicesRouter)
-app.use('/api/customer/service', GetService_SellerDetailsRouter)
-app.use('/api/customer/makerequest', MakeRequestRouter)
-app.use('/api/customer/pendingrequests', PendingRequestRouter)
-app.use('/api/customer/acceptedrequests', AcceptedRequestRouter)
 app.use('/api/seller/viewrequests',SellerViewCustomerRequestRoute)
 app.use('/api/seller/request/accepted',SellerAcceptedRequestRoute)
 app.use('/api/seller/request/cancel',SellerDeleteRequestRoute)
-app.use('/api/customer/completed', CompleteRequestRouter)
-app.use('/api/customer/viewServices', ConsumerViewServicesRoute)
 
 
 
