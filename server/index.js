@@ -27,6 +27,7 @@ const ServiceInfoConsumerRoute=require('./Routes/SellerServiceDataOptedByConsume
 const pendingRequestDeleteRequestRoute=require('./Routes/PendingServiceDeleteRequestRoute')
 const checkConsumerHistoryRoute=require("./Routes/ConsumerHistoryRoute")
 const ConsumerChatSendRoute=require("./Routes/ConsumerChatSendRoute")
+const ConsumerChatReadRoute=require("./Routes/ConsumerViewChatRoute")
 
 
 const SellerViewBroadcastRoute=require("./Routes/ViewBroadcastSellerRoute")
@@ -56,6 +57,9 @@ const unblockconsumerRoute=require('./Routes/UnblockConsumerRoute')
 const unblocksellerRoute=require('./Routes/UnblockSellerRoute')
 const SellerReviewViewRoute=require('./Routes/SellerReviewViewRoute')
 const SellerHistoryRoute=require('./Routes/SellerHistoryRoute')
+const SellerViewChatTileRoute=require('./Routes/SellerViewChatTileRoute')
+const SellerViewChatRoute=require('./Routes/SellerViewChatRoute')
+const SellerSendChatRoute=require('./Routes/SellerSendChatRoute')
 
 
 const sellerServicesRouter = require('./Routes/SellerServiceRoute')
@@ -97,6 +101,7 @@ app.use('/api/customer/pendingrequests', PendingRequestRouter)
 app.use('/api/customer/acceptedrequests', AcceptedRequestRouter)
 app.use("/api/consumer/sendmessage",ConsumerChatSendRoute)//left
 app.use("/api/consumer/history",checkConsumerHistoryRoute)//left
+app.use("/api/consumer/readmessage",ConsumerChatReadRoute)//left
 
 app.use("/api/admin/register",adminRegistrationRoutes);
 app.use("/api/admin/login",adminLoginRoutes);
@@ -128,6 +133,9 @@ app.use('/api/seller/services', sellerServicesRouter)
 app.use('/api/seller/viewrequests',SellerViewCustomerRequestRoute)
 app.use('/api/seller/request/accepted',SellerAcceptedRequestRoute)
 app.use('/api/seller/request/cancel',SellerDeleteRequestRoute)
+app.use('/api/seller/chattile',SellerViewChatTileRoute)//left
+app.use('/api/seller/viewchat',SellerViewChatRoute)//left
+app.use('/api/seller/sendchat',SellerSendChatRoute)//left
 
 
 

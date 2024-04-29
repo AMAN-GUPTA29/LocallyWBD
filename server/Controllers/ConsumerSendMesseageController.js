@@ -23,12 +23,13 @@ async function consumerSendMessage (req, res){
             await new ChatSet(instance).save();
         }
         console.log("dsbhf2233")
-        const forpointer = await ChatSet.find({customerid:req.user._id,sellerid:req.body.sellerid})
+        const forpointer = await ChatSet.findOne({customerid:req.user._id,sellerid:req.body.sellerid})
         console.log(forpointer)
         
         let instance = {
             pointer:forpointer._id,
-            message:req.body.message
+            message:req.body.message,
+            sender:"consumer"
         }
 
         console.log(instance)
