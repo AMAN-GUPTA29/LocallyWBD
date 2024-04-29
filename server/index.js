@@ -3,6 +3,8 @@
  * Add RFS
  * Add csrf
  * Add multer
+ * chat
+ * rubricks
  * Add Global error handler (a,b,c,d) => {retutn xyz}
  */
 const bodyparser = require('body-parser')
@@ -75,33 +77,33 @@ app.use(bodyparser.urlencoded({extended:false}))
 
 app.use("/api/consumer/register",consumerRegistrationRoutes);
 app.use("/api/consumer/login",consumerLoginRoute);
-app.use("/api/consumer/profile",ConsumerProfileRoute);
-app.use("/api/consumer/profile/update",ConsumerProfileUpdateRoute)
+app.use("/api/consumer/profile",ConsumerProfileRoute); //left
+app.use("/api/consumer/profile/update",ConsumerProfileUpdateRoute) //left
 app.use('/api/customer/service', GetService_SellerDetailsRouter)
-app.use("/api/consumer/sellerrating",ConsumerGivenSellerRatingRoute)
+app.use("/api/consumer/sellerrating",ConsumerGivenSellerRatingRoute)//left
 app.use("/api/consumer/viewbroadcast",ConsumerViewBroadcastRoute)
 app.use("/api/consumer/sellerprofileview",SellerProfileConsumerRoute)
 app.use("/api/consumer/sellerreview",SellerGivenConsumerRatingRoute)
 app.use("/api/consumer/seller/optedservice",ServiceInfoConsumerRoute)
 app.use("/api/consumer/pendingrequestdelete",pendingRequestDeleteRequestRoute)
-app.use("/api/consumer/history",checkConsumerHistoryRoute)
+app.use("/api/consumer/history",checkConsumerHistoryRoute)//left
 
 app.use("/api/admin/register",adminRegistrationRoutes);
 app.use("/api/admin/login",adminLoginRoutes);
-app.use("/api/admin/profile",adminProfileRoute);
-app.use("/api/admin/profile/update",adminProfileUpdateRoute);
+app.use("/api/admin/profile",adminProfileRoute); //left
+app.use("/api/admin/profile/update",adminProfileUpdateRoute); //left
 app.use("/api/admin/consumerlist",adminConsumerListRoute)
 app.use("/api/admin/sellerlist",adminSellerListRoute)
 app.use("/api/admin/blockseller",adminBlockSellerRoute)
 app.use("/api/admin/blockconsumer",adminBlockConsumerRoute)
 app.use("/api/admin/blockedconsumerlist",blockedconsumerlistRoute)
 app.use("/api/admin/blockedsellerlist",blockedsellerlistRoute)
-app.use("/api/admin/unblockconsumer",unblockconsumerRoute)
-app.use("/api/admin/unblockseller",unblocksellerRoute)
+app.use("/api/admin/unblockconsumer",unblockconsumerRoute)//left
+app.use("/api/admin/unblockseller",unblocksellerRoute)//left
 app.use("/api/admin/makebroadcast",makeBroadCastRoute)
 app.use("/api/admin/broadcast/view",viewBroadcastAdminRoute)
 app.use("/api/admin/totalservice",viewallServicesRoute)
-app.use("/api/admin/history",AdminHistoryRoute)
+app.use("/api/admin/history",AdminHistoryRoute)//left
 
 app.use("/api/seller/register",sellerRegistrationRoutes);
 app.use("/api/seller/login",sellerLoginRoutes);
@@ -109,7 +111,7 @@ app.use("/api/seller/profile",sellerProfileRoute);
 app.use("/api/seller/profile/update",sellerProfileUpdateRoute)
 app.use("/api/seller/viewbroadcast",SellerViewBroadcastRoute)
 app.use("/api/seller/review/route",SellerReviewViewRoute)
-app.use("/api/seller/history",SellerHistoryRoute)
+app.use("/api/seller/history",SellerHistoryRoute)//left
 
 app.use('/api/seller/services', sellerServicesRouter)
 app.use('/api/customer/service', GetService_SellerDetailsRouter)
