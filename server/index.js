@@ -20,6 +20,7 @@ const ConsumerGivenSellerRatingRoute=require("./Routes/ConsumerRatingRoute")
 const ConsumerViewBroadcastRoute=require("./Routes/ViewBroadcastConsumerRoute")
 const SellerGivenConsumerRatingRoute=require("./Routes/SellerReviewConsumerViewRoute")
 const ServiceInfoConsumerRoute=require('./Routes/SellerServiceDataOptedByConsumerRoute')
+const pendingRequestDeleteRequestRoute=require('./Routes/PendingServiceDeleteRequestRoute')
 
 
 
@@ -79,6 +80,7 @@ app.use("/api/consumer/viewbroadcast",ConsumerViewBroadcastRoute)
 app.use("/api/consumer/sellerprofileview",SellerProfileConsumerRoute)
 app.use("/api/consumer/sellerreview",SellerGivenConsumerRatingRoute)
 app.use("/api/consumer/seller/optedservice",ServiceInfoConsumerRoute)
+app.use("/api/consumer/pendingrequestdelete",pendingRequestDeleteRequestRoute)
 
 app.use("/api/admin/register",adminRegistrationRoutes);
 app.use("/api/admin/login",adminLoginRoutes);
