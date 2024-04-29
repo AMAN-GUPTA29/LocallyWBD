@@ -21,7 +21,7 @@ async function adminProfileViewController (req, res){
         console.log(req.user.email);
 
         
-        res.status(201).send({message:"founduser",email:req.user.email,name:req.user.name,address:req.user.address,pin:req.user.pin})  ;  
+        res.status(201).send({message:"founduser",data:req.user})  ;  
     }catch(e){
         console.log(e)
         res.status(500).send({message:"internl server error"})

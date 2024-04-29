@@ -4,6 +4,8 @@
  * Add csrf
  * Add multer
  * chat
+ * payment gateway
+ * transactions
  * rubricks
  * Add Global error handler (a,b,c,d) => {retutn xyz}
  */
@@ -24,7 +26,7 @@ const SellerGivenConsumerRatingRoute=require("./Routes/SellerReviewConsumerViewR
 const ServiceInfoConsumerRoute=require('./Routes/SellerServiceDataOptedByConsumerRoute')
 const pendingRequestDeleteRequestRoute=require('./Routes/PendingServiceDeleteRequestRoute')
 const checkConsumerHistoryRoute=require("./Routes/ConsumerHistoryRoute")
-
+const ConsumerChatSendRoute=require("./Routes/ConsumerChatSendRoute")
 
 
 const SellerViewBroadcastRoute=require("./Routes/ViewBroadcastSellerRoute")
@@ -93,7 +95,7 @@ app.use('/api/customer/service', GetService_SellerDetailsRouter)
 app.use('/api/customer/makerequest', MakeRequestRouter)
 app.use('/api/customer/pendingrequests', PendingRequestRouter)
 app.use('/api/customer/acceptedrequests', AcceptedRequestRouter)
-
+app.use("/api/consumer/sendmessage",ConsumerChatSendRoute)//left
 app.use("/api/consumer/history",checkConsumerHistoryRoute)//left
 
 app.use("/api/admin/register",adminRegistrationRoutes);
