@@ -1,27 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/sellerhomeComponent/Navbar';
-
+import Cookies from 'universal-cookie';
+const cookie = new Cookies();
 
 const SellerMyrequests = () => {
+  const token = cookie.get("TOKEN")
   const [requests, setRequests] = useState([
-    {
-      id: 1,
-      customer: 'Customer1',
-      email: 'customer1@locally.com',
-      service: 'Electrician',
-      price: '$100',
-      accepted: true,
-      rejected: false,
-    },
-    {
-      id: 2,
-      customer: 'Customer4',
-      email: 'customer4@locally.com',
-      service: 'Carpenter',
-      price: '$100',
-      accepted: false,
-      rejected: false,
-    },
+    // {
+    //   id: 1,
+    //   customer: 'Customer1',
+    //   email: 'customer1@locally.com',
+    //   service: 'Electrician',
+    //   price: '$100',
+    //   accepted: true,
+    //   rejected: false,
+    // },
+    // {
+    //   id: 2,
+    //   customer: 'Customer4',
+    //   email: 'customer4@locally.com',
+    //   service: 'Carpenter',
+    //   price: '$100',
+    //   accepted: false,
+    //   rejected: false,
+    // },
   ]);
 
   const handleAccept = (id) => {
@@ -40,9 +42,25 @@ const SellerMyrequests = () => {
     );
   };
 
+  useEffect(() => {
+    fetch('http://localhost:8080/api/seller/viewrequests', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.data)
+        setRequests(data.data)
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  }, [])
+
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <header className="header-content mx-5 flex items-center justify-center h-20 mt-10 bg-gradient-to-r from-gray-600 to-yellow-300 px-4 rounded-xl">
         <h2 className="text-black font-bold text-xl">
           Service Requests
@@ -52,35 +70,41 @@ const SellerMyrequests = () => {
       <div className="mx-5 flex flex-col justify-center items-center">
         {requests.map((item) => (
           <div
-            key={item.id}
-            className={`col-12 flex flex-col justify-center m-3 p-4 px-5 h-fit py-5 border rounded-xl ${
-              item.accepted
+            key={item._id}
+            className={`col-12 flex flex-col justify-center m-3 p-4 px-5 h-fit py-5 border rounded-xl ${item.accepted
                 ? 'bg-gradient-to-r from-green-400 to-gray-400'
                 : item.rejected
-                ? 'bg-gradient-to-r from-red-400 to-gray-400'
-                : 'bg-gray-300'
-            }`}
+                  ? 'bg-gradient-to-r from-red-400 to-gray-400'
+                  : 'bg-gray-300'
+              }`}
           >
             <div className="flex">
               <h5>
-                Customer Name : <p className="fs-5 inline">{item.customer}</p>
+                Customer Name : <p className="fs-5 inline">{item.customerid.name}</p>
               </h5>
             </div>
             <div className="flex">
               <h5>
-                Customer Email :
-                <p className="fs-5 inline">{item.email}</p>
+                Customer Address :
+                <p className="fs-5 inline">{item.customerid.address}</p>
+              </h5>
+            </div>
+            <div className="flex">
+              <h5>
+                Customer Pincode :
+                <p className="fs-5 inline">{item.customerid.pin}</p>
               </h5>
             </div>
             <div className="flex">
               <h5>
                 Requested Service :
-                <p className="fs-5 inline">{item.service}</p>
+                <p className="fs-5 inline">{item.serviceid.title}</p>
               </h5>
             </div>
             <div className="flex">
               <h5>
-                Price :<p className="fs-5 inline">{item.price}</p>
+                charge :
+                <p className="fs-5 inline">{item.serviceid.charge}</p>
               </h5>
             </div>
             <div className="flex buttons justify-center">

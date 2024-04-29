@@ -52,7 +52,7 @@ const AdminLogin = () => {
   
     if (validateForm()) {
       try {
-        const response = await fetch('http://localhost:8080/api/adminLogging', {
+        const response = await fetch('http://localhost:8080/api/admin/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -62,8 +62,9 @@ const AdminLogin = () => {
   
         const data = await response.json();
   
-        if (data.success) {
-          login(data.token);
+        if (data.message  === "logged in successfully") {
+          console.log(data.data)
+          login(data.data);
           navigate('/adminland');
         } else {
           console.log("else")

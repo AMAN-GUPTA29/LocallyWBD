@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/sellerhomeComponent/Navbar';
 import { AiFillLike } from "react-icons/ai";
+import Cookies from 'universal-cookie';
+const cookie = new Cookies();
 
 const SellerProfile = () => {
+    const token = cookie.get("TOKEN");
     const [seller, setSeller] = useState({
-        name: "Chaitanya Krishna",
-        email: "krishnachaitanya@gmail.com",
-        phoneNumber: "9347980742",
-        likes: 100
+        name: "",
+        email: "",
+        phone: "",
+        address:"",
+        pin:""
     });
 
     const handleChange = (e) => {
@@ -17,6 +21,45 @@ const SellerProfile = () => {
             [name]: value
         }));
     };
+    const handleSubmit = ()=>{
+        fetch('http://localhost:8080/api/seller/profile/update',{
+            method:'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+              },
+            body: JSON.stringify(seller),
+        }).then(response => response.json())
+        .then(data => {
+            console.log(data)
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    }
+    useEffect(() => {
+        console.log(token);
+        fetch('http://localhost:8080/api/seller/profile', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then(response => response.json())
+          .then(data => {
+            if(data.message === "founduser"){
+                data = data.data
+                setSeller(prevState => ({
+                    ...prevState,
+                    name: data.name,
+                    email:data.email,
+                    phone:data.phone,
+                    address:data.address,
+                    pin:data.pin
+                }));
+            }
+          })
+          .catch(error => console.error('Error fetching data:', error));
+      }, []);
 
     return (
         <div>
@@ -39,25 +82,45 @@ const SellerProfile = () => {
                             name="name"
                             value={seller.name}
                             onChange={handleChange}
-                            className="w-full bg-white focus:border-sky-500 focus:border-2 focus:ring-1 rounded-md p-2"
-                        />
+                            className="w-full bg-white  border border-gray-300 rounded-md p-2"                        />
                     </div>
                     <div className='mb-4 flex flex-col items-start'>
                         <label className='block mb-1 text-gray-700'>Email:</label>
-                        <input
+                        <div>{seller.email}</div>
+                        {/* <input
                             type="email"
                             name="email"
                             value={seller.email}
                             onChange={handleChange}
                             className="w-full bg-white  border border-gray-300 rounded-md p-2"
-                        />
+                        /> */}
                     </div>
                     <div className='mb-4 flex flex-col items-start'>
                         <label className='block mb-1 text-gray-700'>Phone Number:</label>
                         <input
                             type="text"
-                            name="phoneNumber"
-                            value={seller.phoneNumber}
+                            name="phone"
+                            value={seller.phone}
+                            onChange={handleChange}
+                            className="w-full bg-white  border border-gray-300 rounded-md p-2"
+                        />
+                    </div>
+                    <div className='mb-4 flex flex-col items-start'>
+                        <label className='block mb-1 text-gray-700'>Address:</label>
+                        <input
+                            type="text"
+                            name="address"
+                            value={seller.address}
+                            onChange={handleChange}
+                            className="w-full bg-white  border border-gray-300 rounded-md p-2"
+                        />
+                    </div>
+                    <div className='mb-4 flex flex-col items-start'>
+                        <label className='block mb-1 text-gray-700'>Pincode:</label>
+                        <input
+                            type="text"
+                            name="pincode"
+                            value={seller.pin}
                             onChange={handleChange}
                             className="w-full bg-white  border border-gray-300 rounded-md p-2"
                         />
@@ -73,7 +136,7 @@ const SellerProfile = () => {
                             readOnly
                         />
                     </div> */}
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleSubmit}>
                         Update Profile
                     </button>
                 </div>

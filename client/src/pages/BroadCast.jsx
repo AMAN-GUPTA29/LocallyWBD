@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Message from "../components/customerviewComponent/_Message";
 import NavPostLog from "../components/customerviewComponent/NavPostLog";
-import Footer from "../components/customerviewComponent/Footer";
 import Fotterfinal from "../components/landingpageComponent/footer";
+import Cookies from 'universal-cookie';
+const cookie = new Cookies();
 
 const dummydata = [
   "festival discounts for sellers",
@@ -12,17 +13,31 @@ const dummydata = [
 ];
 
 export default () => {
-  let iter = -1;
-  const cardArray = dummydata.map((msg) => {
-    iter += 1;
-    return <Message key={iter} message={msg} />;
-  });
+  const token = cookie.get("TOKEN");
+  const [cardArray, setCardArray] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8080/api/consumer/viewbroadcast', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        data = data.data
+        setCardArray(data.map(msg => msg.broadcastMeassage));
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  }, []); 
 
   return (
     <>
       <NavPostLog />
       <br />
-      {cardArray}
+      {cardArray.map((message, index) => (
+        <Message key={index} message={message} />
+      ))}
       <Fotterfinal />
     </>
   );

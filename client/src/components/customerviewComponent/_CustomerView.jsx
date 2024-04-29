@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import Cookies from 'universal-cookie';
 import CardArray from "./_CardArray";
 import { useEffect } from "react";
 import logo1 from "./assets/imgs/1.png";
 import logo2 from "./assets/imgs/2.png";
 import { useNavigate } from "react-router-dom";
+const cookie = new Cookies();
 
 
 const dummyData = [
@@ -25,6 +27,7 @@ const dummyData = [
 ];
 
 export default () => {
+  const token = cookie.get("TOKEN")
   const navigator = useNavigate();
 
   function filter() {
@@ -37,8 +40,9 @@ export default () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://localhost:8080/api/customerview/data");
+      const response = await fetch("http://localhost:8080/api/customer/viewServices");
       const body = await response.json();
+      console.log(body)
       setTimeout(() => {
         console.log(body)
         if (body.isLogged === false) {

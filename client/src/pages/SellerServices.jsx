@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Cookies from 'universal-cookie';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/sellerhomeComponent/Navbar';
@@ -7,8 +8,11 @@ import electricianpng from '../components/sellerServicesComponent/sellerImages/e
 import carpenterpng from '../components/sellerServicesComponent/sellerImages/carpenter.png';
 import { Footer } from '../components/sellerServicesComponent/Footer';
 
-export const SellerServices = () => {
+const cookie = new Cookies();
 
+export const SellerServices = () => {
+    const token = cookie.get("TOKEN")
+    const [services,setServices] = useState([]);
     const itemVariants = {
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0 },
@@ -49,6 +53,22 @@ export const SellerServices = () => {
         margin: '2rem auto',
     };
 
+    useEffect(()=>{
+        fetch("http://localhost:8080/api/seller/services/viewservice",{
+            method:'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+              },
+        }).then(response => response.json())
+        .then(data => {
+            data = data.data
+            console.log(data)
+            setServices(data)
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    },[])
+
     return (
         <div>
             <Navbar/>
@@ -60,7 +80,19 @@ export const SellerServices = () => {
                 animate="visible"
                 variants={{ visible: { transition: { staggerChildren: 0.3 } } }}
             >
-                <motion.div
+                {services.map((service,index)=>(
+                    <motion.div
+                    variants={itemVariants}
+                    style={itemStyle}
+                    key={index}
+                >
+                    <p style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>Ttile : {service.title}</p>
+                    <div>Tag : {service.tag}</div>
+                    <div>Charge : {service.charge}</div>
+                    <p style={{ fontSize: '0.95rem' }}>Description : {service.description}</p>
+                </motion.div>
+                ))}
+                {/* <motion.div
                     variants={itemVariants}
                     style={itemStyle}
                 >
@@ -83,7 +115,7 @@ export const SellerServices = () => {
                     <img src={carpenterpng} alt="" style={{ width: '200px', height: '50%' }} />
                     <p style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>Carpenter</p>
                     <p style={{ fontSize: '0.95rem' }}>As a skilled carpenter service provider, I offer tailored woodworking solutions for diverse projects. From crafting custom furniture to executing precise installations, my expertise enhances residential and commercial spaces. Trust in my craftsmanship to bring creativity and functionality to your woodworking needs.</p>
-                </motion.div>
+                </motion.div> */}
             </motion.div>
             <Link to="/addservices" style={linkStyle}>Add Service</Link>
         </div>

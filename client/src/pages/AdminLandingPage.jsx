@@ -22,39 +22,38 @@ import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 
 export default function AdminLandingPage() {
-    const authUserToken = cookie.get("TOKEN");
+    const token = cookie.get("TOKEN");
     // const { authUserToken } = useAuth();
     const [sellers, setSellers] = useState([]);
-    const [customerCount,setCustomerCount] = useState([]);
-    const [sellerCount,setSellerCount] = useState([]);
-    const [serviceCount,setServiceCount] = useState([])
+    const [customerCount, setCustomerCount] = useState([]);
+    const [sellerCount, setSellerCount] = useState([]);
+    const [serviceCount, setServiceCount] = useState([])
     useEffect(() => {
         const fetchData = async () => {
             try {
-              const token = authUserToken;
-              const config = {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              };
-      
-              const customerResponse = await axios.get('http://localhost:8080/api/customerDetails', config);
-              setCustomerCount(customerResponse.data);
-      
-              const sellerResponse = await axios.get('http://localhost:8080/api/sellerDetails', config);
-              setSellerCount(sellerResponse.data);
-      
-              const serviceResponse = await axios.get('http://localhost:8080/api/requests', config);
-              setServiceCount(serviceResponse.data);
-      
-              const allSellerResponse = await axios.get('http://localhost:8080/api/allSellerDetails', config);
-              setSellers(allSellerResponse.data);
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                };
+                const customerResponse = await axios.get('http://localhost:8080/api/admin/consumerlist', config);
+                setCustomerCount(customerResponse.data.data);
+
+                const sellerResponse = await axios.get('http://localhost:8080/api/admin/sellerlist', config);
+                setSellerCount(sellerResponse.data.data);
+
+                const serviceResponse = await axios.get('http://localhost:8080/api/admin/totalservice', config);
+                setServiceCount(serviceResponse.data.data);
+                console.log(serviceResponse.data);
+
+                // const allSellerResponse = await axios.get('http://localhost:8080/api/allSellerDetails', config);
+                // setSellers(allSellerResponse.data);
             } catch (error) {
-              console.error('Error fetching data:', error);
+                console.error('Error fetching data:', error);
             }
-          };
-    fetchData();
-      }, []);
+        };
+        fetchData();
+    }, []);
     return (
         <div className="bodyy">
             <Navbar />
@@ -92,7 +91,7 @@ export default function AdminLandingPage() {
                 </div>
                 <div className="w-1/4 m-4 px-7 py-4 boxes border pending grid grid-cols-3 gap-4 rounded-xl">
                     <div className="name col-span-2 text-xl font-bold">Services Done</div>
-                    <div className="pending-number rounded-full text-center text-2xl font-bold">{serviceCount.length}</div>
+                    <div className="pending-number rounded-full text-center text-2xl font-bold">{serviceCount}</div>
                     <div className="contact-img row-end-3">
                         <img src={pendingimg} alt="Contacts" className="rounded-full" style={{ width: '50px', height: '50px' }} />
                     </div>
@@ -113,7 +112,7 @@ export default function AdminLandingPage() {
             </div>
 
             <div className="m-4 my-7">
-            <Line />
+                {/* <Line /> */}
             </div>
 
             <div className="topRated-heading text-green-700 m-3 font-semibold text-2xl my-7">Top Liked Service Providers</div>

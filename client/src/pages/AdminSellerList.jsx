@@ -11,23 +11,25 @@ const AdminSellerList = () => {
   const [isModalOpen1, setIsModalOpen1] = useState(false);
   const [isModalOpen2, setIsModalOpen2] = useState(false);
   const [selectedUserName, setSelectedUserName] = useState('');
-  const [selectedCustomerId, setSelectedCustomerId] = useState('');
+  const [selectedSellerId, setSelectedSellerId] = useState('');
+  const [selectedSellerEmail, setSelectedSellerEmail] = useState('');
 
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/sellerDetails',{
+    fetch('http://localhost:8080/api/admin/sellerlist',{
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
       .then(response => response.json())
-      .then(data => setUsers(data))
+      .then(data => setUsers(data.data))
       .catch(error => console.error('Error fetching data:', error));
     console.log(users);
   }, []);
-  const toggleModal1 = (userName, customerId) => {
+  const toggleModal1 = (userName, customerId,email) => {
     setSelectedUserName(userName);
-    setSelectedCustomerId(customerId);
+    setSelectedSellerId(customerId);
+    setSelectedSellerEmail(email)
     setIsModalOpen1(!isModalOpen1);
   };
 
@@ -37,25 +39,27 @@ const AdminSellerList = () => {
   };
 
   const blockUser = async () => {
+    console.log("block seller func")
     setBlockedUsers([...blockedUsers, selectedUserName]);
         toggleModal1();
-    // try {
-    //   const response = await fetch(`http://localhost:8080/api/blockCustomer/${selectedCustomerId}`, {
-    //     method: 'PUT',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({ blocked: true }),
-    //   });
-    //   if (response.ok) {
-    //     setBlockedUsers([...blockedUsers, selectedUserName]);
-    //     toggleModal1(); // Close the modal
-    //   } else {
-    //     throw new Error('Failed to block user');
-    //   }
-    // } catch (err) {
-    //   console.error(err);
-    // }
+    try {
+      const response = await fetch(`http://localhost:8080/api/admin/blockseller`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ blocked: true,email: selectedSellerEmail }),
+      });
+      if (response.ok) {
+        setBlockedUsers([...blockedUsers, selectedUserName]);
+        toggleModal1(); // Close the modal
+      } else {
+        throw new Error('Failed to block user');
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
   
 
@@ -205,6 +209,9 @@ const AdminSellerList = () => {
                 <th className="px-4 py-2">Name</th>
                 <th className="px-4 py-2">Email</th>
                 <th className="px-4 py-2">Id</th>
+                <th className="px-4 py-2">Phone</th>
+                <th className="px-4 py-2">Address</th>
+                <th className="px-4 py-2">Pincode</th>
                 <th className="px-4 py-2">Action</th>
               </tr>
             </thead>
@@ -214,6 +221,9 @@ const AdminSellerList = () => {
                   <td className="border px-4 py-2">Mr.{user.name}</td>
                   <td className="border px-4 py-2">{user.email}</td>
                   <td className="border px-4 py-2">{user._id}</td>
+                  <td className="border px-4 py-2">{user.phone}</td>
+                  <td className="border px-4 py-2">{user.address}</td>
+                  <td className="border px-4 py-2">{user.pin}</td>
                   <td className="border px-4 py-2">
                     {blockedUsers.includes(user.name) ? (
                       <button
@@ -224,7 +234,7 @@ const AdminSellerList = () => {
                       </button>
                     ) : (
                       <button
-                        onClick={() => toggleModal1(user.name, user.customerid)}
+                        onClick={() => toggleModal1(user.name, user.customerid,user.email)}
                         className="text-white bg-red-700 hover:bg-red-800 hover:text-white font-bold rounded-lg text-sm px-5 py-2.5"
                       >
                         <h5>Block</h5>
