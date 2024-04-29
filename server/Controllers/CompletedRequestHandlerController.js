@@ -22,7 +22,11 @@ async function CompletedRequestHandlerController (req, res) {
             customerid: req.user._id,
             sellerid: request_obj.sellerid,
             serviceid: request_obj.serviceid,
+            status: "completed",
+            datecompleted: Date()
         }
+
+        console.log(instance)
         var price=(await Services.findOne({_id:request_obj.serviceid})).charge
         // // var premoney=(await Seller.findOne({_id:request_obj.sellerid})).income
         // var finalmoney=premoney;

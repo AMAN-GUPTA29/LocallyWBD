@@ -21,6 +21,7 @@ const ConsumerViewBroadcastRoute=require("./Routes/ViewBroadcastConsumerRoute")
 const SellerGivenConsumerRatingRoute=require("./Routes/SellerReviewConsumerViewRoute")
 const ServiceInfoConsumerRoute=require('./Routes/SellerServiceDataOptedByConsumerRoute')
 const pendingRequestDeleteRequestRoute=require('./Routes/PendingServiceDeleteRequestRoute')
+const checkConsumerHistoryRoute=require("./Routes/ConsumerHistoryRoute")
 
 
 
@@ -38,6 +39,7 @@ const adminBlockConsumerRoute=require('./Routes/AdminConsumerBlockRoute')
 const makeBroadCastRoute=require('./Routes/MakeBroadcastRoute')
 const viewBroadcastAdminRoute=require('./Routes/ViewBroadcastAdminRoute')
 const viewallServicesRoute=require('./Routes/AdminTotalServiceRoute')
+const AdminHistoryRoute=require('./Routes/AdminHistoryRoutes')
 
 
 const sellerRegistrationRoutes=require('./Routes/SellerRegistrationRoute')
@@ -49,6 +51,7 @@ const blockedsellerlistRoute=require('./Routes/SellerBlockedListRoute')
 const unblockconsumerRoute=require('./Routes/UnblockConsumerRoute')
 const unblocksellerRoute=require('./Routes/UnblockSellerRoute')
 const SellerReviewViewRoute=require('./Routes/SellerReviewViewRoute')
+const SellerHistoryRoute=require('./Routes/SellerHistoryRoute')
 
 
 const sellerServicesRouter = require('./Routes/SellerServiceRoute')
@@ -81,6 +84,7 @@ app.use("/api/consumer/sellerprofileview",SellerProfileConsumerRoute)
 app.use("/api/consumer/sellerreview",SellerGivenConsumerRatingRoute)
 app.use("/api/consumer/seller/optedservice",ServiceInfoConsumerRoute)
 app.use("/api/consumer/pendingrequestdelete",pendingRequestDeleteRequestRoute)
+app.use("/api/consumer/history",checkConsumerHistoryRoute)
 
 app.use("/api/admin/register",adminRegistrationRoutes);
 app.use("/api/admin/login",adminLoginRoutes);
@@ -97,6 +101,7 @@ app.use("/api/admin/unblockseller",unblocksellerRoute)
 app.use("/api/admin/makebroadcast",makeBroadCastRoute)
 app.use("/api/admin/broadcast/view",viewBroadcastAdminRoute)
 app.use("/api/admin/totalservice",viewallServicesRoute)
+app.use("/api/admin/history",AdminHistoryRoute)
 
 app.use("/api/seller/register",sellerRegistrationRoutes);
 app.use("/api/seller/login",sellerLoginRoutes);
@@ -104,6 +109,7 @@ app.use("/api/seller/profile",sellerProfileRoute);
 app.use("/api/seller/profile/update",sellerProfileUpdateRoute)
 app.use("/api/seller/viewbroadcast",SellerViewBroadcastRoute)
 app.use("/api/seller/review/route",SellerReviewViewRoute)
+app.use("/api/seller/history",SellerHistoryRoute)
 
 app.use('/api/seller/services', sellerServicesRouter)
 app.use('/api/customer/service', GetService_SellerDetailsRouter)
