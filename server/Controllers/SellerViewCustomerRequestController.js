@@ -8,7 +8,7 @@ async function SellerViewCustomerRequestController (req, res) {
         const seller_id = req.user._id
         
         console.log(seller_id)
-        const data=   await Requests.find({sellerid:seller_id})
+        const data=   await Requests.where({sellerid:seller_id}).populate('customerid').populate('serviceid')
         res.status(201).send({ data:data ,message: "json for request sent" });
         }
         catch (e){

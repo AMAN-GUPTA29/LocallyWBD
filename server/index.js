@@ -30,6 +30,7 @@ const adminBlockSellerRoute=require('./Routes/AdminSellerBlockRoute')
 const adminBlockConsumerRoute=require('./Routes/AdminConsumerBlockRoute')
 const makeBroadCastRoute=require('./Routes/MakeBroadcastRoute')
 const viewBroadcastAdminRoute=require('./Routes/ViewBroadcastAdminRoute')
+const viewallServicesRoute=require('./Routes/AdminTotalServiceRoute')
 
 
 const sellerRegistrationRoutes=require('./Routes/SellerRegistrationRoute')
@@ -84,6 +85,7 @@ app.use("/api/admin/unblockconsumer",unblockconsumerRoute)
 app.use("/api/admin/unblockseller",unblocksellerRoute)
 app.use("/api/admin/makebroadcast",makeBroadCastRoute)
 app.use("/api/admin/broadcast/view",viewBroadcastAdminRoute)
+app.use("/api/admin/totalservice",viewallServicesRoute)
 
 app.use("/api/seller/register",sellerRegistrationRoutes);
 app.use("/api/seller/login",sellerLoginRoutes);
