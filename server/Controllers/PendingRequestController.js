@@ -6,7 +6,7 @@ const { Services } = require('./../Models/service')
 async function PendingRequestController (req, res) {
     try{
         const customer_id = req.user._id
-        const data=   await Requests.find({customerid:customer_id,accepted:false})
+        const data=   await Requests.find({customerid:customer_id,accepted:false}).populate('customerid').populate('serviceid').populate('sellerid')
         res.status(201).send({ data:data ,message: "Request Sent" });
         }
         catch (e){

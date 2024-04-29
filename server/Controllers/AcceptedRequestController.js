@@ -4,7 +4,7 @@ const { Requests } = require('./../Models/request')
 async function AcceptedRequestController (req, res) {
     try{
         const customer_id = req.user._id
-        const data=   await Requests.find({customerid:customer_id,accepted:true})
+        const data=   await Requests.find({customerid:customer_id,accepted:true}).populate('customerid').populate('serviceid').populate('sellerid')
         console.log(data)
         res.status(201).send({ data:data ,message: "Accepted request" });
         }
