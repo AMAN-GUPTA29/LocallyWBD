@@ -4,7 +4,7 @@ const router = require("express").Router();
 
 
 
-router.get("/",authenticateToken,consumerViewChat)
+router.post("/",authenticateToken,consumerViewChat)
 
 
 module.exports = router;
