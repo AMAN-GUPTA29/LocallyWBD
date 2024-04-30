@@ -11,6 +11,10 @@
  */
 const bodyparser = require('body-parser')
 
+const Multer = require("multer");
+const cloudinary = require("cloudinary").v2;
+const {CloudinaryStorage} = require("multer-storage-cloudinary");
+
 require('dotenv').config();
 const express=require("express")
 const app = express();
@@ -31,6 +35,11 @@ const checkConsumerHistoryRoute=require("./Routes/ConsumerHistoryRoute")
 const ConsumerChatSendRoute=require("./Routes/ConsumerChatSendRoute")
 const ConsumerChatReadRoute=require("./Routes/ConsumerViewChatRoute")
 const MakePaymentConsumer=require("./Routes/ConsumerMakePaymentRoute")
+const TransactionHistoryRoute=require("./Routes/TransactionHistoryRoute")
+
+const TransactionAdminRoute=require("./Routes/TransactionAdminRoute")
+const TransactionSellerRoute=require("./Routes/TransactionSellerRoute")
+const TransactionConsumerRoute=require("./Routes/TransactionConsumerRoute")
 
 const SellerViewBroadcastRoute=require("./Routes/ViewBroadcastSellerRoute")
 const SellerProfileConsumerRoute=require("./Routes/SellerProfileFromConsumerRoute")
@@ -75,6 +84,30 @@ const SellerDeleteRequestRoute = require('./Routes/SellerDeleteRequestRoute')
 const CompleteRequestRouter = require('./Routes/CompleteRequestRouter')
 const ConsumerViewServicesRoute = require('./Routes/ConsumerViewServicesRoute')
 
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDNARY_API_NAME,
+    api_key: process.env.CLOUDNARY_API_KEY,
+    api_secret: process.env.CLOUDNARY_API_SECREAT,
+  });
+  
+  
+  // Configure Multer to use Cloudinary as storage
+  const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+      folder: 'cover', // optional, destination folder in Cloudinary
+      allowed_formats: ['jpg', 'jpeg', 'png'], // optional, allowed formats
+      // other configuration options
+    },
+  })
+  
+  const upload = Multer({
+    storage:storage
+  });
+
+
+
 connection();
 
 
@@ -105,6 +138,8 @@ app.use("/api/consumer/sendmessage",ConsumerChatSendRoute)//left
 app.use("/api/consumer/history",checkConsumerHistoryRoute)//left
 app.use("/api/consumer/readmessage",ConsumerChatReadRoute)//left
 app.use('/api/consumer/payment',MakePaymentConsumer)
+app.use('/api/consumer/transactionsave',TransactionHistoryRoute)
+app.use('/api/consumer/transaction',TransactionConsumerRoute)
 
 app.use("/api/admin/register",adminRegistrationRoutes);
 app.use("/api/admin/login",adminLoginRoutes);
@@ -122,6 +157,11 @@ app.use("/api/admin/makebroadcast",makeBroadCastRoute)
 app.use("/api/admin/broadcast/view",viewBroadcastAdminRoute)
 app.use("/api/admin/totalservice",viewallServicesRoute)
 app.use("/api/admin/history",AdminHistoryRoute)//left
+app.use('/api/admin/transaction',TransactionAdminRoute)
+
+
+
+app.use('/api/seller/transaction',TransactionSellerRoute)
 
 app.use("/api/seller/register",sellerRegistrationRoutes);
 app.use("/api/seller/login",sellerLoginRoutes);

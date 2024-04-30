@@ -94,7 +94,7 @@ function AuthenticationContainer() {
       <div className="loginsignup-ag">
         <Components.Container>
           <Components.SignUpContainer signinIn={signIn}>
-            <Components.Form>
+            <Components.Form >
               <Components.Title>Create Account</Components.Title>
               <Components.Input type="hidden" name="_csrf" value={tokn} />
               <Components.Input type="text" placeholder="Name" />
