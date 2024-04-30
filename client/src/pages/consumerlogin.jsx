@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import * as Components from "./consumerloginstyle";
 import "../components/landingpageComponent/loginsignup.css";
@@ -51,6 +51,8 @@ function AuthenticationContainer() {
     setPassword(val);
   }
 
+  const [file,setFile] = useState("");
+
   // const handleChange = (e) => {
   //   const { name, value } = e.target;
   //   console.log(name, value);
@@ -79,39 +81,35 @@ function AuthenticationContainer() {
   const handleRegistration = async (e) => {
     e.preventDefault();
     console.log(name, email, password, phoneNumber, address, pin);
+    const formData2 = new FormData();
+    formData2.append('email', email);
+    formData2.append('password', password)
+    formData2.append('name', name);
+    formData2.append('pin', pin);
+    formData2.append('address', address)
+    formData2.append('phone', phoneNumber)
+    formData2.append('image', file);
     try {
-      const response = await fetch("http://localhost:8080/api/consumer/register", {
-        method: 'POST',
+      const response = await axios.post('http://localhost:8080/api/consumer/register',formData2,{
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data',
         },
-        body: JSON.stringify(
-          {
-            name: name,
-            email: email,
-            password: password,
-            phone: phoneNumber,
-            address: address,
-            pin: pin
-            }
-        )
-      })
-
+      });
       const data = await response.json();
-          if (data) {
-            // setFormData((prevData) => ({
-            //   ...prevData,
-            //   sellerId: data.sellerId,
-            // }));
-            // setStep(3); 
-            console.log(data)
-            navigator('/consumerlogin')
-          } else {
-            console.error('Failed to register seller:', data.message);
-          }
-  } catch (err) {
-    console.log(err);
-  }
+      if (data) {
+        // setFormData((prevData) => ({
+        //   ...prevData,
+        //   sellerId: data.sellerId,
+        // }));
+        // setStep(3); 
+        console.log(data)
+        // navigate('/seller/login'); 
+      } else {
+        console.error('Failed to register seller:', data.message);
+      }
+    } catch (err) {
+      console.error('Failed to register seller:', err);
+    }
 }
 
 const handleSubmit = async (e) => {
@@ -198,6 +196,15 @@ return (
               value={pin}
               onChange={handleChangePin}
             />
+            <input
+            type="file"
+            className="p-2 flex justify-center"
+            onChange={(e) => {
+              setFile(e.target.files[0]);
+            }}
+
+            >
+            </input>
             <Components.Button>Sign Up</Components.Button>
           </Components.Form>
         </Components.SignUpContainer>

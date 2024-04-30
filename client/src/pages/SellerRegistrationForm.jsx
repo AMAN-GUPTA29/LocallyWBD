@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { FaUser, FaEnvelope, FaKey, FaGoogle, FaTwitter, FaInstagram } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +13,7 @@ const validatePassword = (password) => {
   return passwordRegex.test(password);
 };
 
-const BasicRegistrationForm = ({ formData, errors, handleChange, handleSubmit }) => (
+const BasicRegistrationForm = ({ formData, errors, handleChange, handleSubmit, setFile }) => (
   <form className="px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
     <h1 className="text-4xl font-bold mb-6 text-center">Seller Registration</h1>
     <div className="flex flex-col mt-1">
@@ -32,6 +33,13 @@ const BasicRegistrationForm = ({ formData, errors, handleChange, handleSubmit })
           value={formData.name}
           onChange={handleChange}
         />
+        <input
+        type="file"
+        name="file"
+        onChange={(e)=>{setFile(e.target.files[0]); console.log("KKKKK")}}
+        
+        >
+        </input>
       </div>
       {errors.name && <p className="text-red-500 text-xs italic">{errors.name}</p>}
     </div>
@@ -173,7 +181,7 @@ const SellerRegistrationForm = () => {
   });
 
   const [step, setStep] = useState(1);
-
+  const [file, setFile] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -226,25 +234,26 @@ const SellerRegistrationForm = () => {
         valid = false;
       }
     }
+
+    const formData2 = new FormData();
+    formData2.append('email', formData.email);
+    formData2.append('password', formData.password)
+    formData2.append('name', formData.name);
+    formData2.append('pin',formData.pin);
+    formData2.append('address',formData.address)
+    formData2.append('phone', formData.phoneNumber)
+    formData2.append('image', file);
+  
   
     if (valid) {
       if (step === 1) {
         setStep(2);
       } else {
         try {
-          const response = await fetch('http://localhost:8080/api/seller/register', {
-            method: 'POST',
+          const response = await axios.post('http://localhost:8080/api/seller/register',formData2,{
             headers: {
-              'Content-Type': 'application/json',
+              'Content-Type': 'multipart/form-data',
             },
-            body: JSON.stringify({
-              name: formData.name,
-              email: formData.email,
-              password: formData.password,
-              pin: formData.pin,
-              address: formData.address,
-              phone: formData.phoneNumber,
-            }),
           });
           const data = await response.json();
           if (data) {
@@ -274,6 +283,7 @@ const SellerRegistrationForm = () => {
           errors={errors}
           handleChange={handleChange}
           handleSubmit={handleSubmit}
+          setFile={setFile}
         />
       ) : (
         <AdditionalDetailsForm

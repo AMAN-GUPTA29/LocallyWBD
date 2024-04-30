@@ -13,7 +13,7 @@ const sellerSchema = new mongoose.Schema({
     status:{type:String,default:"Unblocked"},
     time:{type:Date,default:Date.now},
     income: { type: Number, default: 0 },
-    // img:{type:String,data:Buffer}
+    img:{type:String,required:true}
 });
 
 
