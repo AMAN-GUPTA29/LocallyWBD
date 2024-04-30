@@ -10,7 +10,7 @@ const { validate } = require("../Utils/TokenValidate");
 async function sellerViewChatTile (req, res){
     try{
        
-        const data= await ChatSet.find({sellerid:req.user._id});
+        const data= await ChatSet.find({sellerid:req.user._id}).populate(sellerid);
 
         console.log(data)
         
