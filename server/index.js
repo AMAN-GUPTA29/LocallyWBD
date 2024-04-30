@@ -182,6 +182,27 @@ app.use('/api/seller/chattile',SellerViewChatTileRoute)//left
 app.use('/api/seller/viewchat',SellerViewChatRoute)//left
 app.use('/api/seller/sendchat',SellerSendChatRoute)//left
 
+const swaggerJSdoc = require('swagger-jsdoc')
+const swaggerUI = require('swagger-ui-express')
+
+
+
+const options = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: "Nodejs Project",
+            version: '1.0.0'
+        },
+        server: [{
+            url: 'http://localhost:8000'
+        }]
+    },
+    apis: ['./swagger.js']
+}
+const swaggerspec = swaggerJSdoc(options)
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup( swaggerspec ))
+
 
 
 
