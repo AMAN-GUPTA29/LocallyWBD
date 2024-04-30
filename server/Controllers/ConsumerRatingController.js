@@ -10,7 +10,7 @@ async function consumerGivenSellerReview (req, res){
        
        
         
-        await new Review({...req.body}).save();
+        await new Review({...req.body,consumername:req.user.name}).save();
         res.status(201).send({message:"Review saved Succesfully"})
     
         
