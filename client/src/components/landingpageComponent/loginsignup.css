@@ -1,6 +1,3 @@
-body {
-}
-
 .loginsignup-ag {
   transform: scale(1.5);
   align-self: center;
@@ -9,9 +6,12 @@ body {
   justify-content: center;
   padding-top: 200;
   flex-wrap: wrap;
+  zoom: 0.9;
+  font-size:x-small;
 }
 
 .tocent-ag {
+  /* zoom: 0.9; */
   margin-top: 9%;
   height: 100%;
   width: 100%;
