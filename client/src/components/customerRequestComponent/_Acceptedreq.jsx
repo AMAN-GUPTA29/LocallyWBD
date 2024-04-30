@@ -12,13 +12,67 @@ export default ({ _id,seller,email,phone,title,charge,description }) => {
                 Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({
-                amount:charge,
+                amount:charge*100,
                 currency:"INR",
                 receipt:"6757868393"
             })
         }).then(res => res.json())
         .then(data => {
-            console.log(data)
+            console.log(data.date)
+
+            var option = {
+                key:"rzp_test_lLs5vXoaHUtQBz",
+                charge:charge*100,
+                currency:"INR",
+                name:"Web Codder",
+                description: "Test Transaction",
+                image:"https://i.ibb.co/5Y3m33n/test.png",
+                order_id:data.id,
+                handler: async function(data) {
+                  console.log("transaction successfull")
+                  window.location.reload();
+
+                //   const body = {...data,}
+        
+                //   const validateResponse = await fetch('http://localhost:5000/validate', {
+                //   method: 'POST',
+                //   headers: {
+                //     'Content-Type': 'application/json'
+                //   },
+                //   body: JSON.stringify(body)
+        
+                //   })
+        
+                //   const jsonResponse = await validateResponse.json();
+        
+                //   console.log('jsonResponse', jsonResponse);
+                  
+                },
+                prefill: {
+                  name: "locally", 
+                  email: "webcoder@example.com",
+                  contact: "9000000000", 
+                },
+                notes: {
+                  address: "Razorpay Corporate Office",
+                },
+                theme: {
+                  color: "#3399cc",
+                },
+              }
+            var rzp1 = new Razorpay(option);
+            rzp1.on("payment.failed", function(response) {
+                alert(response.error.code);
+                alert(response.error.description);
+                alert(response.error.source);
+                alert(response.error.step);
+                alert(response.error.reason);
+                alert(response.error.metadata.order_id);
+                alert(response.error.metadata.payment_id);
+              })
+
+              rzp1.open();
+              preventDefault();
         })
         .catch(error => console.log(error));
 
