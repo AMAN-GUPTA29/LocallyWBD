@@ -8,7 +8,7 @@ export const Container = styled.div`
   overflow: hidden;
   width: 600px;
   max-width: 100%;
-  min-height: 350px;
+  min-height: 380px;
 `;
 
 export const SignUpContainer = styled.div`
@@ -56,13 +56,14 @@ export const Form = styled.form`
 export const Title = styled.h1`
   font-weight: bold;
   margin: 0;
+  font-size: x-large;
 `;
 
 export const Input = styled.input`
   background-color: #eee;
   border: none;
-  padding: 10px 12px;
-  margin: 6px 0;
+  padding: 6px 8px;
+  margin: 4px 0;
   width: 100%;
   border-radius: 5px;
 `;
@@ -74,7 +75,7 @@ export const Button = styled.button`
   color: #ffffff;
   font-size: 12px;
   font-weight: bold;
-  padding: 11px 43px;
+  padding: 10px 40px;
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: transform 80ms ease-in;

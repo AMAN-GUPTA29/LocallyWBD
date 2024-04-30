@@ -92,20 +92,20 @@ const AdditionalDetailsForm = ({ formData, errors, handleChange, handleSubmit })
   <form className="px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
     <h1 className="text-4xl font-bold mb-6 text-center">Additional Details</h1>
     <div className="flex flex-col mt-2">
-      <label className="text-lg">Aadhar</label>
+      <label className="text-lg">pin</label>
       <input
         className={`appearance-none border indent-4 ${
-          errors.aadhar ? 'border-red-500' : 'border-gray-200'
+          errors.pin ? 'border-red-500' : 'border-gray-200'
         } rounded w-80 h-12 py-2 px-3 pl-8 leading-tight focus:outline-none focus:shadow-outline`}
-        id="aadhar"
-        name="aadhar"
-        type="text"
-        placeholder="Aadhar"
-        value={formData.aadhar}
+        id="pin"
+        name="pin"
+        type="number"
+        placeholder="pin"
+        value={formData.pin}
         onChange={handleChange}
       />
-      {errors.aadhar && (
-        <p className="text-red-500 text-xs italic">{errors.aadhar}</p>
+      {errors.pin && (
+        <p className="text-red-500 text-xs italic">{errors.pin}</p>
       )}
     </div>
     <div className="flex flex-col mt-2">
@@ -158,7 +158,7 @@ const SellerRegistrationForm = () => {
     name: '',
     email: '',
     password: '',
-    aadhar: '',
+    pin: '',
     address: '',
     phoneNumber: '',
   });
@@ -167,7 +167,7 @@ const SellerRegistrationForm = () => {
     name: '',
     email: '',
     password: '',
-    aadhar: '',
+    pin: '',
     address: '',
     phoneNumber: '',
   });
@@ -204,10 +204,10 @@ const SellerRegistrationForm = () => {
     }
   
     if (step === 2) {
-      if (!formData.aadhar.trim() || formData.aadhar.trim().length < 12) {
+      if (!formData.pin.trim() || formData.pin.trim().length < 6) {
         setErrors((prevErrors) => ({
           ...prevErrors,
-          aadhar: 'Aadhar should be 12 digits',
+          pin: 'pin should be 6 digits',
         }));
         valid = false;
       }
@@ -232,7 +232,7 @@ const SellerRegistrationForm = () => {
         setStep(2);
       } else {
         try {
-          const response = await fetch('http://localhost:8080/api/seller/register-seller', {
+          const response = await fetch('http://localhost:8080/api/seller/register', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -241,19 +241,20 @@ const SellerRegistrationForm = () => {
               name: formData.name,
               email: formData.email,
               password: formData.password,
-              aadhar: formData.aadhar,
+              pin: formData.pin,
               address: formData.address,
-              phoneNumber: formData.phoneNumber,
+              phone: formData.phoneNumber,
             }),
           });
           const data = await response.json();
-          if (response.ok) {
-            setFormData((prevData) => ({
-              ...prevData,
-              sellerId: data.sellerId,
-            }));
-            setStep(3); 
-            navigate('/sellerview'); 
+          if (data) {
+            // setFormData((prevData) => ({
+            //   ...prevData,
+            //   sellerId: data.sellerId,
+            // }));
+            // setStep(3); 
+            console.log(data)
+            navigate('/seller/login'); 
           } else {
             console.error('Failed to register seller:', data.message);
           }
