@@ -1,11 +1,6 @@
 /**
  * Add morgan
  * Add RFS
- * Add csrf
- * Add multer
- * chat
- * payment gateway
- * transactions
  * rubricks
  * Add Global error handler (a,b,c,d) => {retutn xyz}
  * Unit Test - done
