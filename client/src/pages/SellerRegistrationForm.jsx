@@ -255,14 +255,14 @@ const SellerRegistrationForm = () => {
               'Content-Type': 'multipart/form-data',
             },
           });
-          const data = await response.json();
-          if (data) {
+          // const data = await response.json();
+          if (response) {
             // setFormData((prevData) => ({
             //   ...prevData,
             //   sellerId: data.sellerId,
             // }));
             // setStep(3); 
-            console.log(data)
+            console.log(response)
             navigate('/seller/login'); 
           } else {
             console.error('Failed to register seller:', data.message);

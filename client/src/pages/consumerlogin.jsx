@@ -95,14 +95,14 @@ function AuthenticationContainer() {
           'Content-Type': 'multipart/form-data',
         },
       });
-      const data = await response.json();
-      if (data) {
+      console.log(response)
+      if (response) {
         // setFormData((prevData) => ({
         //   ...prevData,
         //   sellerId: data.sellerId,
         // }));
         // setStep(3); 
-        console.log(data)
+        alert("Consumer created succesfully")
         // navigate('/seller/login'); 
       } else {
         console.error('Failed to register seller:', data.message);
@@ -158,7 +158,7 @@ return (
         <Components.SignUpContainer signinIn={signIn}>
           <Components.Form onSubmit={handleRegistration}>
             <Components.Title>Create Account</Components.Title>
-            <img src={`${photo}`} alt="" height="80px" width="80px" className="rounded-full"/>
+            {/* <img src={`${photo}`} alt="" height="80px" width="80px" className="rounded-full"/> */}
             <Components.Input type="hidden" name="_csrf" value={tokn} />
             <Components.Input
               type="text"
