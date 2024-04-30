@@ -1,9 +1,11 @@
 import React from "react";
 import Cookies from "universal-cookie";
+import { useNavigate } from "react-router-dom";
 import { useState,useEffect } from "react";
 const cookie = new Cookies();
 
 const Header = ({ _id,seller_id, name, email, phone, address, pin }) => {
+  const navigate = useNavigate();
   const token = cookie.get("TOKEN");
   const hireme = ()=>{
     fetch(`http://localhost:8080/api/customer/makerequest/${_id}`, {
@@ -16,8 +18,9 @@ const Header = ({ _id,seller_id, name, email, phone, address, pin }) => {
         .then(response => response.json())
         .then(data => {
             console.log(data)
+            navigate("/customerview");
         })
-        .catch(error => console.error(error));
+        .catch(error => console.error(error));      
   }
   return (
     <header id="home" style={{ backgroundColor: '#000000', padding: '4rem 0' }}>

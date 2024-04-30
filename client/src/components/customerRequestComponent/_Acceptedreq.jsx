@@ -5,6 +5,23 @@ const cookie = new Cookies();
 export default ({ _id,seller,email,phone,title,charge,description }) => {
     const token = cookie.get("TOKEN");
     const acceptRequest = (_id)=>{
+        fetch(`http://localhost:8080/api/consumer/payment`,{
+            method:'POST',
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                amount:charge,
+                currency:"INR",
+                receipt:"6757868393"
+            })
+        }).then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
+        .catch(error => console.log(error));
+
         fetch(`http://localhost:8080/api/customer/completed/${_id}`, {
             method: 'GET',
             headers: {
@@ -15,7 +32,7 @@ export default ({ _id,seller,email,phone,title,charge,description }) => {
         .then(response => response.json())
         .then(data => {
             console.log(data)
-            window.location.reload();
+            // window.location.reload();
         })
         .catch(error => console.error(error));
     }
