@@ -26,12 +26,24 @@ const SellerMyrequests = () => {
     // },
   ]);
 
-  const handleAccept = (id) => {
-    setRequests((prevRequests) =>
-      prevRequests.map((request) =>
-        request.id === id ? { ...request, accepted: true } : request
-      )
-    );
+  const handleAccept = (_id) => {
+    // setRequests((prevRequests) =>
+    //   prevRequests.map((request) =>
+    //     request.id === id ? { ...request, accepted: true } : request
+    //   )
+    // );
+    fetch(`http://localhost:8080/api/seller/request/accepted/${_id}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+        })
+        .catch(error => console.error(error));
   };
 
   const handleReject = (id) => {
@@ -108,32 +120,43 @@ const SellerMyrequests = () => {
               </h5>
             </div>
             <div className="flex buttons justify-center">
-              {!item.accepted && !item.rejected && (
-                <button
-                  onClick={() => handleAccept(item.id)}
+              {!item.accepted && (
+                <div className='flex buttons justify-center'>
+                  <button
+                  onClick={() => handleAccept(item._id)}
                   className="border p-2 px-5 accept text-decoration-none text-white bg-green-500"
                 >
                   Accept
                 </button>
-              )}
-              {!item.accepted && !item.rejected && (
                 <button
                   onClick={() => handleReject(item.id)}
                   className="border p-2 px-5 reject text-decoration-none text-white bg-red-500"
                 >
                   Reject
                 </button>
+                </div>
+                
               )}
+              {/* {!item.accepted && (
+                <button
+                  onClick={() => handleReject(item.id)}
+                  className="border p-2 px-5 reject text-decoration-none text-white bg-red-500"
+                >
+                  Reject
+                </button>
+              )} */}
               {item.accepted && (
-                <button className="border p-2 px-5 accepted text-decoration-none text-white" disabled>
+                <div>
+                  <button className="border p-2 px-5 accepted text-decoration-none text-white" disabled>
                   Accepted
                 </button>
+                </div>
               )}
-              {item.rejected && (
+              {/* {item.rejected && (
                 <button className="border p-2 px-5 rejected text-decoration-none text-white" disabled>
                   Rejected
                 </button>
-              )}
+              )} */}
             </div>
           </div>
         ))}

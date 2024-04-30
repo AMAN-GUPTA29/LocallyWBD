@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
+import Cookies from 'universal-cookie';
 import "../components/adminLandingPageComponent/admincss/adminland.css"
 
 // import { Barchart } from "./barchart";
@@ -18,7 +19,6 @@ import Card from "../components/adminLandingPageComponent/card";
 import Line from "../components/adminLandingPageComponent/line";
 import axios from 'axios';
 // import { useAuth } from "../AuthContext";
-import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 
 export default function AdminLandingPage() {
@@ -112,7 +112,7 @@ export default function AdminLandingPage() {
             </div>
 
             <div className="m-4 my-7">
-                {/* <Line /> */}
+                <Line />
             </div>
 
             <div className="topRated-heading text-green-700 m-3 font-semibold text-2xl my-7">Top Liked Service Providers</div>

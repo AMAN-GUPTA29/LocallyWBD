@@ -5,9 +5,11 @@ import { SellerServices } from "../pages/SellerServices"
 import { AddService } from "../components/sellerServicesComponent/AddService"
 // import { Footer } from './Footer';
 import SellerProfile from "../pages/SellerProfile"
+import SellerHistory from "../pages/SellerHistory"
 
 export default [
     { path: "/seller/services", element: <SellerServices /> },
     { path: "/addservices", element: <AddService /> },
+    { path: "/seller/history", element: <SellerHistory/>},
     { path: "/seller/profile", element: <SellerProfile /> }
 ]

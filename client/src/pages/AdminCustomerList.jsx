@@ -8,8 +8,6 @@ const AdminCustomerList = () => {
   const token = cookie.get("TOKEN");
   const [users, setUsers] = useState([]);
   const [blockedUsers, setBlockedUsers] = useState([]);
-  const [isModalOpen1, setIsModalOpen1] = useState(false);
-  const [isModalOpen2, setIsModalOpen2] = useState(false);
   const [selectedUserName, setSelectedUserName] = useState('');
   const [selectedCustomerId, setSelectedCustomerId] = useState('');
   const [selectedCustomerEmail, setSelectedCustomerEmail] = useState('');
@@ -34,22 +32,8 @@ const AdminCustomerList = () => {
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
-  const toggleModal1 = (userName, customerId, email) => {
-    setSelectedUserName(userName);
-    setSelectedCustomerId(customerId);
-    setSelectedCustomerEmail(email);
-    setIsModalOpen1(!isModalOpen1);
-  };
-
-  const toggleModal2 = (email) => {
-    setSelectedUserName(email);
-    setIsModalOpen2(!isModalOpen2);
-  };
-
-  const blockUser = async () => {
+  const blockUser = async (userName, customerId, email) => {
     console.log("block consumer func")
-    setBlockedUsers([...blockedUsers, selectedUserName]);
-    toggleModal1();
     try {
       const response = await fetch(`http://localhost:8080/api/admin/blockconsumer`, {
         method: 'POST',
@@ -57,11 +41,11 @@ const AdminCustomerList = () => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ blocked: true, email: selectedCustomerEmail }),
+        body: JSON.stringify({ blocked: true, email }),
       });
       if (response.ok) {
-        setBlockedUsers([...blockedUsers, selectedUserName]);
-        toggleModal1(); // Close the modal
+        setBlockedUsers([...blockedUsers, userName]);
+        window.location.reload();
       } else {
         throw new Error('Failed to block user');
       }
@@ -70,11 +54,8 @@ const AdminCustomerList = () => {
     }
   };
 
-
-  const unblockUser = async() => {
+  const unblockUser = async (userName, email) => {
     console.log("Unblock consumer func")
-    setBlockedUsers(blockedUsers.filter(user => user !== selectedUserName));
-    toggleModal2(); //close modal
     try {
       const response = await fetch(`http://localhost:8080/api/admin/unblockconsumer`, {
         method: 'POST',
@@ -82,12 +63,13 @@ const AdminCustomerList = () => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ blocked: true, email: selectedCustomerEmail }),
+        body: JSON.stringify({ blocked: false, email }),
       });
       if (response.ok) {
-        setBlockedUsers([...blockedUsers, selectedUserName]);
+        setBlockedUsers(blockedUsers.filter(user => user !== userName));
+        window.location.reload();
       } else {
-        throw new Error('Failed to block user');
+        throw new Error('Failed to unblock user');
       }
     } catch (err) {
       console.error(err);
@@ -97,131 +79,6 @@ const AdminCustomerList = () => {
   return (
     <div>
       <Navbar />
-      {/* Modal for blocking user */}
-      {isModalOpen1 && (
-        <div>
-          <div
-            className="fixed top-0 right-0 bottom-0 left-0 bg-black opacity-50 z-40"
-            onClick={toggleModal1}
-          ></div>
-          <div
-            id="static-modal"
-            data-modal-backdrop="static"
-            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 bg-white rounded-lg shadow p-4 w-full max-w-2xl"
-          >
-            <div className="flex items-center justify-between p-4 border-b rounded-t">
-              <h3 className="text-xl font-semibold text-gray-900">
-                Block Mr.{selectedUserName}
-              </h3>
-              <button
-                data-modal-hide="static-modal"
-                onClick={toggleModal1}
-                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-              >
-                <svg
-                  className="w-3 h-3"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 14 14"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                  />
-                </svg>
-                <span className="sr-only">Close modal</span>
-              </button>
-            </div>
-            <div className="p-4 space-y-4">
-              <h5 className="text-xl font-semibold text-gray-900">
-                Do you really want to block Mr.{selectedUserName}?
-              </h5>
-            </div>
-            <div className="flex items-center p-4 border-t">
-              <button
-                onClick={blockUser}
-                className="text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5"
-              >
-                Blockk
-              </button>
-              <button
-                data-modal-hide="static-modal"
-                onClick={toggleModal1}
-                className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 ml-3"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Modal for unblocking user */}
-      {isModalOpen2 && (
-        <div>
-          <div
-            className="fixed top-0 right-0 bottom-0 left-0 bg-black opacity-50 z-40"
-            onClick={toggleModal2}
-          ></div>
-          <div
-            id="static-modal"
-            data-modal-backdrop="static"
-            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 bg-white rounded-lg shadow p-4 w-full max-w-2xl"
-          >
-            <div className="flex items-center justify-between p-4 border-b rounded-t">
-              <h3 className="text-xl font-semibold text-gray-900">
-                Unblock Mr.{selectedUserName}
-              </h3>
-              <button
-                data-modal-hide="static-modal"
-                onClick={toggleModal2}
-                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-              >
-                <svg
-                  className="w-3 h-3"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 14 14"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                  />
-                </svg>
-                <span className="sr-only">Close modal</span>
-              </button>
-            </div>
-            <div className="p-4 space-y-4">
-              <h5 className="text-xl font-semibold text-gray-900">
-                Do you really want to unblock Mr.{selectedUserName}?
-              </h5>
-            </div>
-            <div className="flex items-center p-4 border-t">
-              <button
-                onClick={unblockUser}
-                className="text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5"
-              >
-                Unblockk
-              </button>
-              <button
-                data-modal-hide="static-modal"
-                onClick={toggleModal2}
-                className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 ml-3"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       <h1 className="head text-center font-bold my-4 text-2xl">
         Customers Of Locally
@@ -251,18 +108,18 @@ const AdminCustomerList = () => {
                   <td className="border px-4 py-2">{user.phone}</td>
                   <td className="border px-4 py-2">{user.address}</td>
                   <td className="border px-4 py-2">{user.pin}</td>
-                  <td className="border px-4 py-2">{user.status}</td>
+                  <td className="border px-4 py-2 text-xl font-semibold text-orange-700">{user.status}</td>
                   <td className="border px-4 py-2">
-                    {blockedUsers.includes(user.name) ? (
+                    {user.status === "blocked" ? (
                       <button
-                        onClick={() => toggleModal2(user.name)}
+                        onClick={() => unblockUser(user.name, user.email)}
                         className="text-white bg-green-700 hover:bg-green-800 hover:text-white font-bold rounded-lg text-sm px-5 py-2.5"
                       >
                         <h5>Unblock</h5>
                       </button>
                     ) : (
                       <button
-                        onClick={() => toggleModal1(user.name, user.customerid, user.email)}
+                        onClick={() => blockUser(user.name, user.customerid, user.email)}
                         className="text-white bg-red-700 hover:bg-red-800 hover:text-white font-bold rounded-lg text-sm px-5 py-2.5"
                       >
                         <h5>Block</h5>
@@ -296,21 +153,12 @@ const AdminCustomerList = () => {
                   <td className="border px-4 py-2">{user.email}</td>
                   <td className="border px-4 py-2">{user._id}</td>
                   <td className="border px-4 py-2">
-                    {(user.email) ? (
-                      <button
-                        onClick={() => toggleModal2(user.email)}
-                        className="text-white bg-green-700 hover:bg-green-800 hover:text-white font-bold rounded-lg text-sm px-5 py-2.5"
-                      >
-                        <h5>Unblock</h5>
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => toggleModal1(user.name, user.customerid, user.email)}
-                        className="text-white bg-red-700 hover:bg-red-800 hover:text-white font-bold rounded-lg text-sm px-5 py-2.5"
-                      >
-                        <h5>Block</h5>
-                      </button>
-                    )}
+                    <button
+                      onClick={() => unblockUser(user.name, user.email)}
+                      className="text-white bg-green-700 hover:bg-green-800 hover:text-white font-bold rounded-lg text-sm px-5 py-2.5"
+                    >
+                      <h5>Unblock</h5>
+                    </button>
                   </td>
                 </tr>
               ))}

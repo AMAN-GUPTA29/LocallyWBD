@@ -40,23 +40,31 @@ export default () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://localhost:8080/api/customer/viewServices");
-      const body = await response.json();
-      console.log(body)
-      setTimeout(() => {
-        console.log(body)
-        if (body.isLogged === false) {
-          navigator('/');
-        } else {
-          console.log(body);
-          setData(body.data);
-          setLoading(false);
+      const response = await fetch("http://localhost:8080/api/customer/viewServices",{
+        headers: {
+          Authorization: `Bearer ${token}`,
         }
-      }, 1000);
+      });
+      const body = await response.json();
+      if(body){
+        setLoading(false)
+      }
+      setData(body.data)
+      // setTimeout(() => {
+      //   console.log(body)
+      //   if (body.isLogged === false) {
+      //     navigator('/');
+      //   } else {
+      //     console.log(body);
+      //     setData(body.data);
+      //     setLoading(false);
+      //   }
+      // }, 1000);
     }
 
     fetchData();
   }, []);
+  console.log(data)
 
   return (
     <div className="container mx-auto mb-5">
@@ -82,7 +90,10 @@ export default () => {
       </form>
       <br />
       <div className="container-fluid">
-        {loading ? <div>Loading...</div> : <CardArray data={data} />}
+        {loading ? <div>Loading...</div> : 
+        <CardArray data={data} />
+        // <div>content</div>
+        }
       </div>
       <div className="flex justify-between mt-4">
         <button
