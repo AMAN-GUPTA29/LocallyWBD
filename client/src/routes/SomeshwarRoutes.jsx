@@ -5,6 +5,8 @@ import AdminBroadcast from "../pages/AdminBroadcast";   //problem
 import AdminCustomerList from "../pages/AdminCustomerList";
 import AdminSellerList from "../pages/AdminSellerList";
 import AdminRequests from "../pages/AdminRequests";
+import AdminHistory from "../pages/AdminHistory";
+import AdminProfile from "../pages/AdminProfile";
 
 // import Nav from './nav';
 // import Photos from './photos';
@@ -16,7 +18,9 @@ export default [
     { path: "/adminbroadcast", element: <AdminBroadcast /> },
     { path: "/admin/customerlist", element: <AdminCustomerList /> },
     { path: "/admin/sellerlist", element: <AdminSellerList /> },
-    { path: "/requests", element: <AdminRequests /> }
+    { path: "/admin/history", element: <AdminHistory /> },
+    { path: "/requests", element: <AdminRequests /> },
+    { path: "/admin/profile", element: <AdminProfile /> }
     // { path: "/nav", element: <Nav /> },
     // { path: "/photos", element: <Photos /> },
 ];

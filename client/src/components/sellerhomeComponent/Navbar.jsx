@@ -33,10 +33,11 @@ const Navbar = () => {
           <NavLink to="/sellerview">Home</NavLink>
           <NavLink to="/seller/services">Your Services</NavLink>
           <NavLink to="/seller/chat">Chat</NavLink>
-          <NavLink to="/seller/profile">Profile</NavLink>
           <NavLink to="/seller/request">Requests</NavLink>
           <NavLink to="/seller/broadcast">Notifications</NavLink>
-          <NavLink to="/">Logout</NavLink>
+          <NavLink to="/seller/history">History</NavLink>
+          <NavLink to="/seller/profile">Profile</NavLink>
+          <NavLink to="/seller/login">Logout</NavLink>
         </div>
 
         {/* Responsive Nav Items Container for Small Screens */}
@@ -55,9 +56,10 @@ const Navbar = () => {
             <NavLink to="/sellerview" onClick={closeMenu}>Home</NavLink>
             <NavLink to="/seller/services" onClick={closeMenu}>Your Services</NavLink>
             <NavLink to="/seller/chat" onClick={closeMenu}>Chat</NavLink>
-            <NavLink to="/seller/profile" onClick={closeMenu}>Profile</NavLink>
             <NavLink to="/seller/request" onClick={closeMenu}>Requests</NavLink>
             <NavLink to="/seller/broadcast" onClick={closeMenu}>Notifications</NavLink>
+            <NavLink to="/seller/history" onClick={closeMenu}>History</NavLink>
+            <NavLink to="/seller/profile" onClick={closeMenu}>Profile</NavLink>
             <NavLink to="/seller/login" onClick={closeMenu}>Logout</NavLink>
           </div>
         </div>

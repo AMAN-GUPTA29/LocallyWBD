@@ -9,7 +9,7 @@ import CustomerHistory from "../pages/CustomerHistory";
 export default [
     { path: "/about", element: <About /> },
     { path: "/contact", element: <ContactUs /> },
-    {path : "/customerView/display", element: <SellerInfoDisplay />},
+    {path : "/customerView/display/:_id/:pointer", element: <SellerInfoDisplay />},
     { path: "/customerrequest", element: <Customerrequest /> },
     { path: "/history", element: <CustomerHistory /> },
     // {path :"/consumerlogin/welcome" , element:<RegisterCustomer/>},

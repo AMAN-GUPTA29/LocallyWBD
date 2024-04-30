@@ -45,7 +45,19 @@ export default function Navbar() {
                 to="/requests"
                 className="text-white px-3 py-2 rounded-md text-sm font-medium transition duration-300 hover:bg-yellow-400 hover:text-gray-900"
               >
-                requests
+                Requests
+              </Link>
+              <Link
+                to="/admin/history"
+                className="text-white px-3 py-2 rounded-md text-sm font-medium transition duration-300 hover:bg-yellow-400 hover:text-gray-900"
+              >
+                History
+              </Link>
+              <Link
+                to="/admin/profile"
+                className="text-white px-3 py-2 rounded-md text-sm font-medium transition duration-300 hover:bg-yellow-400 hover:text-gray-900"
+              >
+                Profile
               </Link>
               <Link
                 to="/"
