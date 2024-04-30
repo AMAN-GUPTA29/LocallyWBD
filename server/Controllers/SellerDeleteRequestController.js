@@ -18,7 +18,7 @@ async function SellerDeleteRequestController (req, res) {
         console.log("grg")
 
         await History(instance).save();
-        await Chat(instance).save();
+        
         const data=await Requests.deleteOne({sellerid:seller_id,_id:id,accepted:false})
         console.log(data)
         res.status(201).send({ data:data ,message: "Deleted request" });
