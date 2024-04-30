@@ -11,8 +11,8 @@ const consumerSchema=new mongoose.Schema({
     address:{type: String,required:true },
     pin:{type: String,required:true },
     status:{type:String,default:"Unblocked"},
-    time:{type:Date,default:Date.now}
-    // img:{type:String,data:Buffer}
+    time:{type:Date,default:Date.now},
+    // img:{type:String}
 });
 
 
