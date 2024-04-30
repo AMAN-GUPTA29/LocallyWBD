@@ -112,6 +112,7 @@ export default () => {
                         <Areq
                             key={index}
                             _id={acceptedRequest._id}
+                            sellerid={acceptedRequest.sellerid._id}
                             seller={acceptedRequest.sellerid.name}
                             email={acceptedRequest.sellerid.email}
                             phone={acceptedRequest.sellerid.phone}

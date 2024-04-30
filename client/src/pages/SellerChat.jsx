@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import Cookies from 'universal-cookie';
-import '../components/sellerhomeComponent/CSS/Chat.css';
 import Navbar from '../components/sellerhomeComponent/Navbar';
+import '../components/sellerhomeComponent/CSS/Chat.css';
 const cookie = new Cookies();
 
 const SellerChat = () => {
@@ -26,7 +26,6 @@ const SellerChat = () => {
         .then(response => response.json())
         .then(data => {
           setChat(data.data);
-          // console.log(data.data)
         })
         .catch(error => console.error(error));
     };
@@ -39,7 +38,6 @@ const SellerChat = () => {
   }, []);
 
   const sendMessage = () => {
-    console.log("Sending message:", messageInput);
     fetch("http://localhost:8080/api/seller/sendchat", {
       method: 'POST',
       headers: {
@@ -53,7 +51,7 @@ const SellerChat = () => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data)
+        console.log(data);
       })
       .catch(error => console.error(error));
 
@@ -63,10 +61,9 @@ const SellerChat = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex flex-col overflow-y-auto h-full items-center">
-        <h2 className="text-xl font-bold">Chat</h2>
-        <div className="flex flex-col overflow-y-auto">
-          {chat.map(message => (
+      <div className="flex flex-col h-screen border rounded-2xl shadow-xl mx-40 my-5">
+        <div className="flex flex-col flex-grow overflow-y-auto mx-5 my-10">
+          {chat && chat.map(message => (
             <div
               key={message._id}
               className={`my-2 mx-4 p-2 rounded-lg max-w-md ${message.sender === 'seller' ? 'bg-blue-500 text-white self-end' : 'bg-gray-200 text-gray-800 self-start'}`}
@@ -75,7 +72,7 @@ const SellerChat = () => {
             </div>
           ))}
         </div>
-        <div className="w-full flex items-center justify-center">
+        <div className="p-4  flex justify-center my-20 ">
           <textarea
             className="w-full max-w-md p-2 resize-none border border-black"
             value={messageInput}
@@ -89,8 +86,8 @@ const SellerChat = () => {
             Send
           </button>
         </div>
-        <p className="text-sm text-gray-500">Current time: {new Date().toLocaleTimeString()}</p>
       </div>
+      <p className="text-sm text-gray-500">Current time: {new Date().toLocaleTimeString()}</p>
     </div>
   );
 };

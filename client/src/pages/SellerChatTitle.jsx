@@ -84,7 +84,7 @@ const SellerChatTitle = () => {
             <div style={containerStyle}>
 
             <motion.div  className='flex flex-row flex-wrap gap-7'>
-            {titles.map((title,index)=>(
+            {titles && titles.map((title,index)=>(
                     <motion.div
                     variants={itemVariants}
                     style={itemStyle}
