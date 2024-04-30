@@ -14,6 +14,8 @@ const bodyparser = require('body-parser')
 require('dotenv').config();
 const express=require("express")
 const app = express();
+const Razorpay=require('razorpay')
+const crypto=require('crypto')
 const cors=require("cors");
 const connection=require("./db");
 const consumerRegistrationRoutes=require('./Routes/ConsumerRegistrationRoutes')
@@ -28,7 +30,7 @@ const pendingRequestDeleteRequestRoute=require('./Routes/PendingServiceDeleteReq
 const checkConsumerHistoryRoute=require("./Routes/ConsumerHistoryRoute")
 const ConsumerChatSendRoute=require("./Routes/ConsumerChatSendRoute")
 const ConsumerChatReadRoute=require("./Routes/ConsumerViewChatRoute")
-
+const MakePaymentConsumer=require("./Routes/ConsumerMakePaymentRoute")
 
 const SellerViewBroadcastRoute=require("./Routes/ViewBroadcastSellerRoute")
 const SellerProfileConsumerRoute=require("./Routes/SellerProfileFromConsumerRoute")
@@ -102,6 +104,7 @@ app.use('/api/customer/acceptedrequests', AcceptedRequestRouter)
 app.use("/api/consumer/sendmessage",ConsumerChatSendRoute)//left
 app.use("/api/consumer/history",checkConsumerHistoryRoute)//left
 app.use("/api/consumer/readmessage",ConsumerChatReadRoute)//left
+app.use('/api/consumer/payment',MakePaymentConsumer)
 
 app.use("/api/admin/register",adminRegistrationRoutes);
 app.use("/api/admin/login",adminLoginRoutes);
