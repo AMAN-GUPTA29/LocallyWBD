@@ -3,6 +3,8 @@ const router = require("express").Router();
 const {authenticateToken}=require('../Middleware/CheckTokenLocally');
 
 
-router.get("/",authenticateToken,ConsumerViewServiceController)
+router.get("/",
+    // authenticateToken,
+    ConsumerViewServiceController)
 
 module.exports = router;
