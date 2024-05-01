@@ -39,6 +39,9 @@ jobs:
                 cat ./server/.env
             - name: tests
               run: |
+                cd server
+                npm i --force
+                cd ..
                 pwd
                 npm test
                 cat log.txt
