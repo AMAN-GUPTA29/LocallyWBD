@@ -4,8 +4,7 @@ on: [pull_request]
 
 jobs:
     tests:
-        runs-on: windows-latest
-
+        runs-on: ubuntu-latest
         strategy:
             matrix:
                 node-version: [18.x]
@@ -18,5 +17,9 @@ jobs:
                 node-version: ${{ matrix.node-version }}
             - name: npm intsall
               run: npm ci
+            - name: Manage .env
+              run: echo ${{ secrets.DB }}
+            - name: secret vs var
+              run: echo ${{ vars.DB }}
             - name: tests
               run: npm test

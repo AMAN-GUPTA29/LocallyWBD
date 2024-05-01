@@ -202,7 +202,8 @@
     "jest": "^29.7.0"
   },
   "scripts": {
-    "test": "npx jest"
+    "test": "npx jest",
+    "server": "node server\\index.js"
   },
   "author": "",
   "license": "ISC"
