@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const{Consumer}=require("../Models/consumer");
-const bcrypt=require("bcrypt");
+
 const { redisClient } = require("../Utils/cache");
 
 async function adminConsumerListController (req, res){

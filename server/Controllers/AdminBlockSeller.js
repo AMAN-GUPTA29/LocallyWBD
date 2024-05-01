@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const{Seller}=require("../Models/seller");
 const{BlockedSeller}=require("../Models/blockedseller")
-const bcrypt=require("bcrypt");
+
 
 async function sellerDeleteController (req, res){
     try{

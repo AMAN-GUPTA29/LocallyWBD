@@ -2,7 +2,7 @@
 const router = require("express").Router();
 const{Chat}=require("../Models/chat");
 const{ChatSet}=require("../Models/chatset");
-const bcrypt=require("bcrypt");
+const bcrypt=require("bcryptjs");
 
 
 

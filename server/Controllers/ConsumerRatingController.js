@@ -1,7 +1,7 @@
 
 const router = require("express").Router();
 const{Review}=require("../Models/review");
-const bcrypt=require("bcrypt");
+const bcrypt=require("bcryptjs");
 
 
 

@@ -2,7 +2,7 @@
 const router = require("express").Router();
 const{Seller}=require("../Models/seller");
 const{Review}=require("../Models/review")
-const bcrypt=require("bcrypt");
+
 // const { checktokenMiddleware } = require("../Middleware/Checktoken");
 
 

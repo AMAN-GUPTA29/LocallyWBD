@@ -2,7 +2,7 @@ const router = require("express").Router();
 const{Broadcast}=require("../Models/broadcast");
 
 // const {BlockedSeller} = require("../Models/blockedseller");
-const bcrypt = require("bcrypt");
+
 // const { validate } = require("../Utils/adminLoginValidation");
 
 async function makeBroadcastController (req, res){

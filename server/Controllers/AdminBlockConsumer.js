@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const{Consumer}=require("../Models/consumer");
 const{BlockedConsumer}=require("../Models/blockedconsumer")
-const bcrypt=require("bcrypt");
+
 
 async function consumerDeleteController (req, res){
     try{

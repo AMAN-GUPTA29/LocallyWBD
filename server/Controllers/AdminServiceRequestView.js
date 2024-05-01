@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const{Requests}=require("../Models/request");
-const bcrypt=require("bcrypt");
+const bcrypt=require("bcryptjs");
 
 async function adminRequestListController (req, res){
     try{

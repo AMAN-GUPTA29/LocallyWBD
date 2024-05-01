@@ -1,7 +1,7 @@
 
 const router = require("express").Router();
 const{Consumer}=require("../Models/consumer");
-const bcrypt=require("bcrypt");
+const bcrypt=require("bcryptjs");
 const { validate } = require("../Utils/TokenValidate");
 // const { checktokenMiddleware } = require("../Middleware/Checktoken");
 

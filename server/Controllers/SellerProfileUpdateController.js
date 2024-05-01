@@ -1,7 +1,7 @@
 
 const router = require("express").Router();
 const{Seller}=require("../Models/seller");
-const bcrypt=require("bcrypt");
+
 
 
 

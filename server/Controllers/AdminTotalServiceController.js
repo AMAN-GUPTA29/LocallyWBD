@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const{Services}=require("../Models/service");
-const bcrypt=require("bcrypt");
+const bcrypt=require("bcryptjs");
 
 async function serviceLength (req, res){
     try{

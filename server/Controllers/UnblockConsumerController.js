@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const {BlockedConsumer} = require("../Models/blockedconsumer");
 const{Consumer}=require("../Models/consumer");
-const bcrypt = require("bcrypt");
 const { validate } = require("../Utils/adminLoginValidation");
 
 
