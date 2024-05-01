@@ -158,7 +158,51 @@ export default ({ _id, sellerid, seller, email, phone, title, charge, descriptio
     return (
         <div>
             {/* <h1>Accepted Requests</h1> */}
-            <div className="flex flex-col justify-center items-center mx-5">
+            <div
+                className={`col-12 flex flex-col justify-center m-3 p-4 px-5 h-fit py-5 border rounded-xl font-serif text-md
+              }`}
+            >
+                <div className="flex">
+                    <h5>
+                        Seller Name : <p className="fs-5 inline mx-5">{seller}</p>
+                    </h5>
+                </div>
+                <div className="flex ">
+                    <h5>
+                        Seller Email :
+                        <p className="fs-5 inline mx-5">{email}</p>
+                    </h5>
+                </div>
+                <div className="flex">
+                    <h5>
+                        Seller Phone :
+                        <p className="fs-5 inline mx-5">{phone}</p>
+                    </h5>
+                </div>
+                <div className="flex">
+                    <h5>
+                        Requested Sevice :
+                        <p className="fs-5 inline mx-5">{title}</p>
+                    </h5>
+                </div>
+                <div className="flex">
+                    <h5>
+                        charge :
+                        <p className="fs-5 inline mx-5">{charge} ₹ </p>
+                    </h5>
+                </div>
+                <div className="flex">
+                    <h5>
+                        Description :
+                        <p className="fs-5 inline mx-5">{description} ₹ </p>
+                    </h5>
+                </div>
+                <br /><br />
+                <div className="self-center">
+                    <button onClick={() => acceptRequest(_id)} className="rounded-lg p-2 px-5 bg-green-500 text-white">Completed</button>
+                </div>
+            </div>
+            {/* <div className="flex flex-col justify-center items-center mx-5">
                 <div className="w-full m-3 p-4">
                     <div className="flex">
                         <h5>Seller Name :</h5>
@@ -199,7 +243,7 @@ export default ({ _id, sellerid, seller, email, phone, title, charge, descriptio
                         <button onClick={() => acceptRequest(_id)} className="p-2 px-5 bg-green-500 text-white">Completed</button>
                     </div>
                 </div>
-            </div>
+            </div> */}
             {showModal ? (
                 <>
                     <div
@@ -233,35 +277,35 @@ export default ({ _id, sellerid, seller, email, phone, title, charge, descriptio
                                     </p>
                                 </div> */}
                                 <body className="">
-                                <div className="flex flex-row-reverse justify-end items-center my-4 mx-5">
-                                    {[1, 2, 3, 4, 5].map((value) => (
-                                        <React.Fragment key={value}>
-                                            <input
-                                                id={`hs-ratings-readonly-${value}`}
-                                                type="radio"
-                                                className="peer -ms-5 size-5 bg-transparent border-0 text-transparent cursor-pointer appearance-none checked:bg-none focus:bg-none focus:ring-0 focus:ring-offset-0 justify-center"
-                                                name="hs-ratings-readonly"
-                                                value={value}
-                                                onChange={() => handleRatingChange(value)}
-                                            />
-                                            <label
-                                                htmlFor={`hs-ratings-readonly-${value}`}
-                                                className={`peer-checked:text-yellow-400 text-gray-300 pointer-events-none`}
-                                            >
-                                                <svg
-                                                    className="flex-shrink-0 size-5"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="16"
-                                                    height="16"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 16 16"
+                                    <div className="flex flex-row-reverse justify-end items-center my-4 mx-5">
+                                        {[5,4,3,2,1].map((value) => (
+                                            <React.Fragment key={value}>
+                                                <input
+                                                    id={`hs-ratings-readonly-${value}`}
+                                                    type="radio"
+                                                    className="peer -ms-5 size-5 bg-transparent border-0 text-transparent cursor-pointer appearance-none checked:bg-none focus:bg-none focus:ring-0 focus:ring-offset-0 justify-center"
+                                                    name="hs-ratings-readonly"
+                                                    value={value}
+                                                    onChange={() => handleRatingChange(value)}
+                                                />
+                                                <label
+                                                    htmlFor={`hs-ratings-readonly-${value}`}
+                                                    className={`peer-checked:text-yellow-400 text-gray-300 pointer-events-none`}
                                                 >
-                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
-                                                </svg>
-                                            </label>
-                                        </React.Fragment>
-                                    ))}
-                                </div>
+                                                    <svg
+                                                        className="flex-shrink-0 size-5"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="16"
+                                                        height="16"
+                                                        fill="currentColor"
+                                                        viewBox="0 0 16 16"
+                                                    >
+                                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                                    </svg>
+                                                </label>
+                                            </React.Fragment>
+                                        ))}
+                                    </div>
                                 </body>
                                 <div className="mb-4">
                                     <textarea

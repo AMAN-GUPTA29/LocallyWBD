@@ -27,7 +27,7 @@ export default () => {
         console.log(data)
         data = data.data
         if(data){
-          setCardArray(data.map(msg => msg.broadcastMeassage));
+          setCardArray(data);
         }
       })
       .catch(error => console.error('Error fetching data:', error));
@@ -37,9 +37,24 @@ export default () => {
     <>
       <NavPostLog />
       <br />
-      {cardArray && cardArray.map((message, index) => (
-        <Message key={index} message={message} />
+      <div className="container my-4">
+      <h2 className="mx-5 text-black text-4xl text-center font-bold font-serif my-4 mb-6">BroadCasts</h2>
+        <div className="users">
+          <div className="w-full grid grid-cols-1 gap-4">
+            {/* {msgs && msgs.map((msg, index) => (
+              <div key={index} className="user border shadow-lg rounded-xl p-4 bg-white mx-3">
+                <div className="flex justify-between">
+                  <p>Message: {msg.broadcastMeassage}</p>
+                  <p className=''>Time: {new Date(msg.time).toLocaleString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
+                </div>
+              </div>
+            ))} */}
+            {cardArray && cardArray.map((message, index) => (
+        <Message key={index} message={message.broadcastMeassage} time={message.time}/>
       ))}
+          </div>
+        </div>
+      </div>
       <Fotterfinal />
     </>
   );

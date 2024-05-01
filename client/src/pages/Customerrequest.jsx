@@ -71,14 +71,16 @@ export default () => {
     return (
         <div>
             <NavPostLog />
-            <header className="headerr">
+            {/* <header className="headerr">
                 <h2 className="mx-5 text-white h_2">Service</h2>
                 <h2 className="mx-5 text-blue-500 h_2">Requests</h2>
-            </header>
+            </header> */}
+            <h2 className="mx-5 text-black text-5xl text-center font-bold font-serif">Service Requests</h2>
             <br />
             {/* {dataHTML} */}
             {/* {cardArray} */}
-            <h1>Accepted Requests</h1>
+            <h1 className="text-black font-bold font-serif text-2xl mx-5">
+                Accepted Requests</h1>
             {acceptedRequests &&
                 acceptedRequests.map((acceptedRequest, index) => {
                     console.log(acceptedRequest);
@@ -98,7 +100,8 @@ export default () => {
                 })
             }
 
-            <h1>Pending Requests</h1>
+            <h1 className="text-black font-bold font-serif text-2xl mx-5">
+                Pending Requests</h1>
 
 
             {pendingRequests &&

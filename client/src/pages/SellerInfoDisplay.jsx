@@ -78,7 +78,7 @@ const MainComponent = () => {
             <Header _id={serviceInfo._id} seller_id={sellerInfo._id} name={sellerInfo.name} email={sellerInfo.email} phone={sellerInfo.phone} address={sellerInfo.address} pin={sellerInfo.pin} />
             <div className="flex-grow flex justify-center items-center">
                 <div>
-                    <About img={sellerInfo.img} name={sellerInfo.name} tag="plumber" description="Very good plumber has had an experience of plumbing and other minor jobs involved in it since 15 years, has fixed many water spots and solved many household issues."/>
+                    <About img={sellerInfo.img} name={sellerInfo.name} tag={serviceInfo.title} description={`Very good ${serviceInfo.title} has had an experience and other minor jobs involved in it since 15 years.`} />
                     <div className="my-12">
                     <div className="text-3xl text-center font-bold my-5 font-serif">Service Info</div>
                     <div className="text-lg font-serif mx-10">Title : {serviceInfo.title}</div>

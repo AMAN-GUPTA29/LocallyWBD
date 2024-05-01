@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Cookies from 'universal-cookie';
-// import '../components/customerRequestComponent/css/history.css'
+import '../components/customerRequestComponent/css/history.css'
 import Footer from "../components/customerviewComponent/Footer";
 import NavPostLog from "../components/customerviewComponent/NavPostLog";
 import _Historybody from "../components/historyComponent/_Historybody";
@@ -42,30 +42,47 @@ export default () => {
     return(
         <div>
             <NavPostLog />
-            <header className="headerr">
-            <h2 className="mx-5 text-white h_2">Your History</h2>
+            <header className="">
+            <h2 className="mx-5 text-black text-4xl text-center font-bold font-serif">Your History</h2>
         </header>
 
         {/* <h1>Old Requests</h1> */}
             <br />
-            <div>
-                <h1 className="text-2xl font-semibold">Completed Requests</h1>
+            <div className="font-serif">
+                <h1 className="text-2xl font-semibold mb-3 mx-4">Completed Requests</h1>
+              <table className="table-auto w-full">
+                <thead className="bg-gray-200">
+                  <tr>
+                    <th className="px-6 py-3 text-center">Customer Name</th>
+                    <th className="px-6 py-3 text-center">Title</th>
+                    <th className="px-6 py-3 text-center">Charge</th>
+                    <th className="px-6 py-3 text-center">Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {renderHistoryWithStatus('completed')}
+                </tbody>
+              </table>
+            </div>
+
+            <hr className="text-black"/>
+
+            <div className="font-serif">
+                <h1 className="text-2xl font-semibold my-5 mx-4">Rejected Requests</h1>
                 <table className="table-auto w-full">
                 <thead className="bg-gray-200">
                   <tr>
-                    <th className="px-6 py-3">Customer Name</th>
-                    <th className="px-6 py-3">Title</th>
-                    <th className="px-6 py-3">Charge</th>
-                    <th className="px-6 py-3">Time</th>
+                    <th className="px-6 py-3 text-center">Customer Name</th>
+                    <th className="px-6 py-3 text-center">Title</th>
+                    <th className="px-6 py-3 text-center">Charge</th>
+                    <th className="px-6 py-3 text-center">Time</th>
                   </tr>
                 </thead>
-                </table>
-                {renderHistoryWithStatus('completed')}
-            </div>
-
-            <div>
-                <h1 className="text-2xl font-semibold">Rejected Requests</h1>
-                {renderHistoryWithStatus('pending')}
+                <tbody>
+                    {renderHistoryWithStatus('pending')}
+                </tbody>
+              </table>
+                
             </div>
             <Footer />
         </div>

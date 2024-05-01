@@ -69,8 +69,8 @@ const CustomerTransactions = () => {
   return (
     <>
     <NavPostLog/>
-      <h2 className="text-center text-3xl font-bold mt-10 mb-6 text-gray-800">Customer Transactions</h2>
-      <div className="mx-auto max-w-6xl bg-white shadow-md overflow-hidden sm:rounded-lg">
+      <h2 className="text-center text-3xl font-bold font-serif mt-10 mb-6 text-gray-800">Customer Transactions</h2>
+      <div className="mx-auto max-w-6xl bg-white shadow-md overflow-hidden sm:rounded-lg font-serif">
       <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-200">
             <tr>
