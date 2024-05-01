@@ -139,6 +139,7 @@ const AdminSellerList = () => {
       </h1>
       {blockedUsers && (
         <div className="container-ss mx-auto">
+          
           <table className="table-auto w-full">
             <thead className="bg-gray-200">
               <tr>

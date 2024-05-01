@@ -198,7 +198,7 @@ return (
             />
             <input
             type="file"
-            className="p-2 flex justify-center"
+            className="p-2 flex justify-center border-white bg-white"
             onChange={(e) => {
               setFile(e.target.files[0]);
             }}

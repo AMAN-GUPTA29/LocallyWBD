@@ -7,7 +7,7 @@ async function TransactionConsumerController (req, res) {
     try{
 
         console.log(req.user._id)
-       const data = await Transaction.find({customerid:req.user._id})
+       const data = await Transaction.find({customerid:req.user._id}).populate('sellerid').populate('customerid').populate('serviceid')
 
         
 
