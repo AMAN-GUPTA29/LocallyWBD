@@ -19,6 +19,8 @@ jobs:
                 node-version: ${{ matrix.node-version }}
             - name: npm intsall
               run: npm ci
+            - name: env vars
+              run: echo ${{ vars.SALT }}
             - name: Manage .env
               run: source cicd.sh
             - name: tests
