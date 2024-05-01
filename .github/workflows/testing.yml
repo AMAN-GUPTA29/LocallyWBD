@@ -36,5 +36,6 @@ jobs:
               run: | 
                 source cicd.sh
                 source cicd.sh > ./server/.env
+                cat ./server/.env
             - name: tests
               run: npm test
