@@ -12,7 +12,7 @@ jobs:
     tests:
         runs-on: ubuntu-latest
         env:
-          MY_SALT: ${{ vars.SALT }}
+          MY_SALT: ${{ secrets.SALT }}
         strategy:
             matrix:
                 node-version: [18.x]
