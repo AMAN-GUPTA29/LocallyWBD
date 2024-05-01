@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
+import Cookies from 'universal-cookie';
 import { Link } from "react-router-dom";
 import { useAuth } from "../../AuthContext";
+import AdminProfile from "../../pages/AdminProfile";
+const cookie = new Cookies();
 
 export default function Navbar() {
+  const token = cookie.get("TOKEN");
   const { logout } = useAuth();
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false); // Add this state
 
   const handleLogout = () => {
     logout();
   };
+
   return (
     <nav className="bg-gray-900">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -48,17 +54,23 @@ export default function Navbar() {
                 Requests
               </Link>
               <Link
+                to="/admin/transactions"
+                className="text-white px-3 py-2 rounded-md text-sm font-medium transition duration-300 hover:bg-yellow-400 hover:text-gray-900"
+              >
+                Transactions
+              </Link>
+              <Link
                 to="/admin/history"
                 className="text-white px-3 py-2 rounded-md text-sm font-medium transition duration-300 hover:bg-yellow-400 hover:text-gray-900"
               >
                 History
               </Link>
-              <Link
-                to="/admin/profile"
-                className="text-white px-3 py-2 rounded-md text-sm font-medium transition duration-300 hover:bg-yellow-400 hover:text-gray-900"
+              <button
+                onClick={() => setIsProfileModalOpen(true)}
+                className="text-white px-3 py-2 rounded-md text-sm font-medium transition duration-300 hover:bg-yellow-400 hover:text-gray-900 cursor-pointer"
               >
                 Profile
-              </Link>
+              </button>
               <Link
                 to="/"
                 onClick={handleLogout}
@@ -128,6 +140,37 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
+
+      {/* Profile Modal */}
+      {isProfileModalOpen && (
+        <div className="fixed z-10 inset-0 overflow-y-auto">
+          <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 ">
+            <div className="fixed inset-0 transition-opacity" aria-hidden="true">
+              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+            <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+              <div className="bg-gray-100 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div className="sm:flex sm:items-start">
+                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                    <h3 className="text-lg leading-6 font-medium text-gray-900 text-center">Profile</h3>
+                    <AdminProfile/>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gray-100 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button
+                  onClick={() => setIsProfileModalOpen(false)}
+                  type="button"
+                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-yellow-400 text-base font-medium text-white hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 sm:ml-3 sm:w-auto sm:text-sm"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

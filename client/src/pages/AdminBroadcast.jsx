@@ -10,19 +10,20 @@ export default function AdminBroadcast() {
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [activeButton, setActiveButton] = useState('all');
 
-    // useEffect(() => {
-    //     fetch('http://localhost:8080/api/broadcast',{
-    //         headers: {
-    //           Authorization: `Bearer ${token}`,
-    //         },
-    //       })
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             setUsers(data);
-    //             setFilteredUsers(data);
-    //         })
-    //         .catch(error => console.error('Error fetching data:', error));
-    // }, []);
+    useEffect(() => {
+        fetch('http://localhost:8080/api/admin/broadcast/view',{
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                    },
+                  })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data.data)
+                        setUsers(data.data);
+                        setFilteredUsers(data.data);
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+    }, []);
 
     const [broadcastMeassage, setBroadcastMeassage] = useState('');
     const [pointer, setpointer] = useState('all');
@@ -47,17 +48,18 @@ export default function AdminBroadcast() {
                 setBroadcastMeassage('');
                 setpointer('all');
                 // Fetch the updated list of broadcastMeassages from the server
-                // fetch('http://localhost:8080/api/broadcast',{
-                //     headers: {
-                //       Authorization: `Bearer ${token}`,
-                //     },
-                //   })
-                //     .then(response => response.json())
-                //     .then(data => {
-                //         setUsers(data);
-                //         setFilteredUsers(data);
-                //     })
-                //     .catch(error => console.error('Error fetching data:', error));
+                fetch('http://localhost:8080/api/admin/broadcast/view',{
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                    },
+                  })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data.data)
+                        setUsers(data.data);
+                        setFilteredUsers(data.data);
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
             })
             .catch(error => console.error('Error sending broadcast:', error));
     };
@@ -121,8 +123,8 @@ export default function AdminBroadcast() {
             <div className="past-broadcasts my-3">
                 <div className="users">
                     <button className={`all hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2 ${activeButton === 'all' ? 'active' : ''}`} onClick={() => filterbroadcastMeassages('all')}>All</button>
-                    <button className={`customers hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2 ${activeButton === 'customers' ? 'active' : ''}`} onClick={() => filterbroadcastMeassages('customers')}>Customers</button>
-                    <button className={`workers hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ${activeButton === 'workers' ? 'active' : ''}`} onClick={() => filterbroadcastMeassages('workers')}>Workers</button>
+                    <button className={`customers hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2 ${activeButton === 'customers' ? 'active' : ''}`} onClick={() => filterbroadcastMeassages('consumers')}>Consumers</button>
+                    <button className={`workers hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ${activeButton === 'workers' ? 'active' : ''}`} onClick={() => filterbroadcastMeassages('sellers')}>Sellers</button>
                 </div>
             </div>
             <div className="past-broadcasts">
@@ -133,7 +135,7 @@ export default function AdminBroadcast() {
                             .map(user => (
                                 <div key={user._id} className="user border p-4 bg-white">
                                     <div className="flex justify-between">
-                                        <div>broadcastMeassage: {user.broadcastMeassage}</div>
+                                        <div>BroadcastMeassage :{user.broadcastMeassage}</div>
                                         <div>Time: {new Date(user.time).toLocaleString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>
                                     </div>
                                 </div>
