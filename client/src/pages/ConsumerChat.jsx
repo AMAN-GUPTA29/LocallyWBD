@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
+import NavPostLog from '../components/customerviewComponent/NavPostLog';
 import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 
@@ -21,12 +22,12 @@ const ConsumerChat = () => {
                     sellerid: _id,
                 }),
             })
-            .then(response => response.json())
-            .then(data => {
-                setChat(data.data);
-                // console.log(data.data)
-            })
-            .catch(error => console.error(error));
+                .then(response => response.json())
+                .then(data => {
+                    setChat(data.data);
+                    // console.log(data.data)
+                })
+                .catch(error => console.error(error));
         };
 
         const interval = setInterval(() => {
@@ -38,17 +39,17 @@ const ConsumerChat = () => {
 
     const sendMessage = () => {
         console.log("Sending message:", messageInput);
-            fetch("http://localhost:8080/api/consumer/sendmessage", {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({
-                    sellerid: _id,
-                    message: messageInput
-                }),
-            })
+        fetch("http://localhost:8080/api/consumer/sendmessage", {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                sellerid: _id,
+                message: messageInput
+            }),
+        })
             .then(response => response.json())
             .then(data => {
                 console.log(data)
@@ -59,31 +60,33 @@ const ConsumerChat = () => {
     };
 
     return (
-        <div className="flex flex-col overflow-y-auto h-full items-center">
-            <h2 className="text-xl font-bold">Chat</h2>
-            <div className="flex flex-col overflow-y-auto">
-                {chat.map(message => (
-                    <div
-                        key={message._id}
-                        className={`my-2 mx-4 p-2 rounded-lg max-w-md ${message.sender === 'consumer' ? 'bg-blue-500 text-white self-end' : 'bg-gray-200 text-gray-800 self-start'}`}
+        <div>
+            <NavPostLog />
+            <div className="flex flex-col h-screen border rounded-2xl shadow-xl mx-40 my-5">
+                <div className="flex flex-col flex-grow overflow-y-auto mx-5 my-10">
+                    {chat && chat.map(message => (
+                        <div
+                            key={message._id}
+                            className={`my-2 mx-4 p-2 rounded-lg max-w-md ${message.sender === 'seller' ? 'bg-blue-500 text-white self-end' : 'bg-gray-200 text-gray-800 self-start'}`}
+                        >
+                            {message.message}
+                        </div>
+                    ))}
+                </div>
+                <div className="p-4  flex justify-center my-20 ">
+                    <textarea
+                        className="w-full max-w-md p-2 resize-none border border-black"
+                        value={messageInput}
+                        onChange={e => setMessageInput(e.target.value)}
+                        placeholder="Type your message..."
+                    />
+                    <button
+                        className="bg-blue-500 text-white px-4 py-2 ml-2 rounded"
+                        onClick={sendMessage}
                     >
-                        {message.message}
-                    </div>
-                ))}
-            </div>
-            <div className="w-full flex items-center justify-center">
-                <textarea
-                    className="w-full max-w-md p-2 resize-none border border-black"
-                    value={messageInput}
-                    onChange={e => setMessageInput(e.target.value)}
-                    placeholder="Type your message..."
-                />
-                <button
-                    className="bg-blue-500 text-white px-4 py-2 ml-2 rounded"
-                    onClick={sendMessage}
-                >
-                    Send
-                </button>
+                        Send
+                    </button>
+                </div>
             </div>
             <p className="text-sm text-gray-500">Current time: {new Date().toLocaleTimeString()}</p>
         </div>

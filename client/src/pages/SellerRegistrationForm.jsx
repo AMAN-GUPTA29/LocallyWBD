@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { FaUser, FaEnvelope, FaKey, FaGoogle, FaTwitter, FaInstagram } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +13,7 @@ const validatePassword = (password) => {
   return passwordRegex.test(password);
 };
 
-const BasicRegistrationForm = ({ formData, errors, handleChange, handleSubmit }) => (
+const BasicRegistrationForm = ({ formData, errors, handleChange, handleSubmit, setFile }) => (
   <form className="px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
     <h1 className="text-4xl font-bold mb-6 text-center">Seller Registration</h1>
     <div className="flex flex-col mt-1">
@@ -32,6 +33,13 @@ const BasicRegistrationForm = ({ formData, errors, handleChange, handleSubmit })
           value={formData.name}
           onChange={handleChange}
         />
+        <input
+        type="file"
+        name="file"
+        onChange={(e)=>{setFile(e.target.files[0]); console.log("KKKKK")}}
+        
+        >
+        </input>
       </div>
       {errors.name && <p className="text-red-500 text-xs italic">{errors.name}</p>}
     </div>
@@ -92,20 +100,20 @@ const AdditionalDetailsForm = ({ formData, errors, handleChange, handleSubmit })
   <form className="px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
     <h1 className="text-4xl font-bold mb-6 text-center">Additional Details</h1>
     <div className="flex flex-col mt-2">
-      <label className="text-lg">Aadhar</label>
+      <label className="text-lg">pin</label>
       <input
         className={`appearance-none border indent-4 ${
-          errors.aadhar ? 'border-red-500' : 'border-gray-200'
+          errors.pin ? 'border-red-500' : 'border-gray-200'
         } rounded w-80 h-12 py-2 px-3 pl-8 leading-tight focus:outline-none focus:shadow-outline`}
-        id="aadhar"
-        name="aadhar"
-        type="text"
-        placeholder="Aadhar"
-        value={formData.aadhar}
+        id="pin"
+        name="pin"
+        type="number"
+        placeholder="pin"
+        value={formData.pin}
         onChange={handleChange}
       />
-      {errors.aadhar && (
-        <p className="text-red-500 text-xs italic">{errors.aadhar}</p>
+      {errors.pin && (
+        <p className="text-red-500 text-xs italic">{errors.pin}</p>
       )}
     </div>
     <div className="flex flex-col mt-2">
@@ -158,7 +166,7 @@ const SellerRegistrationForm = () => {
     name: '',
     email: '',
     password: '',
-    aadhar: '',
+    pin: '',
     address: '',
     phoneNumber: '',
   });
@@ -167,13 +175,13 @@ const SellerRegistrationForm = () => {
     name: '',
     email: '',
     password: '',
-    aadhar: '',
+    pin: '',
     address: '',
     phoneNumber: '',
   });
 
   const [step, setStep] = useState(1);
-
+  const [file, setFile] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -204,10 +212,10 @@ const SellerRegistrationForm = () => {
     }
   
     if (step === 2) {
-      if (!formData.aadhar.trim() || formData.aadhar.trim().length < 12) {
+      if (!formData.pin.trim() || formData.pin.trim().length < 6) {
         setErrors((prevErrors) => ({
           ...prevErrors,
-          aadhar: 'Aadhar should be 12 digits',
+          pin: 'pin should be 6 digits',
         }));
         valid = false;
       }
@@ -226,34 +234,36 @@ const SellerRegistrationForm = () => {
         valid = false;
       }
     }
+
+    const formData2 = new FormData();
+    formData2.append('email', formData.email);
+    formData2.append('password', formData.password)
+    formData2.append('name', formData.name);
+    formData2.append('pin',formData.pin);
+    formData2.append('address',formData.address)
+    formData2.append('phone', formData.phoneNumber)
+    formData2.append('image', file);
+  
   
     if (valid) {
       if (step === 1) {
         setStep(2);
       } else {
         try {
-          const response = await fetch('http://localhost:8080/api/seller/register-seller', {
-            method: 'POST',
+          const response = await axios.post('http://localhost:8080/api/seller/register',formData2,{
             headers: {
-              'Content-Type': 'application/json',
+              'Content-Type': 'multipart/form-data',
             },
-            body: JSON.stringify({
-              name: formData.name,
-              email: formData.email,
-              password: formData.password,
-              aadhar: formData.aadhar,
-              address: formData.address,
-              phoneNumber: formData.phoneNumber,
-            }),
           });
-          const data = await response.json();
-          if (response.ok) {
-            setFormData((prevData) => ({
-              ...prevData,
-              sellerId: data.sellerId,
-            }));
-            setStep(3); 
-            navigate('/sellerview'); 
+          // const data = await response.json();
+          if (response) {
+            // setFormData((prevData) => ({
+            //   ...prevData,
+            //   sellerId: data.sellerId,
+            // }));
+            // setStep(3); 
+            console.log(response)
+            navigate('/seller/login'); 
           } else {
             console.error('Failed to register seller:', data.message);
           }
@@ -273,6 +283,7 @@ const SellerRegistrationForm = () => {
           errors={errors}
           handleChange={handleChange}
           handleSubmit={handleSubmit}
+          setFile={setFile}
         />
       ) : (
         <AdditionalDetailsForm

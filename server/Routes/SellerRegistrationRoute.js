@@ -26,8 +26,8 @@ cloudinary.config({
     storage:storage
   });
 
-router.post("/", sellerRegistrationController)
+router.post("/", upload.single('image'),sellerRegistrationController)
 
-// , upload.single('image')
+// 
 
 module.exports=router;

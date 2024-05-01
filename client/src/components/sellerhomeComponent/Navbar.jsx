@@ -32,7 +32,7 @@ const Navbar = () => {
         <div className="lg:flex lg:items-center space-x-4">
           <NavLink to="/sellerview">Home</NavLink>
           <NavLink to="/seller/services">Your Services</NavLink>
-          <NavLink to="/seller/chat">Chat</NavLink>
+          <NavLink to="/seller/chatTitle">Chat</NavLink>
           <NavLink to="/seller/request">Requests</NavLink>
           <NavLink to="/seller/broadcast">Notifications</NavLink>
           <NavLink to="/seller/history">History</NavLink>
@@ -55,7 +55,7 @@ const Navbar = () => {
           <div className="flex flex-col items-center space-y-4 p-4">
             <NavLink to="/sellerview" onClick={closeMenu}>Home</NavLink>
             <NavLink to="/seller/services" onClick={closeMenu}>Your Services</NavLink>
-            <NavLink to="/seller/chat" onClick={closeMenu}>Chat</NavLink>
+            <NavLink to="/seller/chatTitle" onClick={closeMenu}>Chat</NavLink>
             <NavLink to="/seller/request" onClick={closeMenu}>Requests</NavLink>
             <NavLink to="/seller/broadcast" onClick={closeMenu}>Notifications</NavLink>
             <NavLink to="/seller/history" onClick={closeMenu}>History</NavLink>

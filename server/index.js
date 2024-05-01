@@ -1,11 +1,6 @@
 /**
  * Add morgan
  * Add RFS
- * Add csrf
- * Add multer
- * chat
- * payment gateway
- * transactions
  * rubricks
  * Add Global error handler (a,b,c,d) => {retutn xyz}
  * Unit Test - done
@@ -118,12 +113,12 @@ app.use(express.json())
 app.use(cors());
 app.use(bodyparser.urlencoded({extended:false}))
 
-app.use("/api/consumer/register",consumerRegistrationRoutes);
+app.use("/api/consumer/register",consumerRegistrationRoutes);//left
 app.use("/api/consumer/login",consumerLoginRoute);
 app.use("/api/consumer/profile",ConsumerProfileRoute); //left
 app.use("/api/consumer/profile/update",ConsumerProfileUpdateRoute) //left
 app.use('/api/customer/service', GetService_SellerDetailsRouter)
-app.use("/api/consumer/sellerrating",ConsumerGivenSellerRatingRoute)//left
+app.use("/api/consumer/sellerrating",ConsumerGivenSellerRatingRoute)
 app.use("/api/consumer/viewbroadcast",ConsumerViewBroadcastRoute)
 app.use("/api/consumer/sellerprofileview",SellerProfileConsumerRoute)
 app.use("/api/consumer/sellerreview",SellerGivenConsumerRatingRoute)
@@ -131,34 +126,34 @@ app.use("/api/consumer/seller/optedservice",ServiceInfoConsumerRoute)
 app.use("/api/consumer/pendingrequestdelete",pendingRequestDeleteRequestRoute)
 app.use("/api/consumer/history",checkConsumerHistoryRoute)
 app.use('/api/customer/completed', CompleteRequestRouter)
-app.use('/api/customer/viewServices', ConsumerViewServicesRoute)
+app.use('/api/customer/viewServices', ConsumerViewServicesRoute)//left
 app.use('/api/customer/service', GetService_SellerDetailsRouter)
 app.use('/api/customer/makerequest', MakeRequestRouter)
 app.use('/api/customer/pendingrequests', PendingRequestRouter)
 app.use('/api/customer/acceptedrequests', AcceptedRequestRouter)
-app.use("/api/consumer/sendmessage",ConsumerChatSendRoute)//left
-app.use("/api/consumer/history",checkConsumerHistoryRoute)//left
-app.use("/api/consumer/readmessage",ConsumerChatReadRoute)//left
+app.use("/api/consumer/sendmessage",ConsumerChatSendRoute)
+app.use("/api/consumer/history",checkConsumerHistoryRoute)
+app.use("/api/consumer/readmessage",ConsumerChatReadRoute)
 app.use('/api/consumer/payment',MakePaymentConsumer)
 app.use('/api/consumer/transactionsave',TransactionHistoryRoute)
-app.use('/api/consumer/transaction',TransactionConsumerRoute)
+app.use('/api/consumer/transaction',TransactionConsumerRoute)//left
 
 app.use("/api/admin/register",adminRegistrationRoutes);
 app.use("/api/admin/login",adminLoginRoutes);
-app.use("/api/admin/profile",adminProfileRoute); //left
-app.use("/api/admin/profile/update",adminProfileUpdateRoute); //left
+app.use("/api/admin/profile",adminProfileRoute); 
+app.use("/api/admin/profile/update",adminProfileUpdateRoute); 
 app.use("/api/admin/consumerlist",adminConsumerListRoute)
 app.use("/api/admin/sellerlist",adminSellerListRoute)
 app.use("/api/admin/blockseller",adminBlockSellerRoute)
 app.use("/api/admin/blockconsumer",adminBlockConsumerRoute)
 app.use("/api/admin/blockedconsumerlist",blockedconsumerlistRoute)
 app.use("/api/admin/blockedsellerlist",blockedsellerlistRoute)
-app.use("/api/admin/unblockconsumer",unblockconsumerRoute)//left
-app.use("/api/admin/unblockseller",unblocksellerRoute)//left
+app.use("/api/admin/unblockconsumer",unblockconsumerRoute)
+app.use("/api/admin/unblockseller",unblocksellerRoute)
 app.use("/api/admin/makebroadcast",makeBroadCastRoute)
 app.use("/api/admin/broadcast/view",viewBroadcastAdminRoute)
 app.use("/api/admin/totalservice",viewallServicesRoute)
-app.use("/api/admin/history",AdminHistoryRoute)//left
+app.use("/api/admin/history",AdminHistoryRoute)
 app.use('/api/admin/transaction',TransactionAdminRoute)
 
 
@@ -172,15 +167,36 @@ app.use("/api/seller/profile/update",sellerProfileUpdateRoute)
 app.use("/api/seller/viewbroadcast",SellerViewBroadcastRoute)
 app.use("/api/seller/review/route",SellerReviewViewRoute)
 
-app.use("/api/seller/history",SellerHistoryRoute)//left
+app.use("/api/seller/history",SellerHistoryRoute)
 
 app.use('/api/seller/services', sellerServicesRouter)
 app.use('/api/seller/viewrequests',SellerViewCustomerRequestRoute)
 app.use('/api/seller/request/accepted',SellerAcceptedRequestRoute)
 app.use('/api/seller/request/cancel',SellerDeleteRequestRoute)
-app.use('/api/seller/chattile',SellerViewChatTileRoute)//left
-app.use('/api/seller/viewchat',SellerViewChatRoute)//left
-app.use('/api/seller/sendchat',SellerSendChatRoute)//left
+app.use('/api/seller/chattile',SellerViewChatTileRoute)
+app.use('/api/seller/viewchat',SellerViewChatRoute)
+app.use('/api/seller/sendchat',SellerSendChatRoute)
+
+const swaggerJSdoc = require('swagger-jsdoc')
+const swaggerUI = require('swagger-ui-express')
+
+
+
+const options = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: "Nodejs Project",
+            version: '1.0.0'
+        },
+        server: [{
+            url: 'http://localhost:8000'
+        }]
+    },
+    apis: ['./swagger.js']
+}
+const swaggerspec = swaggerJSdoc(options)
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup( swaggerspec ))
 
 
 
