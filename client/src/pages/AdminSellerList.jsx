@@ -100,7 +100,7 @@ const AdminSellerList = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user, i) => (
+              {users && users.map((user, i) => (
                 <tr key={i}>
                   <td className="border px-4 py-2">Mr.{user.name}</td>
                   <td className="border px-4 py-2">{user.email}</td>
@@ -149,7 +149,7 @@ const AdminSellerList = () => {
               </tr>
             </thead>
             <tbody>
-              {blockedUsers.map((user, i) => (
+              {blockedUsers && blockedUsers.map((user, i) => (
                 <tr key={i}>
                   <td className="border px-4 py-2">{user.email}</td>
                   <td className="border px-4 py-2">{user._id}</td>

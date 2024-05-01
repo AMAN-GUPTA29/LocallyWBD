@@ -42,7 +42,7 @@ const SellerHistory = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {history
+                  {history && history
                     .filter(item => item.status === "completed")
                     .map((item, index) => (
                       <tr key={index} className="bg-white border-b">
@@ -69,7 +69,7 @@ const SellerHistory = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {history
+                  {history && history
                     .filter(item => item.status === "pending")
                     .map((item, index) => (
                       <tr key={index} className="bg-white border-b">

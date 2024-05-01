@@ -36,7 +36,7 @@ const AdminRequests = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map(user => (
+              {users && users.map(user => (
                 <tr key={user._id} className="bg-white border-b">
                   <td className="px-6 py-4">{user.customerid ? user.customerid.name : 'N/A'}</td>
                   <td className="px-6 py-4">{user.sellerid ? user.sellerid.name : 'N/A'}</td>

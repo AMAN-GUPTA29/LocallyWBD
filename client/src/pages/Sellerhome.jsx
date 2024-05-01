@@ -132,7 +132,7 @@ const SellerHome = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container font-sans">
       <Navbar />
       {/* <div className="my-4 flex justify-evenly">
         <button className="btn btn-dark " onClick={() => handleButtonClick('new')} role="button" style={{ backgroundColor: 'coral', color: 'white' }}>
@@ -181,7 +181,7 @@ const SellerHome = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {reviews.map((review, index) => (
+              {reviews && reviews.map((review, index) => (
                 <tr key={index} className="hover:bg-gray-100">
                   <td className="px-6 py-4 whitespace-nowrap">{review.consumername}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{review.review}</td>

@@ -64,8 +64,8 @@ const SellerProfile = () => {
     return (
         <div>
             <Navbar />
-            <div className="flex flex-col min-h-screen items-center justify-center bg-gray-100">
-                <h1 className='text-3xl mb-8'>Your Profile</h1>
+            <div className="flex flex-col min-h-screen items-center justify-center bg-gray-100 font-serif">
+                <h1 className='text-3xl my-4'>Your Profile</h1>
                 <div className='p-8 shadow-xl w-[400px] rounded-md bg-white'>
                     <div className='flex items-center justify-center'>
                         <img src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" className='w-32' alt="" />

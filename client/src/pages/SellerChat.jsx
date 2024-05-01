@@ -61,7 +61,7 @@ const SellerChat = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex flex-col h-screen border rounded-2xl shadow-xl mx-40 my-5">
+      <div className="flex flex-col h-screen border rounded-2xl shadow-xl mx-40 my-5 font-serif">
         <div className="flex flex-col flex-grow overflow-y-auto mx-5 my-10">
           {chat && chat.map(message => (
             <div

@@ -29,8 +29,8 @@ const SellerBroadcast = () => {
         <div className="font-bold text-lg mb-2 mx-3">BroadCasts</div>
         <div className="users">
           <div className="w-full grid grid-cols-1 gap-4">
-            {msgs.map((msg, index) => (
-              <div key={index} className="user border rounded-xl p-4 bg-white mx-3">
+            {msgs && msgs.map((msg, index) => (
+              <div key={index} className="user border shadow-lg rounded-xl p-4 bg-white mx-3">
                 <div className="flex justify-between">
                   <p>Message: {msg.broadcastMeassage}</p>
                   <p className=''>Time: {new Date(msg.time).toLocaleString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>

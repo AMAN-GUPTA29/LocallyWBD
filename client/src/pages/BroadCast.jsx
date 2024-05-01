@@ -26,7 +26,9 @@ export default () => {
       .then(data => {
         console.log(data)
         data = data.data
-        setCardArray(data.map(msg => msg.broadcastMeassage));
+        if(data){
+          setCardArray(data.map(msg => msg.broadcastMeassage));
+        }
       })
       .catch(error => console.error('Error fetching data:', error));
   }, []); 
@@ -35,7 +37,7 @@ export default () => {
     <>
       <NavPostLog />
       <br />
-      {cardArray.map((message, index) => (
+      {cardArray && cardArray.map((message, index) => (
         <Message key={index} message={message} />
       ))}
       <Fotterfinal />

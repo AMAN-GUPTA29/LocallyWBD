@@ -11,7 +11,7 @@ export default () => {
 
             <nav className="maiin-naav">
                 <ul className="maiin-naav-lisst">
-                    <li><a className="maiin-naav-linnk" href="/hhjjj" target="_blank">Transactions</a></li>
+                    <li><a className="maiin-naav-linnk" href="/customer/transactions" target="_blank">Transactions</a></li>
                     <li><a className="maiin-naav-linnk" href="/customerrequest">MyRequest</a></li>
                     <li><a className="maiin-naav-linnk" href="/history">History</a></li>
                     <li><a className="maiin-naav-linnk" href="/broadcast">Notifications</a></li>

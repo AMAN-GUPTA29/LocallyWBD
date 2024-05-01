@@ -42,7 +42,7 @@ const AdminHistory = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {history.filter(item => item.status === "completed").map((item, index) => (
+                            {history && history.filter(item => item.status === "completed").map((item, index) => (
                                 <tr key={index}>
                                     <td className="border px-6 py-4">{item.customerid.name}</td>
                                     <td className="border px-6 py-4">{item.sellerid.name}</td>
@@ -75,7 +75,7 @@ const AdminHistory = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {history.filter(item => item.status === "pending").map((item, index) => (
+                            {histor && history.filter(item => item.status === "pending").map((item, index) => (
                                 <tr key={index}>
                                     <td className="border px-6 py-4">{item.customerid.name}</td>
                                     <td className="border px-6 py-4">{item.sellerid.name}</td>

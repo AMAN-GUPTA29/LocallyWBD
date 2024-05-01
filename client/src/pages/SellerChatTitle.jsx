@@ -82,19 +82,22 @@ const SellerChatTitle = () => {
         <div>
             <Navbar />
             <div style={containerStyle} >
+            <h1 className='text-3xl font-bold font-serif my-5'>Serviced Consumers</h1>
 
                 <motion.div className='flex flex-row flex-wrap gap-7 '>
                     {titles && titles.map((title, index) => (
-                        <motion.div
+                        <a href={`/seller/chat/${title.customerid._id}`}>
+                            <motion.div
                             variants={itemVariants}
                             style={itemStyle}
                             key={index}
-                            className='bg-gradient-to-r from-green-400 to-gray-400'
+                            className='bg-gradient-to-r from-green-400 to-gray-400 mx-5 text-lg'
                         >
-                            <a href={`/seller/chat/${title.customerid._id}`} style={{ fontWeight: 'normal', fontSize: '1.1rem' }}>Customer Name : {title.customerid.name}</a>
-                            <div>Phone : {title.customerid.phone}</div>
-                            <div>Address : {title.customerid.address}</div>
+                            <div className='font-serif px-5 py-2 text-start'>Customer Name : {title.customerid.name}</div>
+                            <div className='font-serif px-5 py-2 text-start'>Phone : {title.customerid.phone}</div>
+                            <div className='font-serif px-5 py-2 text-start'>Address : {title.customerid.address}</div>
                         </motion.div>
+                        </a>
                     ))}
                 </motion.div>
 

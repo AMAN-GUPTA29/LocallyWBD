@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import Cookies from 'universal-cookie';
 const cookie = new Cookies();
+import NavPostLog from "../components/customerviewComponent/NavPostLog";
 const token = cookie.get("TOKEN");
 
-const Transactions = () => {
+const CustomerTransactions = () => {
   const token = cookie.get("TOKEN");
-  const [transactionsData,setTransactionData]=useState([]);
+  const [CustomertransactionsData,setTransactionData]=useState([]);
   const [show,setShow] = useState(true);
   useEffect(()=>{
-    fetch('http://localhost:8080/api/seller/transaction', {
+    fetch('http://localhost:8080/api/consumer/transaction', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -67,22 +68,23 @@ const Transactions = () => {
 
   return (
     <>
-      <h2 className="text-center text-3xl font-bold mt-10 mb-6 text-gray-800">Transactions</h2>
+    <NavPostLog/>
+      <h2 className="text-center text-3xl font-bold mt-10 mb-6 text-gray-800">Customer Transactions</h2>
       <div className="mx-auto max-w-6xl bg-white shadow-md overflow-hidden sm:rounded-lg">
-        <table className="min-w-full divide-y divide-gray-200">
+      <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-200">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Transaction ID</th>
-              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Customer Name</th>
+              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Seller Name</th>
               <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Rupees(&#8377;)</th>
               <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Time</th>
             </tr>
           </thead>
           <tbody className=" divide-y divide-gray-200">
-            {transactionsData && transactionsData.map((transaction) => (
+            {CustomertransactionsData && CustomertransactionsData.map((transaction) => (
               <tr key={transaction.id} className="bg-gray-50">
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{transaction.transactionid}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{transaction.customerid.name}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{transaction.sellerid.name}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">{transaction.charge}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">{new Date(transaction.time).toLocaleString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</td>
               </tr>
@@ -102,7 +104,7 @@ const Transactions = () => {
                   time: "16:25",
                   rupees: "₹ 40.00",
                 };
-                setTransactionData([...transactionsData, temp]);
+                setTransactionData([...CustomertransactionsData, temp]);
                 setShow(false);
               }}
             >
@@ -115,4 +117,4 @@ const Transactions = () => {
   );
 };
 
-export default Transactions;
+export default CustomerTransactions;
