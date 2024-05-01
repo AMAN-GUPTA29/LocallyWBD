@@ -24,7 +24,7 @@ const Header = ({ _id,seller_id, name, email, phone, address, pin }) => {
   }
   return (
     <header id="home" style={{ padding: '1.5rem 0' }}>
-      <div className="container mx-auto flex items-center justify-center bg-rose-50 bg-opacity-100"> {/* Updated */}
+      <div className="container mx-auto flex items-center justify-center bg-amber-300 bg-opacity-50"> {/* Updated */}
         <div className="text-start"> {/* Updated */}
           <h6 style={{ color: '#718096' }} className="text-md font-semibold font-serif">Hello, I'm</h6>
           <h1 className="font-serif" style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#000000' }}>{name}</h1>

@@ -11,7 +11,8 @@ const SellerProfile = () => {
         email: "",
         phone: "",
         address:"",
-        pin:""
+        pin:"",
+        img:""
     });
 
     const handleChange = (e) => {
@@ -54,7 +55,8 @@ const SellerProfile = () => {
                     email:data.email,
                     phone:data.phone,
                     address:data.address,
-                    pin:data.pin
+                    pin:data.pin,
+                    img:data.img
                 }));
             }
           })
@@ -68,13 +70,13 @@ const SellerProfile = () => {
                 <h1 className='text-3xl my-4'>Your Profile</h1>
                 <div className='p-8 shadow-xl w-[400px] rounded-md bg-white'>
                     <div className='flex items-center justify-center'>
-                        <img src="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png" className='w-32' alt="" />
+                        <img src={seller.img} className='w-32 rounded-full' alt="" />
                     </div>
-                    <div className='mt-2 text-2xl flex items-baseline justify-center'>
+                    {/* <div className='mt-2 text-2xl flex items-baseline justify-center'>
                         <AiFillLike />
                         <p>{seller.likes}</p>
 
-                    </div>
+                    </div> */}
                     <div className='mb-4 flex flex-col items-start'>
                         <label className='block mb-1 text-gray-700'>Name:</label>
                         <input

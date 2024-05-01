@@ -21,7 +21,8 @@ export default () => {
       email: "",
       phone: "",
       address:"",
-      pin:""
+      pin:"",
+      img:""
   });
 
 useEffect(() => {
@@ -44,7 +45,8 @@ useEffect(() => {
                 email:data.email,
                 phone:data.phone,
                 address:data.address,
-                pin:data.pin
+                pin:data.pin,
+                img:data.img
             }));
         }
       })
@@ -54,7 +56,7 @@ useEffect(() => {
     <div>
       <NavPostLog />
       <ProfileCard data={customer} />
-      <TransactionCard />
+      {/* <TransactionCard /> */}
       <Fotterfinal />
     </div>
   );
