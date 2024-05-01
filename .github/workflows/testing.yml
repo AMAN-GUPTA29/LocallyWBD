@@ -20,7 +20,7 @@ jobs:
             - name: npm intsall
               run: npm ci
             - name: env vars
-              run: echo ${{ vars.SALT }}
+              run: echo ${{ variables.SALT }}
             - name: Manage .env
               run: source cicd.sh
             - name: tests
