@@ -1,12 +1,25 @@
 name: Unit Tests
 
-on: [pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
     tests:
         runs-on: ubuntu-latest
         env:
-          MY_SALT: ${{ vars.SALT }}
+          MY_SALT: ${{ secrets.SALT }}
+          MY_DB: ${{ secrets.DB }}
+          MY_JWTPRIVATEKEY: ${{ secrets.JWTPRIVATEKEY }}
+          MY_RAZORPAY_KEY_ID: ${{ secrets.RAZORPAY_KEY_ID }}
+          MY_RAZORPAY_KEY_SECRET: ${{ secrets.RAZORPAY_KEY_SECRET }}
+          MY_CLOUDNARY_API_KEY: ${{ secrets.CLOUDNARY_API_KEY }}
+          MY_CLOUDNARY_API_SECREAT: ${{ secrets.CLOUDNARY_API_SECREAT }}
+          MY_CLOUDNARY_API_NAME: ${{ secrets.CLOUDNARY_API_NAME }}
         strategy:
             matrix:
                 node-version: [18.x]
@@ -18,10 +31,18 @@ jobs:
               with:
                 node-version: ${{ matrix.node-version }}
             - name: npm intsall
-              run: npm ci
-            - name: env vars
-              run: echo ${{ vars.SALT }}
+              run: npm i
             - name: Manage .env
-              run: source cicd.sh
+              run: | 
+                source cicd.sh
+                source cicd.sh > ./server/.env
+                source cicd.sh > ./.env
+                cat ./server/.env
             - name: tests
-              run: npm test
+              run: |
+                cd server
+                npm i --force
+                cd ..
+                pwd
+                npm test
+                cat log.txt

@@ -34,6 +34,8 @@ const ConsumerChatReadRoute=require("./Routes/ConsumerViewChatRoute")
 const MakePaymentConsumer=require("./Routes/ConsumerMakePaymentRoute")
 const TransactionHistoryRoute=require("./Routes/TransactionHistoryRoute")
 const ConsumerFilterRoute = require("./Routes/ConsumerFilterRoute")
+const ConsumerTransactionFilterRoute= require("./Routes/ConsumerTransactionFilterRoute")
+
 
 
 const TransactionAdminRoute=require("./Routes/TransactionAdminRoute")
@@ -56,7 +58,7 @@ const viewBroadcastAdminRoute=require('./Routes/ViewBroadcastAdminRoute')
 const viewallServicesRoute=require('./Routes/AdminTotalServiceRoute')
 const AdminHistoryRoute=require('./Routes/AdminHistoryRoutes')
 const AdminAllServiceRequest=require('./Routes/AdminRequestsListRoute')
-
+const AdminTransactionFilterRoute= require("./Routes/AdminTransactionFilterRoute")
 
 const sellerRegistrationRoutes=require('./Routes/SellerRegistrationRoute')
 const sellerLoginRoutes=require('./Routes/SellerLoginRoute')
@@ -81,6 +83,9 @@ const AcceptedRequestRouter = require('./Routes/AcceptedRequestRoute')
 const SellerViewCustomerRequestRoute = require('./Routes/SellerViewCustomerRequestRoute')
 const SellerAcceptedRequestRoute = require('./Routes/SellerAcceptedRequestRoute')
 const SellerDeleteRequestRoute = require('./Routes/SellerDeleteRequestRoute')
+const SellerTransactionFilterRoute= require("./Routes/SellerTransactionFilterRoute")
+
+
 const CompleteRequestRouter = require('./Routes/CompleteRequestRouter')
 const ConsumerViewServicesRoute = require('./Routes/ConsumerViewServicesRoute')
 
@@ -141,6 +146,7 @@ app.use('/api/consumer/payment',MakePaymentConsumer)
 app.use('/api/consumer/transactionsave',TransactionHistoryRoute)
 app.use('/api/consumer/transaction',TransactionConsumerRoute)//left
 app.use('/api/customer/viewServices/filter', ConsumerFilterRoute)
+app.use('/api/consumer/transaction/filter', ConsumerTransactionFilterRoute)
 
 app.use("/api/admin/register",adminRegistrationRoutes);
 app.use("/api/admin/login",adminLoginRoutes);
@@ -160,6 +166,7 @@ app.use("/api/admin/totalservice",viewallServicesRoute)
 app.use("/api/admin/history",AdminHistoryRoute)
 app.use('/api/admin/transaction',TransactionAdminRoute)
 app.use('/api/admin/allpendingrequest',AdminAllServiceRequest)
+app.use('/api/admin/transaction/filter',AdminTransactionFilterRoute)
 
 
 
@@ -181,6 +188,7 @@ app.use('/api/seller/request/cancel',SellerDeleteRequestRoute)
 app.use('/api/seller/chattile',SellerViewChatTileRoute)
 app.use('/api/seller/viewchat',SellerViewChatRoute)
 app.use('/api/seller/sendchat',SellerSendChatRoute)
+app.use('/api/seller/transaction/filter', SellerTransactionFilterRoute)
 
 const swaggerJSdoc = require('swagger-jsdoc')
 const swaggerUI = require('swagger-ui-express')
