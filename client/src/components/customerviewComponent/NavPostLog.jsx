@@ -11,11 +11,11 @@ export default () => {
 
             <nav className="maiin-naav">
                 <ul className="maiin-naav-lisst">
-                    <li><a className="maiin-naav-linnk" href="/customer/chat/:_id" target="_blank">Chat</a></li>
+                    <li><a className="maiin-naav-linnk" href="/hhjjj" target="_blank">Transactions</a></li>
                     <li><a className="maiin-naav-linnk" href="/customerrequest">MyRequest</a></li>
                     <li><a className="maiin-naav-linnk" href="/history">History</a></li>
                     <li><a className="maiin-naav-linnk" href="/broadcast">Notifications</a></li>
-                    <li><a className="maiin-naav-linnk" href="/logout">Logout</a></li>
+                    <li><a className="maiin-naav-linnk" href="/">Logout</a></li>
                     <li><a className="maiin-naav-linnk naav-ctta" href="/profile">Profile</a></li>
                 </ul>
             </nav>

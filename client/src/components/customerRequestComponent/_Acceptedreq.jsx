@@ -4,7 +4,7 @@ const cookie = new Cookies();
 
 export default ({ _id, sellerid, seller, email, phone, title, charge, description }) => {
     const token = cookie.get("TOKEN");
-    const [dataId,setDataId] = useState("");
+    const [showModal, setShowModal] = React.useState(false);
     const acceptRequest = (_id) => {
         fetch(`http://localhost:8080/api/consumer/payment`, {
             method: 'POST',
@@ -31,7 +31,8 @@ export default ({ _id, sellerid, seller, email, phone, title, charge, descriptio
                     order_id: data.id,
                     handler: async function (data) {
                         console.log("transaction successfull")
-                        window.location.reload();
+                        setShowModal(true);
+                        // window.location.reload();
 
                         //   const body = {...data,}
 
@@ -79,7 +80,7 @@ export default ({ _id, sellerid, seller, email, phone, title, charge, descriptio
             })
             .catch(error => console.log(error));
 
-        console.log(_id, sellerid, charge, Math.floor(Math.random()*100000000));
+        console.log(_id, sellerid, charge, Math.floor(Math.random() * 100000000));
 
         fetch('http://localhost:8080/api/consumer/transactionsave', {
             method: 'POST',
@@ -91,7 +92,7 @@ export default ({ _id, sellerid, seller, email, phone, title, charge, descriptio
                 serviceid: _id,
                 sellerid: sellerid,
                 charge: charge,
-                transactionid: Math.floor(Math.random()*100000000)
+                transactionid: Math.floor(Math.random() * 100000000)
             })
         }).then(res => res.json())
             .then(data => {
@@ -110,10 +111,50 @@ export default ({ _id, sellerid, seller, email, phone, title, charge, descriptio
             .then(response => response.json())
             .then(data => {
                 console.log(data)
-                
+
             })
             .catch(error => console.error(error));
     }
+
+
+
+    const [rating, setRating] = useState(0);
+    const [review, setReview] = useState('');
+
+    const handleRatingChange = (value) => {
+        setRating(value);
+    };
+
+    const handleReviewChange = (event) => {
+        setReview(event.target.value);
+    };
+
+    const handleSubmit = () => {
+        const formData = {
+            rating: rating,
+            review: review,
+            sellerid: sellerid
+        };
+        console.log(formData);
+        fetch("http://localhost:8080/api/consumer/sellerrating", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                rating: formData.rating,
+                review: formData.review,
+                sellerid: formData.sellerid
+            })
+        }).then(res => res.json())
+            .then(data => {
+                console.log(data)
+                setShowModal(false)
+                window.location.reload();
+            })
+            .catch((error) => { console.log(error) });
+    };
     return (
         <div>
             {/* <h1>Accepted Requests</h1> */}
@@ -159,6 +200,94 @@ export default ({ _id, sellerid, seller, email, phone, title, charge, descriptio
                     </div>
                 </div>
             </div>
+            {showModal ? (
+                <>
+                    <div
+                        className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                    >
+                        <div className="relative w-1/2 my-6 mx-auto max-w-3xl">
+                            {/*content*/}
+                            <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                                {/*header*/}
+                                <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                                    <h3 className="text-3xl font-semibold">
+                                        Review Service
+                                    </h3>
+                                    <button
+                                        className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                                        onClick={() => setShowModal(false)}
+                                    >
+                                        <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                                            x
+                                        </span>
+                                    </button>
+                                </div>
+                                {/*body*/}
+                                {/* <div className="relative p-6 flex-auto">
+                                    <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+                                        I always felt like I could do anything. That’s the main
+                                        thing people are controlled by! Thoughts- their perception
+                                        of themselves! They're slowed down by their perception of
+                                        themselves. If you're taught you can’t do anything, you
+                                        won’t do anything. I was taught I could do everything.
+                                    </p>
+                                </div> */}
+                                <body className="">
+                                <div className="flex flex-row-reverse justify-end items-center my-4 mx-5">
+                                    {[1, 2, 3, 4, 5].map((value) => (
+                                        <React.Fragment key={value}>
+                                            <input
+                                                id={`hs-ratings-readonly-${value}`}
+                                                type="radio"
+                                                className="peer -ms-5 size-5 bg-transparent border-0 text-transparent cursor-pointer appearance-none checked:bg-none focus:bg-none focus:ring-0 focus:ring-offset-0 justify-center"
+                                                name="hs-ratings-readonly"
+                                                value={value}
+                                                onChange={() => handleRatingChange(value)}
+                                            />
+                                            <label
+                                                htmlFor={`hs-ratings-readonly-${value}`}
+                                                className={`peer-checked:text-yellow-400 text-gray-300 pointer-events-none`}
+                                            >
+                                                <svg
+                                                    className="flex-shrink-0 size-5"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="16"
+                                                    height="16"
+                                                    fill="currentColor"
+                                                    viewBox="0 0 16 16"
+                                                >
+                                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                                </svg>
+                                            </label>
+                                        </React.Fragment>
+                                    ))}
+                                </div>
+                                </body>
+                                <div className="mb-4">
+                                    <textarea
+                                        className="w-2/3 border border-gray-300 rounded-md px-3 py-2 mx-5"
+                                        placeholder="Write your review..."
+                                        value={review}
+                                        required
+                                        onChange={handleReviewChange}
+                                    ></textarea>
+                                </div>
+                                <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                                    <button
+                                        className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                        type="button"
+                                        onClick={() => handleSubmit()}
+                                    // onClick={() => setShowModal(false)}
+                                    >
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                </>
+            ) : null}
         </div>
 
     );

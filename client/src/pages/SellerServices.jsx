@@ -85,6 +85,7 @@ export const SellerServices = () => {
                     variants={itemVariants}
                     style={itemStyle}
                     key={index}
+                    className='bg-gradient-to-r from-green-400 to-gray-400'
                 >
                     <p style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>Ttile : {service.title}</p>
                     <div>Tag : {service.tag}</div>
