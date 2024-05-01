@@ -82,7 +82,7 @@ const TestimonialsSection = () => {
       </div>
       <div className="part22-ag tochangesize-ag">
         <div className="gallery-ag tochangesize-ag">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((index) => (
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,13,14,15].map((index) => (
             <figure
               className="gallery-item-ag slidetrans-ag tochangesize-ag"
               key={index}

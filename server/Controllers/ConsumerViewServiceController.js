@@ -7,7 +7,7 @@ const { Services } = require("../Models/service");
 async function ConsumerViewServiceController(req, res) {
     try {
 
-        const data = await Services.find({})
+        const data = await Services.find({}).populate('pointer')
         console.log(data);
         res.status(201).send({ message: "displayed all availaible services", data: data});
     }catch (e) {
