@@ -6,6 +6,7 @@ const { Services } = require("../Models/service");
 
 async function ConsumerViewServiceController(req, res) {
     try {
+        console.log("HIT")
 
         const data = await Services.find({}).populate('pointer')
         console.log(data);

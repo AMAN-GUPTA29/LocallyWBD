@@ -37,5 +37,11 @@ jobs:
                 source cicd.sh
                 source cicd.sh > ./server/.env
                 cat ./server/.env
+            - name: start server
+              run: |
+                cd server
+                npm start
             - name: tests
-              run: npm test
+              run: |
+                npm test
+                cat log.txt
