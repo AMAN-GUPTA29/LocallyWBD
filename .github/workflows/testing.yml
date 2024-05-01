@@ -31,7 +31,7 @@ jobs:
               with:
                 node-version: ${{ matrix.node-version }}
             - name: npm intsall
-              run: npm ci --force
+              run: npm i
             - name: Manage .env
               run: | 
                 source cicd.sh
