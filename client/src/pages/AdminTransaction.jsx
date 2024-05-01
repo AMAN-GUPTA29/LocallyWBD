@@ -38,7 +38,7 @@ const AdminTransaction = () => {
               </tr>
             </thead>
             <tbody>
-              {transactions.map((transaction, i) => (
+              {transactions && transactions.map((transaction, i) => (
                 <tr key={i}>
                   <td className="border px-4 py-2">{transaction._id}</td>
                   <td className="border px-4 py-2">{transaction.customerid ? transaction.customerid.name : 'N/A'}</td>

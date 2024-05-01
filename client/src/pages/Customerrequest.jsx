@@ -67,32 +67,6 @@ export default () => {
             })
             .catch(error => console.error(error));
     }, [])
-    let iter = -1
-    // const cardArray = dataaa.map((msg) => { 
-    //     iter += 1
-    //     return <Message key={iter} message={msg} />
-    // });
-    // let iter1=-1
-    // const cardArray1 = dataaa1.map((msg) => { 
-    //     iter1 += 1
-    //     return <Message key={iter1} message={msg} />
-    // });
-
-    // const dataHTML = data.map((obj) => {
-    // if (obj.accepted) {
-    //     return 1
-    // }
-    // else{
-    //     return 2
-    // }
-    // const comp1 = <h1>comp1</h1>;
-    // const comp2 = <h2>Comp2</h2>
-    //     return obj.accepted ?  <Areq id={obj.id} title={obj.title} /> : <Preq id={obj.id} title={obj.title} /> ;
-    // })
-
-    // let iter2 = -1;
-    // const
-
 
     return (
         <div>

@@ -78,30 +78,54 @@ const MainComponent = () => {
             <Header _id={serviceInfo._id} seller_id={sellerInfo._id} name={sellerInfo.name} email={sellerInfo.email} phone={sellerInfo.phone} address={sellerInfo.address} pin={sellerInfo.pin} />
             <div className="flex-grow flex justify-center items-center">
                 <div>
-                    <About name={sellerInfo.name} tag="plumber" description="Very good plumber has had an experience of plumbing and other minor jobs involved in it since 15 years, has fixed many water spots and solved many household issues."/>
-                    <div className="my-10">
-                    <div className="text-lg font-bold my-5">Service Info</div>
-                    <div>Title : {serviceInfo.title}</div>
-                    <div>Description: {serviceInfo.description}</div>
-                    <div>Charge : {serviceInfo.charge}</div>
+                    <About img={sellerInfo.img} name={sellerInfo.name} tag="plumber" description="Very good plumber has had an experience of plumbing and other minor jobs involved in it since 15 years, has fixed many water spots and solved many household issues."/>
+                    <div className="my-12">
+                    <div className="text-3xl text-center font-bold my-5 font-serif">Service Info</div>
+                    <div className="text-lg font-serif mx-10">Title : {serviceInfo.title}</div>
+                    <div className="text-lg font-serif mx-10">Charge : {serviceInfo.charge} ₹ </div>
+                    <div className="text-lg font-serif mx-10">Description: {serviceInfo.description}</div>
                     </div>
                     
-                    <div className="text-lg font-bold my-5">Reviews</div>
+                    <div className="text-2xl text-center font-bold my-5 font-serif">Reviews and Rating of {sellerInfo.name}</div>
                     {serviceInfo ? (
         <div>
-            {reviews.map((review, index) => (
-                <div key={index}>
-                    <p>Consumer Name: {review.consumername}</p>
-                    <p>Rating: {review.rating}</p>
-                    <p>Review: {review.review}</p>
-                </div>
-            ))}
+            <table className="min-w-full divide-y divide-gray-200 mx-10">
+    <thead className="bg-gray-50">
+        <tr>
+            <th scope="col" className="px-6 py-3 text-left text-md text-gray-900 font-serif uppercase tracking-wider">
+                Consumer Name
+            </th>
+            <th scope="col" className="px-6 py-3 text-left text-md text-gray-900 font-serif uppercase tracking-wider">
+                Rating
+            </th>
+            <th scope="col" className="px-6 py-3 text-left text-md text-gray-900 font-serif uppercase tracking-wider">
+                Review
+            </th>
+        </tr>
+    </thead>
+    <tbody className="bg-white divide-y divide-gray-200 font-serif">
+        {reviews && reviews.map((review, index) => (
+            <tr key={index}>
+                <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900">{review.consumername}</div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900">{review.rating}</div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900">{review.review}</div>
+                </td>
+            </tr>
+        ))}
+    </tbody>
+</table>
+
         </div>
     ) : (
         <p>Loading reviews...</p>
     )}
-                    <Service/>
-                    <Contact source="https://snazzymaps.com/embed/61257"/>
+                    {/* <Service/> */}
+                    <Contact address={sellerInfo.address} phone={sellerInfo.phone} email={sellerInfo.email} source="https://snazzymaps.com/embed/61257"/>
                    {/* <MapWithMarker/> */}
                 </div>
                 
@@ -112,75 +136,3 @@ const MainComponent = () => {
 };
 
 export default MainComponent;
-
-
-
-
-
-// const MapWithMarker = () => {
-//     const [viewport, setViewport] = useState({
-//       latitude: 37.7577,
-//       longitude: -122.4376,
-//       zoom: 11,
-//     });
-  
-//     const [selectedLocation, setSelectedLocation] = useState(null);
-  
-//     return (
-//       <div className="w-full h-screen flex justify-center items-center">
-//         <ReactMapGL
-//           {...viewport}
-//           width="100%"
-//           height="100%"
-//           mapStyle="mapbox://styles/mapbox/streets-v11"
-//           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-//           onViewportChange={(viewport) => setViewport(viewport)}
-//         >
-//           {/* Markers */}
-//           <Marker
-//             latitude={37.7577}
-//             longitude={-122.4376}
-//             offsetLeft={-20}
-//             offsetTop={-10}
-//           >
-//             <div>
-//               <svg
-//                 xmlns="http://www.w3.org/2000/svg"
-//                 className="h-6 w-6 text-red-600"
-//                 fill="none"
-//                 viewBox="0 0 24 24"
-//                 stroke="currentColor"
-//               >
-//                 <path
-//                   strokeLinecap="round"
-//                   strokeLinejoin="round"
-//                   strokeWidth={2}
-//                   d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-//                 />
-//               </svg>
-//             </div>
-//           </Marker>
-  
-//           {/* Popup */}
-//           {selectedLocation && (
-//             <Popup
-//               latitude={selectedLocation.latitude}
-//               longitude={selectedLocation.longitude}
-//               onClose={() => setSelectedLocation(null)}
-//             >
-//               <div>
-//                 <h2 className="text-lg font-semibold">
-//                   Selected Location Details
-//                 </h2>
-//                 <p>
-//                   Latitude: {selectedLocation.latitude}, Longitude:{" "}
-//                   {selectedLocation.longitude}
-//                 </p>
-//               </div>
-//             </Popup>
-//           )}
-//         </ReactMapGL>
-//       </div>
-//     );
-//   };
-  

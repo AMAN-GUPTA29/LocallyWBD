@@ -1,6 +1,6 @@
 import React from "react";
 
-const Contact = ({ source }) => {
+const Contact = ({ address,phone,email,source }) => {
   return (
     <section id="contact" style={{ backgroundColor: '', padding: '4rem 0' }}>
       <div className="container text-center">
@@ -10,33 +10,33 @@ const Contact = ({ source }) => {
           <p style={{ color: '#4a5568', marginBottom: '2rem' }}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In alias dignissimos. rerum commodi corrupti, temporibus non quam.</p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem',margin:'2px 20px' }}>
           <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '0.5rem', padding: '2rem', textAlign: 'center' }}>
             <i className="ti-location-pin" style={{ fontSize: '2rem', marginBottom: '1rem', color: '#4a5568' }}></i>
             <div>
               <h5 style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Location</h5>
-              <p style={{ color: '#4a5568' }}>12345 Fake ST NoWhere AB Country</p>
+              <p style={{ color: '#4a5568' }}>{address}</p>
             </div>
           </div>
           <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '0.5rem', padding: '2rem', textAlign: 'center' }}>
             <i className="ti-mobile" style={{ fontSize: '2rem', marginBottom: '1rem', color: '#4a5568' }}></i>
             <div>
               <h5 style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Phone Number</h5>
-              <p style={{ color: '#4a5568' }}>(123) 456-7890</p>
+              <p style={{ color: '#4a5568' }}>{phone}</p>
             </div>
           </div>
           <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '0.5rem', padding: '2rem', textAlign: 'center' }}>
             <i className="ti-email" style={{ fontSize: '2rem', marginBottom: '1rem', color: '#4a5568' }}></i>
             <div>
               <h5 style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>Email Address</h5>
-              <p style={{ color: '#4a5568' }}>info@website.com</p>
+              <p style={{ color: '#4a5568' }}>{email}</p>
             </div>
           </div>
         </div>
       </div>
 
       <div id="map" style={{ marginTop: '2rem' }}>
-        <iframe src={source} style={{ width: '100%', height: '400px', borderRadius: '0.5rem', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)' }}></iframe>
+        {/* <iframe src={source} style={{ width: '100%', height: '400px', borderRadius: '0.5rem', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)' }}></iframe> */}
       </div>
     </section>
   );

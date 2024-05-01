@@ -130,7 +130,7 @@ export default function AdminBroadcast() {
             <div className="past-broadcasts">
                 <div className="users">
                     <div className="grid grid-cols-1 gap-4">
-                        {filteredUsers
+                        {filteredUsers && filteredUsers
                             .sort((a, b) => new Date(b.time) - new Date(a.time))
                             .map(user => (
                                 <div key={user._id} className="user border p-4 bg-white">

@@ -85,7 +85,7 @@ const SellerMyrequests = () => {
   }, [])
 
   return (
-    <div>
+    <div className=''>
       <Navbar />
       <header className="header-content mx-5 flex items-center justify-center h-20 mt-10 bg-gradient-to-r from-gray-600 to-yellow-300 px-4 rounded-xl">
         <h2 className="text-black font-bold text-xl">
@@ -93,8 +93,8 @@ const SellerMyrequests = () => {
           {/* <span className="text-info">Requests</span> */}
         </h2>
       </header>
-      <div className="mx-5 flex flex-col justify-center items-center">
-        {requests.map((item) => (
+      <div className="mx-5 flex flex-col justify-center font-serif text-lg">
+        {requests && requests.map((item) => (
           <div
             key={item._id}
             className={`col-12 flex flex-col justify-center m-3 p-4 px-5 h-fit py-5 border rounded-xl ${item.accepted
@@ -106,31 +106,31 @@ const SellerMyrequests = () => {
           >
             <div className="flex">
               <h5>
-                Customer Name : <p className="fs-5 inline">{item.customerid.name}</p>
+                Customer Name : <p className="fs-5 inline mx-5">{item.customerid.name}</p>
               </h5>
             </div>
             <div className="flex">
               <h5>
                 Customer Address :
-                <p className="fs-5 inline">{item.customerid.address}</p>
+                <p className="fs-5 inline mx-5">{item.customerid.address}</p>
               </h5>
             </div>
             <div className="flex">
               <h5>
                 Customer Pincode :
-                <p className="fs-5 inline">{item.customerid.pin}</p>
+                <p className="fs-5 inline mx-5">{item.customerid.pin}</p>
               </h5>
             </div>
             <div className="flex">
               <h5>
                 Requested Service :
-                <p className="fs-5 inline">{item.serviceid.title}</p>
+                <p className="fs-5 inline mx-5">{item.serviceid.title}</p>
               </h5>
             </div>
             <div className="flex">
               <h5>
                 charge :
-                <p className="fs-5 inline">{item.serviceid.charge}</p>
+                <p className="fs-5 inline mx-5">{item.serviceid.charge} ₹ </p>
               </h5>
             </div>
             <div className="flex buttons justify-center">

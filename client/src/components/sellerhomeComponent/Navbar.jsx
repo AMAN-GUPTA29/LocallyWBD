@@ -37,7 +37,7 @@ const Navbar = () => {
           <NavLink to="/seller/broadcast">Notifications</NavLink>
           <NavLink to="/seller/history">History</NavLink>
           <NavLink to="/seller/profile">Profile</NavLink>
-          <NavLink to="/seller/login">Logout</NavLink>
+          <NavLink to="/">Logout</NavLink>
         </div>
 
         {/* Responsive Nav Items Container for Small Screens */}

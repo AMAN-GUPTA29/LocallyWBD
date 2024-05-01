@@ -73,23 +73,23 @@ export const SellerServices = () => {
         <div>
             <Navbar/>
             <div style={containerStyle} className='services'>
-            <h1>Your Services</h1>
+            <h1 className='text-3xl font-bold font-mono my-5'>Your Services</h1>
             <motion.div
                 style={flexContainerStyle}
                 initial="hidden"
                 animate="visible"
                 variants={{ visible: { transition: { staggerChildren: 0.3 } } }}
             >
-                {services.map((service,index)=>(
+                {services && services.map((service,index)=>(
                     <motion.div
                     variants={itemVariants}
                     style={itemStyle}
                     key={index}
-                    className='bg-gradient-to-r from-green-400 to-gray-400'
+                    className='bg-gradient-to-r from-green-400 to-gray-400 font-serif'
                 >
-                    <p style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>Ttile : {service.title}</p>
-                    <div>Tag : {service.tag}</div>
-                    <div>Charge : {service.charge}</div>
+                    <p style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>Title : {service.title}</p>
+                    <div className='font-semibold'>Tag : {service.tag}</div>
+                    <div className='font-semibold'>Charge : {service.charge} INR</div>
                     <p style={{ fontSize: '0.95rem' }}>Description : {service.description}</p>
                 </motion.div>
                 ))}

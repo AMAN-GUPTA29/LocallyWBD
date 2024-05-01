@@ -118,7 +118,7 @@ export default function AdminLandingPage() {
             <div className="topRated-heading text-green-700 m-3 font-semibold text-2xl my-7">Top Liked Service Providers</div>
             <div className="overflow-x-auto whitespace-no-wrap my-5">
                 <div className="flex">
-                    {sellers
+                    {sellers && sellers
                         .filter((seller) => seller.like > 10)
                         .sort((a, b) => b.like - a.like) // Sort in descending order based on 'like'
                         .map((seller) => (

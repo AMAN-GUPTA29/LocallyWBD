@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Cookies from 'universal-cookie';
-import '../components/customerRequestComponent/css/history.css'
+// import '../components/customerRequestComponent/css/history.css'
 import Footer from "../components/customerviewComponent/Footer";
 import NavPostLog from "../components/customerviewComponent/NavPostLog";
 import _Historybody from "../components/historyComponent/_Historybody";
@@ -50,6 +50,16 @@ export default () => {
             <br />
             <div>
                 <h1 className="text-2xl font-semibold">Completed Requests</h1>
+                <table className="table-auto w-full">
+                <thead className="bg-gray-200">
+                  <tr>
+                    <th className="px-6 py-3">Customer Name</th>
+                    <th className="px-6 py-3">Title</th>
+                    <th className="px-6 py-3">Charge</th>
+                    <th className="px-6 py-3">Time</th>
+                  </tr>
+                </thead>
+                </table>
                 {renderHistoryWithStatus('completed')}
             </div>
 
