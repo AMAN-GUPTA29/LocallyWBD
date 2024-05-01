@@ -13,6 +13,13 @@ jobs:
         runs-on: ubuntu-latest
         env:
           MY_SALT: ${{ secrets.SALT }}
+          MY_DB: ${{ secrets.DB }}
+          MY_JWTPRIVATEKEY: ${{ secrets.JWTPRIVATEKEY }}
+          MY_RAZORPAY_KEY_ID: ${{ secrets.RAZORPAY_KEY_ID }}
+          MY_RAZORPAY_KEY_SECRET: ${{ secrets.RAZORPAY_KEY_SECRET }}
+          MY_CLOUDNARY_API_KEY: ${{ secrets.CLOUDNARY_API_KEY }}
+          MY_CLOUDNARY_API_SECREAT: ${{ secrets.CLOUDNARY_API_SECREAT }}
+          MY_CLOUDNARY_API_NAME: ${{ secrets.CLOUDNARY_API_NAME }}
         strategy:
             matrix:
                 node-version: [18.x]
@@ -25,9 +32,9 @@ jobs:
                 node-version: ${{ matrix.node-version }}
             - name: npm intsall
               run: npm ci
-            - name: env vars
-              run: echo ${{ secrets.SALT }}
             - name: Manage .env
-              run: source cicd.sh
+              run: | 
+                source cicd.sh
+                source cicd.sh > ./server/.env
             - name: tests
               run: npm test
