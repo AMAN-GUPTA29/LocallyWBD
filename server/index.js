@@ -33,6 +33,8 @@ const ConsumerChatSendRoute=require("./Routes/ConsumerChatSendRoute")
 const ConsumerChatReadRoute=require("./Routes/ConsumerViewChatRoute")
 const MakePaymentConsumer=require("./Routes/ConsumerMakePaymentRoute")
 const TransactionHistoryRoute=require("./Routes/TransactionHistoryRoute")
+const ConsumerFilterRoute = require("./Routes/ConsumerFilterRoute")
+
 
 const TransactionAdminRoute=require("./Routes/TransactionAdminRoute")
 const TransactionSellerRoute=require("./Routes/TransactionSellerRoute")
@@ -138,6 +140,7 @@ app.use("/api/consumer/readmessage",ConsumerChatReadRoute)
 app.use('/api/consumer/payment',MakePaymentConsumer)
 app.use('/api/consumer/transactionsave',TransactionHistoryRoute)
 app.use('/api/consumer/transaction',TransactionConsumerRoute)//left
+app.use('/api/customer/viewServices/filter', ConsumerFilterRoute)
 
 app.use("/api/admin/register",adminRegistrationRoutes);
 app.use("/api/admin/login",adminLoginRoutes);
