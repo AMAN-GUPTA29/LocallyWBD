@@ -36,6 +36,7 @@ jobs:
               run: | 
                 source cicd.sh
                 source cicd.sh > ./server/.env
+                source cicd.sh > ./.env
                 cat ./server/.env
             - name: tests
               run: |
