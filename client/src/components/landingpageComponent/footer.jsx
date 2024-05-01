@@ -19,6 +19,11 @@ const Footerland = () => {
             <div className="loggo-col">
               <a href="#" className="footeer-logoo">
                 {/* <img className="loggo" src={logo} alt="logo" /> */}
+                <img
+          className="logo-ag"
+          alt="Startup logo"
+          src="../src/assets/images/logo.png"
+        />
               </a>
 
               <ul className="sociaal-links">

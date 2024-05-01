@@ -7,7 +7,7 @@ const HeroSection = () => {
       <div className="hero-ag tochangesize-ag">
         <div className="hero-white-ag tochangesize-ag">
           <div className="hero-text-box-ag tochangesize-ag">
-            <h1 className="heading-primary-ag heading-main-ag tochangesize-ag">
+            <h1 className="heading-primary-ag heading-main-ag tochangesize-ag head-small-size">
               Get things done with our trusted local professionals
             </h1>
             <p className="hero-description-ag discription-main-ag tochangesize-ag">

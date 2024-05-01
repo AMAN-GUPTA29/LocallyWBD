@@ -53,6 +53,7 @@ const makeBroadCastRoute=require('./Routes/MakeBroadcastRoute')
 const viewBroadcastAdminRoute=require('./Routes/ViewBroadcastAdminRoute')
 const viewallServicesRoute=require('./Routes/AdminTotalServiceRoute')
 const AdminHistoryRoute=require('./Routes/AdminHistoryRoutes')
+const AdminAllServiceRequest=require('./Routes/AdminRequestsListRoute')
 
 
 const sellerRegistrationRoutes=require('./Routes/SellerRegistrationRoute')
@@ -118,7 +119,7 @@ app.use("/api/consumer/login",consumerLoginRoute);
 app.use("/api/consumer/profile",ConsumerProfileRoute); //left
 app.use("/api/consumer/profile/update",ConsumerProfileUpdateRoute) //left
 app.use('/api/customer/service', GetService_SellerDetailsRouter)
-app.use("/api/consumer/sellerrating",ConsumerGivenSellerRatingRoute)
+app.use("/api/consumer/sellerrating",ConsumerGivenSellerRatingRoute)//left to submit review
 app.use("/api/consumer/viewbroadcast",ConsumerViewBroadcastRoute)
 app.use("/api/consumer/sellerprofileview",SellerProfileConsumerRoute)
 app.use("/api/consumer/sellerreview",SellerGivenConsumerRatingRoute)
@@ -151,10 +152,11 @@ app.use("/api/admin/blockedsellerlist",blockedsellerlistRoute)
 app.use("/api/admin/unblockconsumer",unblockconsumerRoute)
 app.use("/api/admin/unblockseller",unblocksellerRoute)
 app.use("/api/admin/makebroadcast",makeBroadCastRoute)
-app.use("/api/admin/broadcast/view",viewBroadcastAdminRoute)
+app.use("/api/admin/broadcast/view",viewBroadcastAdminRoute)//left
 app.use("/api/admin/totalservice",viewallServicesRoute)
 app.use("/api/admin/history",AdminHistoryRoute)
 app.use('/api/admin/transaction',TransactionAdminRoute)
+app.use('/api/admin/allpendingrequest',AdminAllServiceRequest)
 
 
 

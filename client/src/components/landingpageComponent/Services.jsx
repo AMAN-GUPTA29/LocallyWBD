@@ -1,4 +1,6 @@
 import React from "react";
+import { AnimatedOnScroll } from "react-animated-css-onscroll";
+import 'animate.css';
 
 const ServicesSection = () => {
   return (
@@ -13,6 +15,7 @@ const ServicesSection = () => {
 
         <div className="notflex-ag conntainer-ag grid-ag grid--2-cols-ag grid--center-v-ag tochangesize-ag">
           {/* STEP 01 */}
+          <AnimatedOnScroll animationIn="animate__animated animate__backInLeft">
           <div className="step-text-box-ag slidetrans-ag">
             <p className="step-number-ag">01</p>
             <h3 className="heading-tertiary-ag">
@@ -26,7 +29,9 @@ const ServicesSection = () => {
               and get back on the road with confidence.
             </p>
           </div>
+          </AnimatedOnScroll>
 
+          <AnimatedOnScroll animationIn="animate__animated animate__backInRight">
           <div className="step-img-box-ag slidetrans1-ag">
             <img
               src="../src/assets/images/image/service3/outdoor.jpg"
@@ -34,8 +39,10 @@ const ServicesSection = () => {
               alt="Outdoor services"
             />
           </div>
+          </AnimatedOnScroll>
 
           {/* STEP 02 */}
+          <AnimatedOnScroll animationIn="animate__animated animate__backInLeft">
           <div className="step-img-box-ag slidetrans1-ag">
             <img
               src="../src/assets/images/image/service3/indoor.jpg"
@@ -43,6 +50,8 @@ const ServicesSection = () => {
               alt="Indoor services"
             />
           </div>
+          </AnimatedOnScroll>
+          <AnimatedOnScroll animationIn="animate__animated animate__backInRight">
           <div className="step-text-box-ag slidetrans-ag">
             <p className="step-number-ag">02</p>
             <h3 className="heading-tertiary-ag">Indoor services provided by us</h3>
@@ -55,8 +64,10 @@ const ServicesSection = () => {
               your household all with just a click.
             </p>
           </div>
+          </AnimatedOnScroll>
 
           {/* STEP 03 */}
+          <AnimatedOnScroll animationIn="animate__animated animate__backInLeft">
           <div className="step-text-box-ag slidetrans-ag">
             <p className="step-number-ag">03</p>
             <h3 className="heading-tertiary-ag">
@@ -72,6 +83,8 @@ const ServicesSection = () => {
               fingertips
             </p>
           </div>
+          </AnimatedOnScroll>
+          <AnimatedOnScroll animationIn="animate__animated animate__backInRight">
           <div className="step-img-box-ag slidetrans1-ag">
             <img
               src="../src/assets/images/image/service3/miscellinious.jpg"
@@ -79,6 +92,7 @@ const ServicesSection = () => {
               alt="Miscellaneous services"
             />
           </div>
+          </AnimatedOnScroll>
         </div>
       </section>
     </section>

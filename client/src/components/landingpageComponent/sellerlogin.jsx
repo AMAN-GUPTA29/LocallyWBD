@@ -2,7 +2,7 @@ import React from "react";
 
 const SellerLoginSection = () => {
   return (
-    <section className="slidetrans-ag tochangesize-ag">
+    <section className="slidetrans-ag tochangesize-ag sellermarginedown">
       <div className="seller-login-ag tochangesize-ag">
         <h2 className="heading-secondary-ag marghead-ag tochangesize-ag">
           Wanna become a service provider click below
@@ -15,7 +15,7 @@ const SellerLoginSection = () => {
               }
             </p>
           </div>
-          <div className="padd-ag tochangesize-ag">
+          <div className="padd-ag tochangesize-ag buttonsellerlogin">
             <a
               href="/seller/login"
               className="btn-ag btn--full-ag margin-right-sm-ag margbutton-ag tochangesize-ag"

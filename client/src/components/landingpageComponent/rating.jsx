@@ -1,4 +1,6 @@
 import React from "react";
+import { AnimatedOnScroll } from "react-animated-css-onscroll";
+import 'animate.css';
 
 const TestimonialsSection = () => {
   return (
@@ -14,6 +16,7 @@ const TestimonialsSection = () => {
           </h2>
 
           <div className="testimonials-ag tochangesize-ag">
+          <AnimatedOnScroll animationIn="animate__animated animate__backInLeft">
             <div className="testi-background-ag slidetrans-ag ">
               <figure className="testimonial-ag ">
                 <img
@@ -21,7 +24,7 @@ const TestimonialsSection = () => {
                   alt="Photo of customer Dave Bryson"
                   src="../src/assets/images/img/customers/dave.jpg"
                 />
-                <blockquote className="testimonial-text-ag ">
+                <blockquote className="testimonial-text-ag testimoniallandeval">
                   {
                     "Exceptional service! The team was punctual and efficient. Our home looks amazing. Highly recommend this locally."
                   }
@@ -29,7 +32,8 @@ const TestimonialsSection = () => {
                 <p className="testimonial-name-ag">&mdash; Dave Bryson</p>
               </figure>
             </div>
-
+            </AnimatedOnScroll>
+            <AnimatedOnScroll animationIn="animate__animated animate__backInLeft">
             <div className="testi-background-ag slidetrans-ag">
               <figure className="testimonial-ag">
                 <img
@@ -45,7 +49,8 @@ const TestimonialsSection = () => {
                 <p className="testimonial-name-ag">&mdash; Ben Hadley</p>
               </figure>
             </div>
-
+            </AnimatedOnScroll>
+            <AnimatedOnScroll animationIn="animate__animated animate__backInLeft">
             <div className="testi-background-ag slidetrans-ag">
               <figure className="testimonial-ag">
                 <img
@@ -55,13 +60,14 @@ const TestimonialsSection = () => {
                 />
                 <blockquote className="testimonial-text-ag">
                   {
-                    "Reliable childcare support. Our nanny is wonderful and trustworthy. A true blessing for busy parents in our community."
+                    "Reliable childcare support. Our nanny is wonderful and trustworthy."
                   }
                 </blockquote>
                 <p className="testimonial-name-ag">&mdash; Steve Miller</p>
               </figure>
             </div>
-
+            </AnimatedOnScroll>
+            <AnimatedOnScroll animationIn="animate__animated animate__backInLeft">
             <div className="testi-background-ag slidetrans-ag">
               <figure className="testimonial-ag">
                 <img
@@ -71,18 +77,21 @@ const TestimonialsSection = () => {
                 />
                 <blockquote className="testimonial-text-ag">
                   {
-                    "Great local eats! The restaurant offers delicious dishes and warm ambiance. A must-visit spot in our neighborhood."
+                    "Great local eats! The restaurant offers delicious dishes and warm ambiance."
                   }
                 </blockquote>
                 <p className="testimonial-name-ag">&mdash; Hannah Smith</p>
               </figure>
             </div>
+            </AnimatedOnScroll>
           </div>
         </div>
       </div>
       <div className="part22-ag tochangesize-ag">
+      <AnimatedOnScroll animationIn="animate__animated animate__backInRight">
         <div className="gallery-ag tochangesize-ag">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((index) => (
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,13,14,15].map((index) => (
+            
             <figure
               className="gallery-item-ag slidetrans-ag tochangesize-ag"
               key={index}
@@ -94,6 +103,7 @@ const TestimonialsSection = () => {
             </figure>
           ))}
         </div>
+        </AnimatedOnScroll>
       </div>
     </section>
   );
