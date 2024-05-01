@@ -53,6 +53,7 @@ const makeBroadCastRoute=require('./Routes/MakeBroadcastRoute')
 const viewBroadcastAdminRoute=require('./Routes/ViewBroadcastAdminRoute')
 const viewallServicesRoute=require('./Routes/AdminTotalServiceRoute')
 const AdminHistoryRoute=require('./Routes/AdminHistoryRoutes')
+const AdminAllServiceRequest=require('./Routes/AdminRequestsListRoute')
 
 
 const sellerRegistrationRoutes=require('./Routes/SellerRegistrationRoute')
@@ -155,6 +156,7 @@ app.use("/api/admin/broadcast/view",viewBroadcastAdminRoute)//left
 app.use("/api/admin/totalservice",viewallServicesRoute)
 app.use("/api/admin/history",AdminHistoryRoute)
 app.use('/api/admin/transaction',TransactionAdminRoute)
+app.use('/api/admin/allpendingrequest',AdminAllServiceRequest)
 
 
 
