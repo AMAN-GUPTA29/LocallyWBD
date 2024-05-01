@@ -22,7 +22,7 @@ const AdminProfile = () => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data.data)
+        console.log(data)
         data = data.data
         setAdmin(prevState => ({
           ...prevState,
@@ -58,20 +58,20 @@ const AdminProfile = () => {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="container mb-5 details p-5 bg-gray-100 rounded-lg">
         <p className="">Name :
-          <span className="font-bold text-blue-500">
+          <span className="font-bold text-blue-500 ml-2">
             {admin.name}
           </span>
-          <button onClick={unhide_place} type="button" name="Edit" className="mx-4 text-blue-500">Edit</button>
+          <button onClick={unhide_place} type="button" name="Edit" className="mx-4 text-red-500">Edit</button>
         </p>
         <form className="hidden" id="form1" onSubmit={(e) => { e.preventDefault(); updateProfile('name', nameValue); }}>
           <input type="text" value={nameValue} onChange={(e) => setNameValue(e.target.value)} required className="border border-gray-300 rounded-md px-2 py-1" />
           <button type="submit" className="bg-blue-500 text-white px-2 py-1 rounded-md ml-2">Submit</button>
         </form>
         <p className="">Email :
-          <span className="font-bold text-blue-500">
+          <span className="font-bold text-blue-500 ml-2">
             {admin.email}
           </span>
         </p>

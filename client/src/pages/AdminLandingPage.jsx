@@ -90,7 +90,7 @@ export default function AdminLandingPage() {
                     </div>
                 </div>
                 <div className="w-1/4 m-4 px-7 py-4 boxes border pending grid grid-cols-3 gap-4 rounded-xl">
-                    <div className="name col-span-2 text-xl font-bold">Services Done</div>
+                    <div className="name col-span-2 text-xl font-bold">Services</div>
                     <div className="pending-number rounded-full text-center text-2xl font-bold">{serviceCount}</div>
                     <div className="contact-img row-end-3">
                         <img src={pendingimg} alt="Contacts" className="rounded-full" style={{ width: '50px', height: '50px' }} />

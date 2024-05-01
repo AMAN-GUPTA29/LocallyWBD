@@ -6,7 +6,7 @@ const { Transaction } = require('./../Models/transaction')
 async function TransactionAdminController (req, res) {
     try{
 
-       const data = await Transaction.find();
+       const data = await Transaction.find().populate('sellerid').populate('customerid').populate('serviceid')
 
         
 

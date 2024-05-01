@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'universal-cookie';
+const cookie = new Cookies();
 import { Bar } from 'react-chartjs-2';
 import Transactions from '../components/sellerhomeComponent/Transactions';
 import ChartJS from 'chart.js/auto';
 import Navbar from '../components/sellerhomeComponent/Navbar';
 
-const cookie = new Cookies();
 
 const SellerHome = () => {
   const token = cookie.get("TOKEN");
@@ -134,7 +134,7 @@ const SellerHome = () => {
   return (
     <div className="container">
       <Navbar />
-      <div className="my-4 flex justify-evenly">
+      {/* <div className="my-4 flex justify-evenly">
         <button className="btn btn-dark " onClick={() => handleButtonClick('new')} role="button" style={{ backgroundColor: 'coral', color: 'white' }}>
           New {requests && `(${requests})`}
         </button>
@@ -151,7 +151,7 @@ const SellerHome = () => {
             Reviews
           </button>
         )}
-      </div>
+      </div> */}
       <div className="trade border border-dark rounded w-2/3 m-auto">
         <h2 className="mx-5 my-3 text-4xl font-extrabold italic text-center text-beige-600">Trade</h2>
         <hr className="border border-secondary opacity-100" />

@@ -7,6 +7,7 @@ import AdminSellerList from "../pages/AdminSellerList";
 import AdminRequests from "../pages/AdminRequests";
 import AdminHistory from "../pages/AdminHistory";
 import AdminProfile from "../pages/AdminProfile";
+import AdminTransaction from "../pages/AdminTransaction";
 
 // import Nav from './nav';
 // import Photos from './photos';
@@ -19,6 +20,7 @@ export default [
     { path: "/admin/customerlist", element: <AdminCustomerList /> },
     { path: "/admin/sellerlist", element: <AdminSellerList /> },
     { path: "/admin/history", element: <AdminHistory /> },
+    { path: "/admin/transactions", element: <AdminTransaction /> },
     { path: "/requests", element: <AdminRequests /> },
     { path: "/admin/profile", element: <AdminProfile /> }
     // { path: "/nav", element: <Nav /> },

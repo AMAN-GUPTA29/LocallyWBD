@@ -47,12 +47,25 @@ const SellerMyrequests = () => {
         .catch(error => console.error(error));
   };
 
-  const handleReject = (id) => {
-    setRequests((prevRequests) =>
-      prevRequests.map((request) =>
-        request.id === id ? { ...request, rejected: true } : request
-      )
-    );
+  const handleReject = (_id) => {
+    // setRequests((prevRequests) =>
+    //   prevRequests.map((request) =>
+    //     request.id === id ? { ...request, rejected: true } : request
+    //   )
+    // );
+    fetch(`http://localhost:8080/api/seller/request/cancel/${_id}`, {
+            method: 'DELETE',
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            window.location.reload();
+        })
+        .catch(error => console.error(error));
   };
 
   useEffect(() => {
@@ -130,7 +143,7 @@ const SellerMyrequests = () => {
                   Accept
                 </button>
                 <button
-                  onClick={() => handleReject(item.id)}
+                  onClick={() => handleReject(item._id)}
                   className="border p-2 px-5 reject text-decoration-none text-white bg-red-500"
                 >
                   Reject
