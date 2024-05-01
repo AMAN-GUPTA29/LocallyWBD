@@ -133,6 +133,8 @@
   transition-delay: 600ms;
 } */
 
+
+
 .slidetrans-ag {       
   opacity: 100;
   /* filter: blur(5px); */
@@ -145,6 +147,10 @@
   filter: blur(5px);
   transform: translateY(100%);
   transition: all 1s; */
+}
+
+.testimoniallandeval{
+  zoom:90%;
 }
 
 .show-ag {
@@ -1143,4 +1149,14 @@ footer .wave-ag#wave4 {
   .cta-text-box-ag {
     padding: 3.2rem;
   }
+}
+
+
+.buttonsellerlogin{
+  padding-left: 40%;
+  padding-bottom: 10%;
+}
+
+.sellermarginedown{
+  margin-bottom: 10%;
 }
