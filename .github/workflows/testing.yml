@@ -40,8 +40,10 @@ jobs:
             - name: start server
               run: |
                 cd server
+                npm i --force
                 npm start
             - name: tests
               run: |
+                pwd
                 npm test
                 cat log.txt
