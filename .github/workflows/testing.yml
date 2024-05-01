@@ -5,6 +5,8 @@ on: [pull_request]
 jobs:
     tests:
         runs-on: ubuntu-latest
+        env:
+          MY_SALT: ${{ vars.SALT }}
         strategy:
             matrix:
                 node-version: [18.x]
@@ -18,8 +20,6 @@ jobs:
             - name: npm intsall
               run: npm ci
             - name: Manage .env
-              run: echo ${{ secrets.DB }}
-            - name: secret vs var
-              run: echo ${{ vars.DB }}
+              run: source cicd.sh
             - name: tests
               run: npm test
