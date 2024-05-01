@@ -6,6 +6,7 @@ import Cookies from 'universal-cookie';
 const cookie = new Cookies();
 
 export default function Line() {
+  const token = cookie.get("TOKEN");
 //   module.exports.getRegistrationTimes = async (req, res) => {
 //     try {
 //         const customers = await TaskModel.customerModel.find();
@@ -48,36 +49,103 @@ export default function Line() {
 //         res.status(500).send('Internal Server Error');
 //     }
 // };
-  const token = cookie.get("TOKEN");
   const [registrationData, setRegistrationData] = useState({ customers: [], sellers: [] });
+  const [sellerRegistrationTimes, setSellerRegistrationTimes] = useState([]);
+  const [customerRegistrationTimes, setCustomerRegistrationTimes] = useState([]);
+  const [customers, setCustomers] = useState([]);
+  const [sellers, setSellers] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        };
+    fetch('http://localhost:8080/api/admin/sellerlist', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        const times = data.data.map(item => new Date(item.time).getTime());
+        setSellerRegistrationTimes(times);
+      })
+      .catch(error => console.error('Error fetching seller data:', error));
 
-        const response = await axios.get("http://localhost:8080/api/getRegistrationTimes", config);
-        setRegistrationData(response.data);
-      } catch (error) {
-        console.error("Error fetching registration times:", error);
-      }
-    };
+    fetch('http://localhost:8080/api/admin/consumerlist', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        const times = data.data.map(item => new Date(item.time).getTime());
+        setCustomerRegistrationTimes(times);
+      })
+      .catch(error => console.error('Error fetching consumer data:', error));
+    // const fetchData = async () => {
+    //   try {
+    //     const config = {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //     };
 
-    fetchData();
-  }, [token]);
+    //     const response = await axios.get("http://localhost:8080/api/getRegistrationTimes", config);
+    //     setRegistrationData(response.data);
+    //   } catch (error) {
+    //     console.error("Error fetching registration times:", error);
+    //   }
+    // };
+
+    // fetchData();
+  }, []);
+
+  //         const customerRegistrationTimes = customers.map(customer => new Date(customer.time).getTime());
+//         const sellerRegistrationTimes = sellers.map(seller => new Date(seller.time).getTime());
+        
+        const minTime = Math.min(...customerRegistrationTimes, ...sellerRegistrationTimes);
+        const maxTime = Math.max(...customerRegistrationTimes, ...sellerRegistrationTimes);
+        const timeRange = maxTime - minTime;
+        const slotSize = timeRange / 5; // Assuming 5 time slots, adjust as needed
+        
+        const customerSlotCounts = Array.from({ length: 5 }, () => 0);
+        const sellerSlotCounts = Array.from({ length: 5 }, () => 0);
+        
+        customerRegistrationTimes.forEach(time => {
+            const slotIndex = Math.floor((time - minTime) / slotSize);
+            customerSlotCounts[slotIndex]++;
+        });
+        
+        sellerRegistrationTimes.forEach(time => {
+            const slotIndex = Math.floor((time - minTime) / slotSize);
+            sellerSlotCounts[slotIndex]++;
+        });
+        
+        const customerData = customerSlotCounts.map((count, index) => ({
+            x: new Date(minTime + index * slotSize),
+            y: count
+        }));
+        
+        const sellerData = sellerSlotCounts.map((count, index) => ({
+            x: new Date(minTime + index * slotSize),
+            y: count
+        }));
+        
+        
+//         res.status(200).json({ customers: customerData, sellers: sellerData });
+//     } catch (err) {
+//         console.error(err);
+//         res.status(500).send('Internal Server Error');
+//     }
+// };
+  console.log(customerData);
+  console.log(sellerData)
   const state = {
     series: [
       {
         name: "Customer Registrations",
-        data: registrationData.customers,
+        data: customerData,
       },
       {
         name: "Seller Registrations",
-        data: registrationData.sellers,
+        data: sellerData,
       },
     ],
     options: {

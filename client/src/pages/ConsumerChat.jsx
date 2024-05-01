@@ -25,7 +25,7 @@ const ConsumerChat = () => {
                 .then(response => response.json())
                 .then(data => {
                     setChat(data.data);
-                    // console.log(data.data)
+                    console.log(data)
                 })
                 .catch(error => console.error(error));
         };
@@ -65,11 +65,17 @@ const ConsumerChat = () => {
             <div className="flex flex-col h-screen border rounded-2xl shadow-xl mx-40 my-5">
                 <div className="flex flex-col flex-grow overflow-y-auto mx-5 my-10">
                     {chat && chat.map(message => (
-                        <div
-                            key={message._id}
-                            className={`my-2 mx-4 p-2 rounded-lg max-w-md ${message.sender === 'seller' ? 'bg-blue-500 text-white self-end' : 'bg-gray-200 text-gray-800 self-start'}`}
-                        >
-                            {message.message}
+                        <div className='flex flex-col '>
+                            <div
+                                key={message._id}
+                                className={`my-2 mx-4 p-2 rounded-lg max-w-md ${message.sender === 'seller' ? 'bg-blue-500 text-white self-end' : 'bg-gray-200 text-gray-800 self-start'}`}
+                            >
+                                {message.message}
+                                {/* {message.time} */}
+                            </div>
+                            <div className={`my-2 mx-4 p-2 rounded-lg max-w-md ${message.sender === 'seller' ? 'bg-blue-500 text-white self-end' : 'bg-gray-200 text-gray-800 self-start'}`}>
+                                {new Date(message.time).toLocaleString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                            </div>
                         </div>
                     ))}
                 </div>
