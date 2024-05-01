@@ -37,11 +37,6 @@ jobs:
                 source cicd.sh
                 source cicd.sh > ./server/.env
                 cat ./server/.env
-            - name: start server
-              run: |
-                cd server
-                npm i --force
-                npm start
             - name: tests
               run: |
                 pwd
