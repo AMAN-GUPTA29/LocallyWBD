@@ -22,7 +22,7 @@ const Footerland = () => {
                 <img
           className="logo-ag"
           alt="Startup logo"
-          src="../src/assets/images/logo.png"
+          src="logo.png"
         />
               </a>
 
