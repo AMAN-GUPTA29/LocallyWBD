@@ -8,7 +8,7 @@ const SellerHistory = () => {
     const token = cookie.get("TOKEN");
     const [history, setHistory] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:8080/api/seller/history", {
+        fetch(`${import.meta.env.VITE_BASE_URL}/api/seller/history`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`,

@@ -17,7 +17,7 @@ export default () => {
   const [cardArray, setCardArray] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/consumer/viewbroadcast', {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/consumer/viewbroadcast`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

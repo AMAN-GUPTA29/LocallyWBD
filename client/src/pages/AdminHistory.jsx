@@ -8,7 +8,7 @@ const AdminHistory = () => {
     const [history, setHistory] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/admin/history", {
+        fetch(`${import.meta.env.VITE_BASE_URL}/api/admin/history`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`,

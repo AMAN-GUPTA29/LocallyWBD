@@ -12,7 +12,7 @@ const ConsumerChat = () => {
 
     useEffect(() => {
         const fetchData = () => {
-            fetch("http://localhost:8080/api/consumer/readmessage", {
+            fetch(`${import.meta.env.VITE_BASE_URL}/api/consumer/readmessage`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -39,7 +39,7 @@ const ConsumerChat = () => {
 
     const sendMessage = () => {
         console.log("Sending message:", messageInput);
-        fetch("http://localhost:8080/api/consumer/sendmessage", {
+        fetch(`${import.meta.env.VITE_BASE_URL}/api/consumer/sendmessage`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

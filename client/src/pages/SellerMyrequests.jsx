@@ -32,7 +32,7 @@ const SellerMyrequests = () => {
     //     request.id === id ? { ...request, accepted: true } : request
     //   )
     // );
-    fetch(`http://localhost:8080/api/seller/request/accepted/${_id}`, {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/seller/request/accepted/${_id}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const SellerMyrequests = () => {
     //     request.id === id ? { ...request, rejected: true } : request
     //   )
     // );
-    fetch(`http://localhost:8080/api/seller/request/cancel/${_id}`, {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/seller/request/cancel/${_id}`, {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
@@ -69,7 +69,7 @@ const SellerMyrequests = () => {
   };
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/seller/viewrequests', {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/seller/viewrequests`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

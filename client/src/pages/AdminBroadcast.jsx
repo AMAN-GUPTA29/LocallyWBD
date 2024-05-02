@@ -11,7 +11,7 @@ export default function AdminBroadcast() {
     const [activeButton, setActiveButton] = useState('all');
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/admin/broadcast/view',{
+        fetch(`${import.meta.env.VITE_BASE_URL}/api/admin/broadcast/view`,{
                     headers: {
                       Authorization: `Bearer ${token}`,
                     },
@@ -31,7 +31,7 @@ export default function AdminBroadcast() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const currentTime = new Date().toLocaleString();
-        fetch('http://localhost:8080/api/admin/makebroadcast', {
+        fetch(`${import.meta.env.VITE_BASE_URL}/api/admin/makebroadcast`, {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -48,7 +48,7 @@ export default function AdminBroadcast() {
                 setBroadcastMeassage('');
                 setpointer('all');
                 // Fetch the updated list of broadcastMeassages from the server
-                fetch('http://localhost:8080/api/admin/broadcast/view',{
+                fetch(`${import.meta.env.VITE_BASE_URL}/api/admin/broadcast/view`,{
                     headers: {
                       Authorization: `Bearer ${token}`,
                     },

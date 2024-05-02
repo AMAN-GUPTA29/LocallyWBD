@@ -13,7 +13,7 @@ const SellerChat = () => {
 
   useEffect(() => {
     const fetchData = () => {
-      fetch("http://localhost:8080/api/seller/viewchat", {
+      fetch(`${import.meta.env.VITE_BASE_URL}/api/seller/viewchat`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
@@ -38,7 +38,7 @@ const SellerChat = () => {
   }, []);
 
   const sendMessage = () => {
-    fetch("http://localhost:8080/api/seller/sendchat", {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/seller/sendchat`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",

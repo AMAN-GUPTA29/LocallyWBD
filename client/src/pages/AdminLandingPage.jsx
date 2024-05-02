@@ -36,13 +36,13 @@ export default function AdminLandingPage() {
                         Authorization: `Bearer ${token}`,
                     },
                 };
-                const customerResponse = await axios.get('http://localhost:8080/api/admin/consumerlist', config);
+                const customerResponse = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/admin/consumerlist`, config);
                 setCustomerCount(customerResponse.data.data);
 
-                const sellerResponse = await axios.get('http://localhost:8080/api/admin/sellerlist', config);
+                const sellerResponse = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/admin/sellerlist`, config);
                 setSellerCount(sellerResponse.data.data);
 
-                const serviceResponse = await axios.get('http://localhost:8080/api/admin/totalservice', config);
+                const serviceResponse = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/admin/totalservice`, config);
                 setServiceCount(serviceResponse.data.data);
                 console.log(serviceResponse.data);
 

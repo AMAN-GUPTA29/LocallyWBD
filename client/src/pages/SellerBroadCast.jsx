@@ -8,7 +8,7 @@ const SellerBroadcast = () => {
   const [msgs, setMsgs] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/seller/viewbroadcast', {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/seller/viewbroadcast`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

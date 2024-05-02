@@ -34,7 +34,7 @@ export default ({ data }) => {
 
     const updateProfile = (field, value) => {
         const updatedData = { ...data, [field]: value };
-        fetch('http://localhost:8080/api/consumer/profile/update', {
+        fetch(`${import.meta.env.VITE_BASE_URL}/api/consumer/profile/update`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

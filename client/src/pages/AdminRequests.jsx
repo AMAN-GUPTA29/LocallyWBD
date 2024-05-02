@@ -8,7 +8,7 @@ const AdminRequests = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/admin/allpendingrequest',{
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/admin/allpendingrequest`,{
       headers: {
         Authorization: `Bearer ${token}`,
       },

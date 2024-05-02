@@ -39,7 +39,7 @@ export default () => {
     const [acceptedRequests, setacceptedRequests] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/customer/pendingrequests", {
+        fetch(`${import.meta.env.VITE_BASE_URL}/api/customer/pendingrequests`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -53,7 +53,7 @@ export default () => {
             })
             .catch(error => console.error(error));
 
-        fetch("http://localhost:8080/api/customer/acceptedrequests", {
+        fetch(`${import.meta.env.VITE_BASE_URL}/api/customer/acceptedrequests`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",

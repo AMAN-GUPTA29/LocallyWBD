@@ -13,7 +13,7 @@ const AdminCustomerList = () => {
   const [selectedCustomerEmail, setSelectedCustomerEmail] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/admin/consumerlist', {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/admin/consumerlist`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -22,7 +22,7 @@ const AdminCustomerList = () => {
       .then(data => setUsers(data.data))
       .catch(error => console.error('Error fetching data:', error));
 
-    fetch('http://localhost:8080/api/admin/blockedconsumerlist', {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/admin/blockedconsumerlist`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -35,7 +35,7 @@ const AdminCustomerList = () => {
   const blockUser = async (userName, customerId, email) => {
     console.log("block consumer func")
     try {
-      const response = await fetch(`http://localhost:8080/api/admin/blockconsumer`, {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/admin/blockconsumer`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ const AdminCustomerList = () => {
   const unblockUser = async (userName, email) => {
     console.log("Unblock consumer func")
     try {
-      const response = await fetch(`http://localhost:8080/api/admin/unblockconsumer`, {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/admin/unblockconsumer`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

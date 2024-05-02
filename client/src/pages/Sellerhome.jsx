@@ -41,7 +41,7 @@ const SellerHome = () => {
 
   useEffect(() => {
     console.log(token);
-    fetch('http://localhost:8080/api/seller/profile', {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/seller/profile`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -66,7 +66,7 @@ const SellerHome = () => {
       })
       .catch(error => console.error('Error fetching data:', error));
 
-    fetch('http://localhost:8080/api/seller/review/route', {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/seller/review/route`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,

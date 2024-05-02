@@ -6,7 +6,7 @@ export default ({ _id, sellerid, seller, email, phone, title, charge, descriptio
     const token = cookie.get("TOKEN");
     const [showModal, setShowModal] = React.useState(false);
     const acceptRequest = (_id) => {
-        fetch(`http://localhost:8080/api/consumer/payment`, {
+        fetch(`${import.meta.env.VITE_BASE_URL}/api/consumer/payment`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -82,7 +82,7 @@ export default ({ _id, sellerid, seller, email, phone, title, charge, descriptio
 
         console.log(_id, sellerid, charge, Math.floor(Math.random() * 100000000));
 
-        fetch('http://localhost:8080/api/consumer/transactionsave', {
+        fetch(`${import.meta.env.VITE_BASE_URL}/api/consumer/transactionsave`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -101,7 +101,7 @@ export default ({ _id, sellerid, seller, email, phone, title, charge, descriptio
                 console.log(err)
             })
 
-        fetch(`http://localhost:8080/api/customer/completed/${_id}`, {
+        fetch(`${import.meta.env.VITE_BASE_URL}/api/customer/completed/${_id}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -136,7 +136,7 @@ export default ({ _id, sellerid, seller, email, phone, title, charge, descriptio
             sellerid: sellerid
         };
         console.log(formData);
-        fetch("http://localhost:8080/api/consumer/sellerrating", {
+        fetch(`${import.meta.env.VITE_BASE_URL}/api/consumer/sellerrating`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

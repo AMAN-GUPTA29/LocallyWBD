@@ -90,7 +90,7 @@ function AuthenticationContainer() {
     formData2.append('phone', phoneNumber)
     formData2.append('image', file);
     try {
-      const response = await axios.post('http://localhost:8080/api/consumer/register',formData2,{
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/consumer/register`,formData2,{
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -117,7 +117,7 @@ const handleSubmit = async (e) => {
   console.log("hajch");
   console.log(email, password, tokn);
   try {
-    const response = await axios.post("http://localhost:8080/api/consumer/login", {
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/consumer/login`, {
       email: email,
       password: password,
       _csrf: tokn,

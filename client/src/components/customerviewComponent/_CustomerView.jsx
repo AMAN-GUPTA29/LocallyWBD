@@ -40,7 +40,7 @@ export default () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://localhost:8080/api/customer/viewServices",{
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/customer/viewServices`,{
         headers: {
           Authorization: `Bearer ${token}`,
         }
@@ -69,7 +69,7 @@ export default () => {
   const filtering = (e, selectedValue) => {
     e.preventDefault(); 
     console.log("perfrom", selectedValue);
-    fetch(`http://localhost:8080/api/customer/viewServices/filter/${selectedValue}`,{
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/customer/viewServices/filter/${selectedValue}`,{
       method:"GET",
       headers: {
         "Content-Type": "application/json",

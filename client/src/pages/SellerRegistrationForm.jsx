@@ -250,7 +250,7 @@ const SellerRegistrationForm = () => {
         setStep(2);
       } else {
         try {
-          const response = await axios.post('http://localhost:8080/api/seller/register',formData2,{
+          const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/seller/register`,formData2,{
             headers: {
               'Content-Type': 'multipart/form-data',
             },

@@ -16,7 +16,7 @@ const CustomerTransactions = () => {
   }, []);
 
   const fetchTransactions = () => {
-    fetch('http://localhost:8080/api/consumer/transaction', {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/consumer/transaction`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -33,7 +33,7 @@ const CustomerTransactions = () => {
   const handleFilter = (e) => {
     e.preventDefault();
     console.log('Transactions filter')
-    fetch(`http://localhost:8080/api/consumer/transaction/filter/${startDate}/${endDate}`,{
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/consumer/transaction/filter/${startDate}/${endDate}`,{
       method:"GET",
       headers: {
         "Content-Type": "application/json",

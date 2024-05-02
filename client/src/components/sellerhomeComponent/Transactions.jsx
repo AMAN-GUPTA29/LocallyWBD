@@ -11,7 +11,7 @@ const Transactions = () => {
   const [showall,setShowall] = useState(true);
   const [show, setShow] = useState(false);
   useEffect(()=>{
-    fetch('http://localhost:8080/api/seller/transaction', {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/seller/transaction`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -28,7 +28,7 @@ const Transactions = () => {
   const handleFilter = (e) => {
     e.preventDefault();
     console.log('Transactions filter')
-    fetch(`http://localhost:8080/api/seller/transaction/filter/${startDate}/${endDate}`,{
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/seller/transaction/filter/${startDate}/${endDate}`,{
       method:"GET",
       headers: {
         "Content-Type": "application/json",

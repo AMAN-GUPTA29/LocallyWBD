@@ -5,7 +5,7 @@ const cookie = new Cookies();
 export default ({ _id, seller, email, phone, title, charge, description }) => {
     const token = cookie.get("TOKEN");
     const deleteRequest = (_id) => {
-        fetch("http://localhost:8080/api/consumer/pendingrequestdelete", {
+        fetch(`${import.meta.env.VITE_BASE_URL}/api/consumer/pendingrequestdelete`, {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",

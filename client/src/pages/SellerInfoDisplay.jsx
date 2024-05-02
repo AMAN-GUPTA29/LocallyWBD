@@ -19,7 +19,7 @@ const MainComponent = () => {
     const [serviceInfo,setServiceInfo] = useState([]);
     useEffect(() => {
         console.log(_id,pointer)
-        fetch("http://localhost:8080/api/consumer/sellerprofileview", {
+        fetch(`${import.meta.env.VITE_BASE_URL}/api/consumer/sellerprofileview`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -36,7 +36,7 @@ const MainComponent = () => {
         })
         .catch(error => console.error(error));
 
-        fetch("http://localhost:8080/api/consumer/sellerreview", {
+        fetch(`${import.meta.env.VITE_BASE_URL}/api/consumer/sellerreview`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const MainComponent = () => {
         })
         .catch(error => console.error(error));
 
-        fetch("http://localhost:8080/api/consumer/seller/optedservice", {
+        fetch(`${import.meta.env.VITE_BASE_URL}/api/consumer/seller/optedservice`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

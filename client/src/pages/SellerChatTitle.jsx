@@ -51,7 +51,7 @@ const SellerChatTitle = () => {
 
     useEffect(() => {
         const fetchData = () => {
-            fetch("http://localhost:8080/api/seller/chattile", {
+            fetch(`${import.meta.env.VITE_BASE_URL}/api/seller/chattile`, {
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/json",

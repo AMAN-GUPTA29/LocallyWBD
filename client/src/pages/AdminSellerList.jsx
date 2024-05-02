@@ -13,7 +13,7 @@ const AdminSellerList = () => {
   const [selectedSellerEmail, setSelectedSellerEmail] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/admin/sellerlist', {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/admin/sellerlist`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -22,7 +22,7 @@ const AdminSellerList = () => {
       .then(data => setUsers(data.data))
       .catch(error => console.error('Error fetching data:', error));
 
-      fetch('http://localhost:8080/api/admin/blockedsellerlist', {
+      fetch(`${import.meta.env.VITE_BASE_URL}/api/admin/blockedsellerlist`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -35,7 +35,7 @@ const AdminSellerList = () => {
   const blockUser = async (userName, customerId, email) => {
     console.log("block seller func")
     try {
-      const response = await fetch(`http://localhost:8080/api/admin/blockseller`, {
+      const response = await fetch(`/api/admin/blockseller`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ const AdminSellerList = () => {
   const unblockUser = async (userName, email) => {
     console.log("Unblock consumer func")
     try {
-      const response = await fetch(`http://localhost:8080/api/admin/unblockseller`, {
+      const response = await fetch(`/api/admin/unblockseller`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

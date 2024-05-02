@@ -12,7 +12,7 @@ const AdminTransaction = () => {
   const [endDate, setEndDate] = useState("");
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/admin/transaction', {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/admin/transaction`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -25,7 +25,7 @@ const AdminTransaction = () => {
   const handleFilter = (e) => {
     e.preventDefault();
     console.log('Transactions filter')
-    fetch(`http://localhost:8080/api/admin/transaction/filter/${startDate}/${endDate}`,{
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/admin/transaction/filter/${startDate}/${endDate}`,{
       method:"GET",
       headers: {
         "Content-Type": "application/json",

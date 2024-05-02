@@ -10,7 +10,7 @@ export default function Line() {
   const [customerRegistrationTimes, setCustomerRegistrationTimes] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/admin/sellerlist', {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/admin/sellerlist`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -22,7 +22,7 @@ export default function Line() {
       })
       .catch(error => console.error('Error fetching seller data:', error));
 
-    fetch('http://localhost:8080/api/admin/consumerlist', {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/admin/consumerlist`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

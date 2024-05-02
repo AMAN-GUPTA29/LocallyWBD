@@ -54,7 +54,7 @@ export const SellerServices = () => {
     };
 
     useEffect(()=>{
-        fetch("http://localhost:8080/api/seller/services/viewservice",{
+        fetch(`${import.meta.env.VITE_BASE_URL}/api/seller/services/viewservice`,{
             method:'GET',
             headers: {
                 'Content-Type': 'application/json',

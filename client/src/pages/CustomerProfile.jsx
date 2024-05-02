@@ -27,7 +27,7 @@ export default () => {
 
 useEffect(() => {
     console.log(token);
-    fetch('http://localhost:8080/api/consumer/profile', {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/consumer/profile`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

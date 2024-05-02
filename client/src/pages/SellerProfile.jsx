@@ -23,7 +23,7 @@ const SellerProfile = () => {
         }));
     };
     const handleSubmit = ()=>{
-        fetch('http://localhost:8080/api/seller/profile/update',{
+        fetch(`${import.meta.env.VITE_BASE_URL}/api/seller/profile/update`,{
             method:'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ const SellerProfile = () => {
     }
     useEffect(() => {
         console.log(token);
-        fetch('http://localhost:8080/api/seller/profile', {
+        fetch(`${import.meta.env.VITE_BASE_URL}/api/seller/profile`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

@@ -8,7 +8,7 @@ const Header = ({ _id,seller_id, name, email, phone, address, pin }) => {
   const navigate = useNavigate();
   const token = cookie.get("TOKEN");
   const hireme = ()=>{
-    fetch(`http://localhost:8080/api/customer/makerequest/${_id}`, {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/customer/makerequest/${_id}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",

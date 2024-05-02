@@ -3,7 +3,7 @@ import React from "react";
 export default () => {
     return (
         <div className="container mx-auto my-5">
-            <form action="http://localhost:8080/xtraDetails" method="post" encType="multipart/form-data">
+            <form action={`${import.meta.env.VITE_BASE_URL}/xtraDetails`} method="post" encType="multipart/form-data">
                 <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">Address</label>
                     <input name="address" type="text" className="form-input" id="exampleInputEmail1" aria-describedby="emailHelp" required />

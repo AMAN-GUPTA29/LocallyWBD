@@ -47,7 +47,7 @@ export const AddService = () => {
         }
         console.log(service)
     
-        fetch("http://localhost:8080/api/seller/services/addservice", {
+        fetch(`${import.meta.env.VITE_BASE_URL}/api/seller/services/addservice`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

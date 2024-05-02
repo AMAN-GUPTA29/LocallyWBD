@@ -58,7 +58,7 @@ const AdminRegister = () => {
 
     if (validateForm()) {
         try {
-            const response = await fetch('http://localhost:8080/api/admin/register', {
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/admin/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

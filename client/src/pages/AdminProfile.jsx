@@ -13,7 +13,7 @@ const AdminProfile = () => {
   });
   useEffect(() => {
     console.log(token);
-    fetch('http://localhost:8080/api/admin/profile', {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/admin/profile`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const AdminProfile = () => {
 
   const updateProfile = (field, value) => {
     const updatedData = { ...admin, [field]: value };
-    fetch('http://localhost:8080/api/admin/profile/update', {
+    fetch(`${import.meta.env.VITE_BASE_URL}/api/admin/profile/update`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
