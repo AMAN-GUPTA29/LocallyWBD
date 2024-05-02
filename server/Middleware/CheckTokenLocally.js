@@ -11,7 +11,7 @@ function authenticateToken(req,res,next)
     }
 
     const token=authHeader.split(" ")[1];
-    console.log(token)
+    // console.log(token)
     jwt.verify(token,process.env.JWTPRIVATEKEY,async (err,decoded)=>
     {
         if(err)
@@ -20,17 +20,17 @@ function authenticateToken(req,res,next)
             return res.status(430).json({ error: err });
         }
 
-        console.log("verified1")
+        // console.log("verified1")
 
         const userId=decoded._id;
 
-        console.log(userId)
+        // console.log(userId)
 
         const user=await Consumer.findById(userId);
 
         req.user=user;
-        console.log("heyhere");
-        console.log(req.user);
+        // console.log("heyhere");
+        // console.log(req.user);
         next();
 });
 }
