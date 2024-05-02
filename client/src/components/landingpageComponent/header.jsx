@@ -7,7 +7,7 @@ const Header = () => {
         <img
           className="logo-ag"
           alt="Startup logo"
-          src="../../assets/images/logo.png"
+          src="../src/assets/images/logo.png"
         />
       </a>
 
