@@ -32,7 +32,7 @@ const HeroSection = () => {
           <div className="delivered-meals-ag ">
             <div className="delivered-imgs-ag ">
               <img
-                src="../src/assets/images/img/customers/customer-1.jpg"
+                src="customer-1.jpg"
                 alt="Customer photo"
               />
               <img
