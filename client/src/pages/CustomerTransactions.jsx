@@ -1,14 +1,21 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Cookies from 'universal-cookie';
-const cookie = new Cookies();
 import NavPostLog from "../components/customerviewComponent/NavPostLog";
+const cookie = new Cookies();
 const token = cookie.get("TOKEN");
 
 const CustomerTransactions = () => {
-  const token = cookie.get("TOKEN");
-  const [CustomertransactionsData,setTransactionData]=useState([]);
-  const [show,setShow] = useState(true);
-  useEffect(()=>{
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [CustomertransactionsData, setCustomerTransactionData] = useState([]);
+  const [show, setShow] = useState(false);
+  const [filteredData, setFilteredData] = useState([]);
+
+  useEffect(() => {
+    fetchTransactions();
+  }, []);
+
+  const fetchTransactions = () => {
     fetch('http://localhost:8080/api/consumer/transaction', {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -17,62 +24,73 @@ const CustomerTransactions = () => {
       .then(response => response.json())
       .then(data => {
         console.log(data)
-        setTransactionData(data.data)
+        setCustomerTransactionData(data.data)
+        // setFilteredData(data.data)
       })
       .catch(error => console.error('Error fetching data:', error));
-    // setTransactionData(
-    //   [
-    //     {
-    //       id: 1,
-    //       name: "Varun",
-    //       code: "@ 175",
-    //       date: "18-03-2023",
-    //       time: "21:45",
-    //       rupees: "₹ 40.00",
-    //     },
-    //     {
-    //       id: 2,
-    //       name: "Chaitanya",
-    //       code: "@ 199",
-    //       date: "18-03-2023",
-    //       time: "14:20",
-    //       rupees: "₹ 120.00",
-    //     },
-    //     {
-    //       id: 3,
-    //       name: "Vivek",
-    //       code: "@ 007",
-    //       date: "10-03-2023",
-    //       time: "10:07",
-    //       rupees: "₹ 70.00",
-    //     },
-    //     {
-    //       id: 4,
-    //       name: "Uday",
-    //       code: "@ 118",
-    //       date: "9-03-2023",
-    //       time: "18:50",
-    //       rupees: "₹ 200.00",
-    //     },
-    //     {
-    //       id: 5,
-    //       name: "Eswar",
-    //       code: "@ 277",
-    //       date: "9-03-2023",
-    //       time: "16:25",
-    //       rupees: "₹ 30.00",
-    //     }
-    //   ]
-    // )
-  },[])
+  };
+
+  const handleFilter = (e) => {
+    e.preventDefault();
+    console.log('Transactions filter')
+    fetch(`http://localhost:8080/api/consumer/transaction/filter/${startDate}/${endDate}`,{
+      method:"GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      }
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data.data)
+        setCustomerTransactionData(data.data)
+        // setData(data.data)
+        // window.location.reload();
+      })
+    // const filtered = CustomertransactionsData.filter(transaction => {
+    //   const transactionDate = new Date(transaction.time);
+      // return (
+      //   (!startDate || transactionDate >= new Date(startDate)) &&
+      //   (!endDate || transactionDate <= new Date(endDate))
+      // );
+    // });
+    // setFilteredData(filtered);
+  };
 
   return (
     <>
-    <NavPostLog/>
+      <NavPostLog />
       <h2 className="text-center text-3xl font-bold font-serif mt-10 mb-6 text-gray-800">Customer Transactions</h2>
       <div className="mx-auto max-w-6xl bg-white shadow-md overflow-hidden sm:rounded-lg font-serif">
-      <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-200">
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded-md m-4"
+          onClick={() => setShow(!show)}
+        >
+          {show ? "Hide Filter" : "Show Filter"}
+        </button>
+        {show && (
+          <form onSubmit={handleFilter} className="m-4">
+            <label htmlFor="start_date">Start Date:</label>
+            <input
+              type="date"
+              id="start_date"
+              name="start_date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+            <label htmlFor="end_date" className="ml-4">End Date:</label>
+            <input
+              type="date"
+              id="end_date"
+              name="end_date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              className="ml-2"
+            />
+            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md ml-4">Search</button>
+          </form>
+        )}
+        <table className="min-w-full divide-y divide-gray-200">
+        <thead className="bg-gray-200">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Transaction ID</th>
               <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Seller Name</th>
@@ -104,7 +122,7 @@ const CustomerTransactions = () => {
                   time: "16:25",
                   rupees: "₹ 40.00",
                 };
-                setTransactionData([...CustomertransactionsData, temp]);
+                setCustomerTransactionData([...CustomertransactionsData, temp]);
                 setShow(false);
               }}
             >

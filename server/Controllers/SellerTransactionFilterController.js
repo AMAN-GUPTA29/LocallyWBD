@@ -15,13 +15,13 @@ async function SellerTransactionFilterController(req, res) {
         const adjustedEndDate = new Date(endDateObj.getTime() + 86400000); // Adding one day in milliseconds
 
         // Query transactions between startDate and endDate for the logged-in user
-        const data = await Transaction.find({
+        const data = await Transaction.where({
             sellerid: req.user._id,
             $and: [
                 { time: { $gte: startDateObj } },  // Transactions on or after the start date
                 { time: { $lte: adjustedEndDate } }  // Transactions on or before the adjusted end date
             ]
-        });
+        }).populate('customerid').populate('sellerid')
 
         res.status(200).send({ data: data, message: "Transactions fetched successfully" });
     } catch (error) {
