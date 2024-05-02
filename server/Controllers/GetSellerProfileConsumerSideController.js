@@ -10,13 +10,13 @@ async function sellerProfilefromConsumer (req, res){
     try{
        
         
-        console.log("here7")
-        console.log(req.body)
+        // console.log("here7")
+        // console.log(req.body)
         // console.log(req.user.email)
 
 
         const user=await Seller.findOne({_id:req.body.pointer});
-        console.log(user)
+        // console.log(user)
         // if(!user.acknowledged)
         // {
         //     res.status(500).send({message:"User not found error"});  
@@ -32,7 +32,7 @@ async function sellerProfilefromConsumer (req, res){
         
         res.status(201).send({data:user,message:"Seller Info"})  ;  
     }catch(e){
-        console.log(e)
+        // console.log(e)
         res.status(500).send({message:"internl server error"})
     }
 }

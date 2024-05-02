@@ -201,4 +201,4 @@ app.use('/api/seller/sendchat',SellerSendChatRoute)
 
 setTimeout(()=>{
   mongoose.connection.close()
-}, 5000)
+}, 10000)
