@@ -66,27 +66,51 @@ export default () => {
   }, []);
   console.log(data)
 
+  const filtering = (e, selectedValue) => {
+    e.preventDefault(); 
+    console.log("perfrom", selectedValue);
+    fetch(`http://localhost:8080/api/customer/viewServices/filter/${selectedValue}`,{
+      method:"GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      }
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data.data)
+        setData(data.data)
+        // window.location.reload();
+      })
+  }
+  
+
   return (
     <div className="container mx-auto mb-5">
       <button
         type="button"
-        className="border border-dark px-5 py-2 mb-2"
+        className="border border-dark px-5 py-2 mb-2 font-semibold bg-blue-700 text-white rounded-xl"
         onClick={filter}
       >
         Filters
       </button>
       <br />
-      <form className="hidden" id="form" action="/filter">
+      <form className="hidden" id="form" onSubmit={(e) => filtering(e, e.target.filter_details.value)}>
         <select
           name="filter_details"
-          className="form-select"
+          className="form-select font-semibold"
           aria-label="Default select example"
         >
-          <option value="Electric">Electric</option>
-          <option value="Auto-Rickshaw">Auto-Rickshaw</option>
+          {/*   // driver seller delivery technician plumber pickup
+ */}
+          <option value="driver">driver</option>
+          <option value="seller">seller</option>
+          <option value="delivery">delivery</option>
+          <option value="technician">technician</option>
+          <option value="plumber">plumber</option>
+          <option value="pickup">pickup</option>
         </select>
         <br />
-        <input type="submit" />
+        <input type="submit" className="bg-blue-700 text-white font-semibold text-lg px-5 rounded-xl my-5" />
       </form>
       <br />
       <div className="container-fluid">
@@ -95,7 +119,7 @@ export default () => {
         // <div>content</div>
         }
       </div>
-      <div className="flex justify-between mt-4">
+      {/* <div className="flex justify-between mt-4">
         <button
           type="button"
           className="border border-gray-400 px-4 py-2"
@@ -108,7 +132,7 @@ export default () => {
         >
           Next
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

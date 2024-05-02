@@ -5,8 +5,11 @@ const token = cookie.get("TOKEN");
 
 const Transactions = () => {
   const token = cookie.get("TOKEN");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [transactionsData,setTransactionData]=useState([]);
-  const [show,setShow] = useState(true);
+  const [showall,setShowall] = useState(true);
+  const [show, setShow] = useState(false);
   useEffect(()=>{
     fetch('http://localhost:8080/api/seller/transaction', {
       headers: {
@@ -19,56 +22,60 @@ const Transactions = () => {
         setTransactionData(data.data)
       })
       .catch(error => console.error('Error fetching data:', error));
-    // setTransactionData(
-    //   [
-    //     {
-    //       id: 1,
-    //       name: "Varun",
-    //       code: "@ 175",
-    //       date: "18-03-2023",
-    //       time: "21:45",
-    //       rupees: "₹ 40.00",
-    //     },
-    //     {
-    //       id: 2,
-    //       name: "Chaitanya",
-    //       code: "@ 199",
-    //       date: "18-03-2023",
-    //       time: "14:20",
-    //       rupees: "₹ 120.00",
-    //     },
-    //     {
-    //       id: 3,
-    //       name: "Vivek",
-    //       code: "@ 007",
-    //       date: "10-03-2023",
-    //       time: "10:07",
-    //       rupees: "₹ 70.00",
-    //     },
-    //     {
-    //       id: 4,
-    //       name: "Uday",
-    //       code: "@ 118",
-    //       date: "9-03-2023",
-    //       time: "18:50",
-    //       rupees: "₹ 200.00",
-    //     },
-    //     {
-    //       id: 5,
-    //       name: "Eswar",
-    //       code: "@ 277",
-    //       date: "9-03-2023",
-    //       time: "16:25",
-    //       rupees: "₹ 30.00",
-    //     }
-    //   ]
-    // )
+    
   },[])
+
+  const handleFilter = (e) => {
+    e.preventDefault();
+    console.log('Transactions filter')
+    fetch(`http://localhost:8080/api/seller/transaction/filter/${startDate}/${endDate}`,{
+      method:"GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      }
+    }).then(res => res.json())
+      .then(data => {
+        console.log(data.data)
+        setTransactionData(data.data)
+        // setData(data.data)
+        // window.location.reload();
+      })
+  };
 
   return (
     <>
       <h2 className="text-center text-3xl font-bold mt-10 mb-6 text-gray-800">Transactions</h2>
       <div className="mx-auto max-w-6xl bg-white shadow-md overflow-hidden sm:rounded-lg">
+        
+        <button
+          className="bg-blue-500 text-white px-4 py-2 rounded-md m-4"
+          onClick={() => setShow(!show)}
+        >
+          {show ? "Hide Filter" : "Show Filter"}
+        </button>
+        {show && (
+          <form onSubmit={handleFilter} className="m-4">
+            <label htmlFor="start_date">Start Date:</label>
+            <input
+              type="date"
+              id="start_date"
+              name="start_date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+            <label htmlFor="end_date" className="ml-4">End Date:</label>
+            <input
+              type="date"
+              id="end_date"
+              name="end_date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              className="ml-2"
+            />
+            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md ml-4">Search</button>
+          </form>
+        )}
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-200">
             <tr>
@@ -89,7 +96,7 @@ const Transactions = () => {
             ))}
           </tbody>
         </table>
-        {show && (
+        {showall && (
           <div className="bg-gray-50 px-6 py-4">
             <button
               className="text-white bg-gray-800 px-4 py-2 rounded-md"
@@ -103,7 +110,7 @@ const Transactions = () => {
                   rupees: "₹ 40.00",
                 };
                 setTransactionData([...transactionsData, temp]);
-                setShow(false);
+                setShowall(false);
               }}
             >
               See All

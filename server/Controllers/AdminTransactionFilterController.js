@@ -13,9 +13,9 @@ async function AdminTransactionFilterController(req, res) {
         const adjustedEndDate = new Date(endDateObj.getTime() + 86400000); // Adding one day in milliseconds
 
         // Query all transactions between startDate and endDate
-        const data = await Transaction.find({
+        const data = await Transaction.where({
             time: { $gte: startDateObj, $lte: adjustedEndDate }
-        });
+        }).populate('customerid').populate('sellerid');
 
         res.status(200).send({ data: data, message: "Transactions fetched successfully" });
     } catch (error) {
